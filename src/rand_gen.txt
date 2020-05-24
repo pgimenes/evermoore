@@ -1,0 +1,18 @@
+_main:
+    LDI R1, a // = coefficient of Xn; how to load 25k?
+    LDI R2, 3 // = b, constant
+    LDI R3, 16 // = n, word length
+    LDI R4, s // = seed
+    LDI R5, 18 // end of subroutine
+
+    CALL _rand_gen
+    STP
+
+_rand_gen:
+    MUL R4, R4, R1
+    ADD R4, R2
+    ADD R6, R4 // R6 contains sum
+    DEC R3
+    JMPS Z R5 // jump to address in R5 (end of subroutine) if R3 = 0 (Z set in SREG)
+    JMP 12 // if instr above fails, jump to top of subroutine
+    RTN

@@ -1,0 +1,17 @@
+_main:
+    LDI R1 x // value we’re looking for
+    LDI R2 head // address of first item
+    LDI R5 9
+    CALL _traversal
+    STP
+
+_traversal:
+    STORE R4, R2 // R4 now has first value of list
+    SUB R4, R1
+    JMPS Z 17 // stop if R4 = 0
+    INC R2
+    STORE R2, R2 // make STORE also update SREG
+
+    JMPS Z R5 // stop if R2 = 0
+    JMP 5
+    RTN

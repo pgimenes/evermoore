@@ -2,3 +2,6 @@ db/*
 incremental_db/*
 output_files/*
 simulation/*
+
+# Mac system files
+.DS_Store
