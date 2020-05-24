@@ -16,3 +16,5 @@ _rand_gen:
     JMPS Z R5 // jump to address in R5 (end of subroutine) if R3 = 0 (Z set in SREG)
     JMP 12 // if instr above fails, jump to top of subroutine
     RTN
+
+// assume constants are all 16-bits
