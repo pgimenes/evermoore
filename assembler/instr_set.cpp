@@ -17,7 +17,7 @@ Instr_Set::Instr_Set(ifstream & stream){
 
     // assert that start_indexes.size() == end_indexes.size();
 
-    // populate addr_modes vector
+    // populate addr_modes vector and/or map?
     for (int i = 0; i < start_indexes.size(); i++){
         pair<string, vector<string> > block;
         string addr_mode_name = instructions[start_indexes[i]];
@@ -27,6 +27,7 @@ Instr_Set::Instr_Set(ifstream & stream){
         vector<string> instr_list;
         for (int j = start_indexes[i]+1; j < end_indexes[i]; j++){
             instr_list.push_back(instructions[j]);
+            instr_map.insert(pair<string, string>(instructions[j], addr_mode_name)); // use just this?
         }
 
         block.second = instr_list;
@@ -47,7 +48,7 @@ void Instr_Set::reset_instructions_vect(){
     }
 }
 
-void Instr_Set::output_instructions(ostream & stream){
+void Instr_Set::output_instr_blocks(ostream & stream){
     for (int i = 0; i < addr_modes.size(); i++){
         // print addresing mode name
         stream << addr_modes[i].first << ":" << endl;
@@ -61,17 +62,18 @@ void Instr_Set::output_instructions(ostream & stream){
     }
 }
 
-string Instr_Set::ret_addr_mode(string instr){
+// string Instr_Set::ret_addr_mode(string instr){
     // iterating through every addressing mode
-    for (int i = 0; i < addr_modes.size(); i++){
-        // checking each instruction within each addressing mode
-        vector<string> & instr_list = addr_modes[i].second;
-        for (int j = 0; j < instr_list.size(); j++){
-            if (instr == instr_list[j]) return addr_modes[i].first;
-        }
-    }
-    return "AM not found";
-}
+    // for (int i = 0; i < addr_modes.size(); i++){
+    //     // checking each instruction within each addressing mode
+    //     vector<string> & instr_list = addr_modes[i].second;
+    //     for (int j = 0; j < instr_list.size(); j++){
+    //         if (instr == instr_list[j]) return addr_modes[i].first;
+    //     }
+    // }
+    // return "AM not found";
+//     return instr_map.at(instr);
+// }
 
 bool Instr_Set::is_instruction(string instr){
     if (find(instructions.begin(), instructions.end(), instr) == instructions.end()) return false;

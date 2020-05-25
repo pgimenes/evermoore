@@ -18,7 +18,8 @@ public:
             AM_codes = {{"single_register", "00"}, {"double_register", "01"}, {"triple_register", "10"}, {"direct_addressing_control_ops", "11"}};
         }
 
-    string assemble_instr();
+    string assemble_instr(const vector<string> instr);
+    vector<string> assemble_instruction(vector<string> instruction); 
 };
 
 #endif
