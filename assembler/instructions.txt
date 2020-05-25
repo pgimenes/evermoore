@@ -1,3 +1,5 @@
+single_reg:
+JMP
 JMI
 JEQ
 CALL
@@ -7,22 +9,31 @@ INV
 TWC
 INC
 DEC
+end
+
+single_reg_immediate:
 LDI
 ADDI
 SUBI
+end
 
+single_reg_bit_access:
 SETK
 CLR
 BST
 BLT
 SKS
 SKC
+end
 
+double_reg_arithmetic:
 ADD
 SUB
 ADDL
 SUBL
+end
 
+double_reg:
 MOV
 MOVW
 PUSH
@@ -33,19 +44,24 @@ AND
 OR
 XOR
 COMP
+end
 
+triple_reg:
 MULT
 MULS
 MULSU
+end
 
+direct_addressing:
 JMP
 CALL
 LDA
+end
 
+control_ops:
 RTN
 STP
 CLEAR
-
 SEZ
 CLZ
 SEN
@@ -60,6 +76,9 @@ SES
 CLS
 SEI
 CLI
+end
 
+control_ops_offset:
 BRAU
 BRAD
+end

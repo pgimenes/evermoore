@@ -5,8 +5,13 @@
 
 using namespace std;
 
-struct instr_set{
+class instr_set {
+private:
     vector<string> instructions;
-};
+    vector< pair< string, vector<string> > > addr_modes;
 
-instr_set init_set(ifstream stream);
+public:
+    instr_set(ifstream & stream);
+
+    void output_instructions(ostream & stream);
+};
