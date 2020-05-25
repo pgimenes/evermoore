@@ -32,6 +32,19 @@ Instr_Set::Instr_Set(ifstream & stream){
         block.second = instr_list;
         addr_modes.push_back(block);
     }
+
+    reset_instructions_vect();
+}
+
+void Instr_Set::reset_instructions_vect(){
+    instructions.clear();
+    for (int i = 0; i < addr_modes.size(); i++){
+        // checking each instruction within each addressing mode
+        vector<string> & instr_list = addr_modes[i].second;
+        for (int j = 0; j < instr_list.size(); j++){
+            instructions.push_back(instr_list[j]);
+        }
+    }
 }
 
 void Instr_Set::output_instructions(ostream & stream){
@@ -58,4 +71,9 @@ string Instr_Set::ret_addr_mode(string instr){
         }
     }
     return "AM not found";
+}
+
+bool Instr_Set::is_instruction(string instr){
+    if (find(instructions.begin(), instructions.end(), instr) == instructions.end()) return false;
+    else return true;
 }

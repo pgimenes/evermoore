@@ -1,4 +1,5 @@
 #include "cpu.hpp"
+#include "assembler.hpp"
 
 using namespace std;
 
@@ -19,5 +20,8 @@ int main(int argc, char ** argv) {
     // FUNCTION TEST LINES
     // cpu_instr_set.output_instructions(cout);
     // cout << cpu_instance.ret_addr_mode("BRAD");
+
+    // READ PROGRAM
+    Assembler program_assembler(cin, cpu_instance);
 
 }
