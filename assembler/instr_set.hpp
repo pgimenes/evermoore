@@ -1,3 +1,6 @@
+#ifndef INSTR_SET_HPP
+#define INSTR_SET_HEPP
+
 #include <vector>
 #include <string>
 #include <iostream>
@@ -5,13 +8,16 @@
 
 using namespace std;
 
-class instr_set {
+class Instr_Set {
 private:
     vector<string> instructions;
     vector< pair< string, vector<string> > > addr_modes;
 
 public:
-    instr_set(ifstream & stream);
+    Instr_Set(ifstream & stream);
 
     void output_instructions(ostream & stream);
+    string ret_addr_mode(string instr);
 };
+
+#endif

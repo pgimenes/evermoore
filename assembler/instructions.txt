@@ -33,7 +33,7 @@ ADDL
 SUBL
 end
 
-double_reg:
+double_reg_non_arithmetic:
 MOV
 MOVW
 PUSH
