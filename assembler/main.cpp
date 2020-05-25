@@ -22,6 +22,7 @@ int main(int argc, char ** argv) {
     // cout << cpu_instance.ret_addr_mode("BRAD");
 
     // READ PROGRAM
-    Assembler program_assembler(cin, cpu_instance);
-
+    ifstream program_stream(program_file);
+    Assembler program_assembler(program_stream, cpu_instance);
+    program_stream.close();
 }

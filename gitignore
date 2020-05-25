@@ -5,3 +5,5 @@ simulation/*
 
 # Mac system files
 .DS_Store
+
+a.out
