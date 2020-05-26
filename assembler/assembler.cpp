@@ -17,20 +17,25 @@ void Assembler::parse_instructions(Instr_Set * isa_instance){
         if ((*isa_instance).is_instruction(assembly_code[i])) {
             instr_indices.push_back(i);
         }
+        cout << assembly_code[i] << endl;
     }
     instr_indices.push_back(assembly_code.size());
 
-    // cout << "size " << instr_indices.size() << endl;
+    cout << endl << "size " << instr_indices.size() << endl;
 
-    // for (int i = 0; i < instr_indices.size(); i++){
-    //     cout << instr_indices[i] << endl;
-    // }
+    for (int i = 0; i < instr_indices.size(); i++){
+        cout << instr_indices[i] << endl;
+    }
 
     // combine instructions with specifiers into a single vector
     vector<string> instruction;
+    
     for (int i = 0; i < instr_indices.size()-1; i++){
         instruction.clear();
-        for (int j = instr_indices[i]; j < instr_indices[i+1]; i++) instruction.push_back(assembly_code[j]);
+        
+        for (int j = instr_indices[i]; j < instr_indices[i+1]; i++){
+            instruction.push_back(assembly_code[j]);
+        }
         
         for (int j = 0; j<instruction.size(); j++){
             cout << instruction[j] << " ";
