@@ -1,3 +1,4 @@
+#include "instr_set.hpp"
 #include "cpu.hpp"
 #include "assembler.hpp"
 

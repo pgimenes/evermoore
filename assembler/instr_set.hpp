@@ -1,5 +1,5 @@
 #ifndef INSTR_SET_HPP
-#define INSTR_SET_HEPP
+#define INSTR_SET_HPP
 
 #include <vector>
 #include <string>
