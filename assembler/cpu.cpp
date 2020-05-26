@@ -42,7 +42,7 @@ vector<string> CPU::assemble_instruction(vector<string> instruction_vect){
     
     // instruction parameters
     int size = instruction_vect.size();  
-     
+    
     string addr_mode = ret_addr_mode(instruction_vect[0]);
     string condition_binary = COND_codes.at("A"); // set to ALWAYS by default.
     

@@ -14,7 +14,7 @@ int main(int argc, char ** argv) {
     ifstream isa_stream ("instructions.txt");
     CPU cpu_instance(isa_stream);
     isa_stream.close();
-    // cout << cpu_instance.register_bin("R7") << endl;
+    // cout << cpu_instance.register_binary("R7") << endl;
 
     // execute assemble procedure on each input file
     for (int i = 0; i < argc-1; i++){
@@ -38,9 +38,4 @@ int main(int argc, char ** argv) {
         output_stream.close();
 
     }
-
-    vector<string> test;
-    test.push_back("one");
-    test.push_back("two");
-    cout << test[2] << endl;
 }

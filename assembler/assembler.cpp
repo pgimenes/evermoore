@@ -6,6 +6,7 @@ void Assembler::assemble(){
         
         for (int j = 0; j < assembled_instruction.size(); j++){
             assembled_code.push_back(assembled_instruction[j]);
+            cout << assembled_instruction[j] << endl;
         } // normally a single iteration
     }
 }
@@ -39,7 +40,7 @@ void Assembler::parse_instructions(Instr_Set * isa_instance){
         }
         cout << endl;
     }
-    cout << "here" << endl;
+    cout << endl;
 }
 
 void Assembler::output_as_mif (ofstream & stream){

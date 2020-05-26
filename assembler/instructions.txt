@@ -1,8 +1,8 @@
 single_reg:
-JMP
+JMPR
 JMI
 JEQ
-CALL
+CALLR
 LSR
 ASR
 INV
@@ -53,8 +53,8 @@ MULSU
 end
 
 direct_addressing:
-JMP
-CALL
+JMPD
+CALLD
 LDA
 end
 
