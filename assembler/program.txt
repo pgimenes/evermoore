@@ -1,4 +1,3 @@
-LDI yo mama
-INV something else
-DEC whatever
-TWC yo yo
+LDA 0x100
+JMP 0x101
+CALL 0x102

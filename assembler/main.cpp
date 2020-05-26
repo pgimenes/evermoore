@@ -14,11 +14,12 @@ int main(int argc, char ** argv) {
     ifstream isa_stream ("instructions.txt");
     CPU cpu_instance(isa_stream);
     isa_stream.close();
+    // cout << cpu_instance.register_bin("R7") << endl;
 
     // execute assemble procedure on each input file
     for (int i = 0; i < argc-1; i++){
         string program_file = argv[i+1];
-
+        
         // READ PROGRAM
         ifstream program_stream(program_file);
         Assembler program_assembler(program_stream, & cpu_instance); // ACTION
@@ -29,10 +30,17 @@ int main(int argc, char ** argv) {
         for (int j = 0; j<4; j++) program_file.pop_back();
         program_file.append("_output.txt");
         output_stream.open(program_file);
+        
         program_assembler.assemble(); // ACTION
+        
         program_assembler.output_as_mif(output_stream); // ACTION
 
         output_stream.close();
 
     }
+
+    vector<string> test;
+    test.push_back("one");
+    test.push_back("two");
+    cout << test[2] << endl;
 }

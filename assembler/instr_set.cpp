@@ -62,18 +62,9 @@ void Instr_Set::output_instr_blocks(ostream & stream){
     }
 }
 
-// string Instr_Set::ret_addr_mode(string instr){
-    // iterating through every addressing mode
-    // for (int i = 0; i < addr_modes.size(); i++){
-    //     // checking each instruction within each addressing mode
-    //     vector<string> & instr_list = addr_modes[i].second;
-    //     for (int j = 0; j < instr_list.size(); j++){
-    //         if (instr == instr_list[j]) return addr_modes[i].first;
-    //     }
-    // }
-    // return "AM not found";
-//     return instr_map.at(instr);
-// }
+string Instr_Set::ret_addr_mode(string instr){
+    return instr_map.at(instr);
+}
 
 bool Instr_Set::is_instruction(string instr){
     if (find(instructions.begin(), instructions.end(), instr) == instructions.end()) return false;

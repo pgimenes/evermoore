@@ -33,12 +33,13 @@ void Assembler::parse_instructions(Instr_Set * isa_instance){
     }
 
     // PRINT parsed_instructions FOR TESTING
-    // for (int i = 0; i < parsed_instructions.size(); i++) {
-    //     for (int j = 0; j < parsed_instructions[i].size(); j++){
-    //         cout << parsed_instructions[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
+    for (int i = 0; i < parsed_instructions.size(); i++) {
+        for (int j = 0; j < (parsed_instructions[i]).size(); j++){
+            cout << (parsed_instructions[i])[j] << " ";
+        }
+        cout << endl;
+    }
+    cout << "here" << endl;
 }
 
 void Assembler::output_as_mif (ofstream & stream){
