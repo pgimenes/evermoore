@@ -72,7 +72,7 @@ vector<string> CPU::assemble_instruction(vector<string> instruction_vect){
     else if (addr_mode == "single_reg_immediate") {
         assembled_string.append(register_binary(instruction_vect[size-2]));
         assembled_vect.push_back(assembled_string);
-        assembled_vect.push_back(hex_to_binary(instruction_vect[size-1]));
+        assembled_vect.push_back(hex_to_binary(instruction_vect[size-1], "16b"));
         return assembled_vect;
     }
     else if(addr_mode == "single_reg_bit_access") {
@@ -99,15 +99,24 @@ vector<string> CPU::assemble_instruction(vector<string> instruction_vect){
 string CPU::hex_to_binary (string hex_string, string spec){
     string input, output;
     input = hex_string;
-    if (input[0] == '0' && input[1] == 'x'){
-        for (int i = 0; i < 2; i++) input.erase(input.begin());
+    if (input[0] == '0' && input[1] == 'x') for (int i = 0; i < 2; i++) input.erase(input.begin());
+
+    if (input.size() > 4) {
+        cerr << "HEX data out of range." << endl;
+        exit(1);
     }
+
     for (int i = 0; i < input.size(); i++){
         output.append(hex_table.at(input[i]));
     }
 
     if (spec=="3b") {
         output.erase(output.begin());
+    } else if (spec=="16b"){
+        // if less than 4 hex digits specified, add 0's to the left to complete 16 binary bits
+        for (int i = 0; i < (4-input.size()); i++) {
+            output.insert (0, "0000");
+        }
     }
     return output;
 }
@@ -127,15 +136,25 @@ bool CPU::is_cond(string value){
 
 void CPU::assert_reg_specified (vector<string> values){
     bool assertion = true;
+    string message;
+
     for (int i = 0; i < values.size(); i++) {
-        if (values[i][0] != 'R' && values[i][0] != 'r') assertion = false;
+        if (values[i][0] != 'R' && values[i][0] != 'r') {
+            assertion = false;
+            message = "Invalid syntax. Specify register.";
+            break;
+        }
+
+        string num = values[i];
+        num.erase(num.begin());
+        if (stoi(num) > 7){
+            assertion = false;
+            message = "Register out of range.";
+        }
     }
 
     if (!assertion){
-        cerr << "Invalid syntax. Specify register";
-        if (values.size()>1) cerr << "s.";
-        else cerr << ".";
-        cerr << endl;
+        cerr << message << endl;
         exit(1);
     }
 }

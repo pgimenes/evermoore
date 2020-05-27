@@ -19,6 +19,7 @@ int main(int argc, char ** argv) {
     // execute assemble procedure on each input file
     for (int i = 0; i < argc-1; i++){
         string program_file = argv[i+1];
+        cout << "Assembling " << program_file << " ..." << endl;
         
         // READ PROGRAM
         ifstream program_stream(program_file);
@@ -27,8 +28,11 @@ int main(int argc, char ** argv) {
         
         // set up output stream and output to MIF
         ofstream output_stream;
-        for (int j = 0; j<4; j++) program_file.pop_back();
-        program_file.append("_output.mif");
+        // if there is an extension, replace it with .mif
+        if (program_file[program_file.size()-4] == '.'){
+            for (int j = 0; j<4; j++) program_file.pop_back();
+        }
+        program_file.append("_assembled.mif");
         output_stream.open(program_file);
         
         program_assembler.assemble(); // ACTION
@@ -36,6 +40,9 @@ int main(int argc, char ** argv) {
         program_assembler.output_as_mif(output_stream); // ACTION
 
         output_stream.close();
+
+        cout << "Done." << endl;
+        cout << endl;
 
     }
 }
