@@ -59,7 +59,7 @@ void Assembler::output_as_mif (ofstream & stream){
     stream << "CONTENT BEGIN" << endl;
     
     for (int i = 0; i < assembled_code.size(); i++){
-        stream << "0x" << dec_to_hex(to_string(i)) << " : ";
+        stream << dec_to_hex(to_string(i)) << " : ";
         stream << assembled_code[i] << endl;
     }
 
