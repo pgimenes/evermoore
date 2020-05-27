@@ -8,7 +8,7 @@ private:
 
     Instr_Set * ISA_instance;
 
-    void parse_instructions(Instr_Set * isa_instance);
+    void parse_instructions();
 public:
     // upon construction, object reads program and 
     Assembler(ifstream & stream, Instr_Set * isa_instance) // can't use reference instead of pointer?
@@ -16,10 +16,11 @@ public:
     {
         string input;
         while (stream >> input) assembly_code.push_back(input);
-        parse_instructions(ISA_instance); // separates program instructions
+        parse_instructions(); // separates program instructions
     }
 
     void assemble(); // takes all parsed instructions and converts to assembled binary
 
     void output_as_mif (ofstream & stream);
+    int ret_num_instr ();
 };

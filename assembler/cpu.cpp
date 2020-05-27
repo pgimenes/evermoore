@@ -2,32 +2,16 @@
 
 CPU::CPU(ifstream & stream)
         : Instr_Set(stream)
-        {
-            COND_codes = {{"ZS", "0000"}, {"NS","0001"}, {"CS","0010"}, {"TS","0011"}, {"VS", "0100"}, {"SS", "0101"}, {"A", "0110"}, {"IS", "0111"}, {"ZC", "1000"}, {"NC", "1001"}, {"CC", "1010"}, {"TC", "1011"}, {"VC", "1100"}, {"SC", "1101"}, {"IC", "1111"}};
-            hex_table = {{'0', "0000"}, {'1', "0001"}, {'2', "0010"}, {'3', "0011"}, {'4', "0100"}, {'5', "0101"}, {'6', "0110"}, {'7', "0111"}, {'8', "1000"}, {'9', "1001"}, {'A', "1010"}, {'B', "1011"}, {'C', "1100"}, {'D', "1101"}, {'E', "1110"}, {'F', "1111"}, {'a', "1010"}, {'b', "1011"}, {'c', "1100"}, {'d', "1101"}, {'e', "1110"}, {'f', "1111"}};
+{
+    hex_table = {{'0', "0000"}, {'1', "0001"}, {'2', "0010"}, {'3', "0011"}, {'4', "0100"}, {'5', "0101"}, {'6', "0110"}, {'7', "0111"}, {'8', "1000"}, {'9', "1001"}, {'A', "1010"}, {'B', "1011"}, {'C', "1100"}, {'D', "1101"}, {'E', "1110"}, {'F', "1111"}, {'a', "1010"}, {'b', "1011"}, {'c', "1100"}, {'d', "1101"}, {'e', "1110"}, {'f', "1111"}};
+    
+    ifstream cond_stream ("COND_codes.txt");
+    create_map(cond_stream, COND_codes);
 
-            // OBTAIN SPECIFIC INSTRUCTION OPCODES
-            ifstream opcode_stream("instruction_opcodes.txt");
-            string input;
-            
-            // while (opcode_stream >> input){
-            //     if (is_instruction(input)) {
-            //         string opcode;
-            //         opcode_stream >> opcode;
-            //         instr_opcodes.insert(pair<string, string>(input, opcode));
-            //     }
-            // }
-            
-            vector<string> opcode_input;
-            while (opcode_stream >> input) opcode_input.push_back(input);
-            opcode_stream.close();
-
-            for (int i = 0; i < opcode_input.size(); i++){
-                if (is_instruction(opcode_input[i])) {
-                    instr_opcodes.insert(pair<string, string>(opcode_input[i], opcode_input[i+1]));
-                }
-            }
-        }
+    // OBTAIN SPECIFIC INSTRUCTION OPCODES
+    ifstream opcode_stream("instruction_opcodes.txt");
+    create_map (opcode_stream, instr_opcodes);
+}
 
 // receives instruction in vector form and returns binary in vect form where each element is a RAM address value
 vector<string> CPU::assemble_instruction(vector<string> instruction_vect){
@@ -41,7 +25,8 @@ vector<string> CPU::assemble_instruction(vector<string> instruction_vect){
     
     // insert instruction OPCODE
     assembled_string = instr_opcodes.at(instruction_vect[0]);
-    
+
+
     // cout << addr_mode << endl;
     // cout << "size: " << size << endl;
     assert(size > 0 && size < 6);

@@ -1,5 +1,7 @@
 #include "assembler.hpp"
 
+string dec_to_hex(string decimal);
+
 void Assembler::assemble(){
     for (int i = 0; i < parsed_instructions.size(); i++){
         // cout << "Instruction " << i+1 << endl;
@@ -13,11 +15,13 @@ void Assembler::assemble(){
     }
 }
 
-void Assembler::parse_instructions(Instr_Set * isa_instance){
+void Assembler::parse_instructions(){
+    if (assembly_code.size() == 0) return;
+    
     // obtain indices of where instruction mnemonics are in the program
     vector<int> instr_indices;
     for (int i = 0; i < assembly_code.size(); i++){
-        if ((*isa_instance).is_instruction(assembly_code[i])) {
+        if (ISA_instance->is_instruction(assembly_code[i])) {
             instr_indices.push_back(i);
         }
     }
@@ -55,9 +59,20 @@ void Assembler::output_as_mif (ofstream & stream){
     stream << "CONTENT BEGIN" << endl;
     
     for (int i = 0; i < assembled_code.size(); i++){
-        stream << i << " : ";
+        stream << "0x" << dec_to_hex(to_string(i)) << " : ";
         stream << assembled_code[i] << endl;
     }
 
     stream << "END;";
 }
+
+int Assembler::ret_num_instr () {
+    return parsed_instructions.size();
+}
+
+string dec_to_hex(string decimal){
+    stringstream ss;
+    ss << hex << decimal;
+    return ss.str();
+}
+

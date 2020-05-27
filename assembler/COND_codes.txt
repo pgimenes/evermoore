@@ -1,0 +1,15 @@
+0000: ZS end
+0001: NS end
+0010: CS end
+0011: TS end
+0100: VS end
+0101: SS end
+0110: A end
+0111: IS end
+1000: ZC end
+1001: NC end
+1010: CC end
+1011: TC end
+1100: VC end
+1101: SC end
+1111: IC end
