@@ -2,14 +2,14 @@
 
 void Assembler::assemble(){
     for (int i = 0; i < parsed_instructions.size(); i++){
-        cout << "Instruction " << i+1 << endl;
+        // cout << "Instruction " << i+1 << endl;
         vector<string> assembled_instruction = ISA_instance->assemble_instruction(parsed_instructions[i]);
         
         for (int j = 0; j < assembled_instruction.size(); j++){
             assembled_code.push_back(assembled_instruction[j]);
-            cout << assembled_instruction[j] << endl;
+            // cout << assembled_instruction[j] << endl;
         } // normally a single iteration
-        cout << endl;
+        // cout << endl;
     }
 }
 
@@ -36,18 +36,28 @@ void Assembler::parse_instructions(Instr_Set * isa_instance){
     }
 
     // PRINT parsed_instructions FOR TESTING
-    for (int i = 0; i < parsed_instructions.size(); i++) {
-        for (int j = 0; j < (parsed_instructions[i]).size(); j++){
-            cout << (parsed_instructions[i])[j] << " ";
-        }
-        cout << endl;
-    }
-    cout << endl;
+    // for (int i = 0; i < parsed_instructions.size(); i++) {
+    //     for (int j = 0; j < (parsed_instructions[i]).size(); j++){
+    //         cout << (parsed_instructions[i])[j] << " ";
+    //     }
+    //     cout << endl;
+    // }
+    // cout << endl;
 }
 
 void Assembler::output_as_mif (ofstream & stream){
+    stream << "WIDTH=16;" << endl;
+    stream << "DEPTH=4096;" << endl;
+    stream << endl;
+    stream << "ADDRESS_RADIX=UNS;" << endl;
+    stream << "DATA_RADIX=BIN;" << endl;
+    stream << endl;
+    stream << "CONTENT BEGIN" << endl;
+    
     for (int i = 0; i < assembled_code.size(); i++){
         stream << i << " : ";
         stream << assembled_code[i] << endl;
     }
+
+    stream << "END;";
 }

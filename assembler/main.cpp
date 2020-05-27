@@ -28,7 +28,7 @@ int main(int argc, char ** argv) {
         // set up output stream and output to MIF
         ofstream output_stream;
         for (int j = 0; j<4; j++) program_file.pop_back();
-        program_file.append("_output.txt");
+        program_file.append("_output.mif");
         output_stream.open(program_file);
         
         program_assembler.assemble(); // ACTION

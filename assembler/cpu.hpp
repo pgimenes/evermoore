@@ -17,7 +17,7 @@ private:
 public:
     CPU(ifstream & stream);
     vector<string> assemble_instruction(vector<string> instruction_vect);
-    string hex_to_binary (string hex_string);
+    string hex_to_binary (string hex_string, string spec = "4b");
     string register_binary (string reg);
     bool is_cond(string value);
 

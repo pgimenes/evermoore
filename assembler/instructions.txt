@@ -1,8 +1,8 @@
 single_reg:
-JMPR
+JMR
 JMI
 JEQ
-CALLR
+CAR
 LSR
 ASR
 INV
@@ -13,29 +13,26 @@ end
 
 single_reg_immediate:
 LDI
-ADDI
-SUBI
+AIM
+SIM
 end
 
 single_reg_bit_access:
-SETK
-CLR
-BST
-BLT
-SKS
-SKC
+SEB
+CLB
+STB
+LOB
 end
 
-double_reg_arithmetic:
+double_reg:
 ADD
+ADC
 SUB
-ADDL
-SUBL
-end
-
-double_reg_non_arithmetic:
+SBC
+GHA
+GHS
 MOV
-MOVW
+MOW
 PUSH
 LOAD
 POP
@@ -48,13 +45,12 @@ end
 
 triple_reg:
 MUL
-MULS
-MULSU
+MLS
 end
 
 direct_addressing:
-JMPD
-CALLD
+JMD
+CALL
 LDA
 end
 
@@ -79,6 +75,6 @@ CLI
 end
 
 control_ops_offset:
-BRAU
-BRAD
+BRU
+BRD
 end
