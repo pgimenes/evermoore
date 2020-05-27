@@ -2,12 +2,14 @@
 
 void Assembler::assemble(){
     for (int i = 0; i < parsed_instructions.size(); i++){
-        vector<string> assembled_instruction = (*ISA_instance).assemble_instruction(parsed_instructions[i]);
+        cout << "Instruction " << i+1 << endl;
+        vector<string> assembled_instruction = ISA_instance->assemble_instruction(parsed_instructions[i]);
         
         for (int j = 0; j < assembled_instruction.size(); j++){
             assembled_code.push_back(assembled_instruction[j]);
             cout << assembled_instruction[j] << endl;
         } // normally a single iteration
+        cout << endl;
     }
 }
 
@@ -21,7 +23,7 @@ void Assembler::parse_instructions(Instr_Set * isa_instance){
     }
     instr_indices.push_back(assembly_code.size());
 
-    // combine instructions with specifiers into a single vector
+    // combine instructions and parameters into a single vector
     vector<string> instruction;
     for (int i = 0; i < instr_indices.size()-1; i++){
         instruction.clear();

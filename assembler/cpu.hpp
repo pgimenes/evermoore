@@ -20,6 +20,9 @@ public:
     string hex_to_binary (string hex_string);
     string register_binary (string reg);
     bool is_cond(string value);
+
+    // ERROR FUNCTIONS
+    void assert_reg_specified(vector<string> values);
 };
 
 #endif

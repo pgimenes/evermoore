@@ -47,7 +47,7 @@ COMP
 end
 
 triple_reg:
-MULT
+MUL
 MULS
 MULSU
 end

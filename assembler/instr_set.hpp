@@ -12,11 +12,8 @@ using namespace std;
 
 class Instr_Set {
 private:
-    vector<string> instructions;
-    vector< pair< string, vector<string> > > addr_modes;
+    vector<string> every_input;
     map<string, string> instr_map;
-
-    void reset_instructions_vect();
 public:
     Instr_Set(ifstream & stream);
 
@@ -26,9 +23,6 @@ public:
 
     string ret_addr_mode(string instr);
     bool is_instruction(string instr);
-    bool is_binary(string term);
-
-    void output_instr_blocks(ostream & stream);
 };
 
 #endif

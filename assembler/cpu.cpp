@@ -4,24 +4,19 @@ CPU::CPU(ifstream & stream)
         : Instr_Set(stream)
         {
             COND_codes = {{"ZS", "0000"}, {"NS","0001"}, {"CS","0010"}, {"TS","0011"}, {"VS", "0100"}, {"SS", "0101"}, {"A", "0110"}, {"IS", "0111"}, {"ZC", "1000"}, {"NC", "1001"}, {"CC", "1010"}, {"TC", "1011"}, {"VC", "1100"}, {"SC", "1101"}, {"IC", "1111"}};
-            CIN_codes = {{"CIZ", "00"}, {"CIO", "01"}, {"CIF", "10"}, {"CIL", "11"}};
+            CIN_codes = {{"CIZ", "00"}, {"CIO", "01"}, {"CIF", "10"}, {"CIB", "11"}};
             hex_table = {{'0', "0000"}, {'1', "0001"}, {'2', "0010"}, {'3', "0011"}, {'4', "0100"}, {'5', "0101"}, {'6', "0110"}, {'7', "0111"}, {'8', "1000"}, {'9', "1001"}, {'A', "1010"}, {'B', "1011"}, {'C', "1100"}, {'D', "1101"}, {'E', "1110"}, {'F', "1111"}, {'a', "1010"}, {'b', "1011"}, {'c', "1100"}, {'d', "1101"}, {'e', "1110"}, {'f', "1111"}};
 
             // OBTAIN SPECIFIC INSTRUCTION OPCODES
             ifstream opcode_stream("instruction_opcodes.txt");
             string input;
             
-            // idk if this implementation will work:
             // while (opcode_stream >> input){
             //     if (is_instruction(input)) {
             //         string opcode;
             //         opcode_stream >> opcode;
             //         instr_opcodes.insert(pair<string, string>(input, opcode));
             //     }
-            // }
-            // map<string,string>::iterator it;
-            // for (it = instr_opcodes.begin(); it < instr_opcodes.end(); it++){
-            //     cout << it->first << endl;
             // }
             
             vector<string> opcode_input;
@@ -41,26 +36,45 @@ vector<string> CPU::assemble_instruction(vector<string> instruction_vect){
     string assembled_string;
     
     // instruction parameters
-    int size = instruction_vect.size();  
-    
+    int size = instruction_vect.size();
     string addr_mode = ret_addr_mode(instruction_vect[0]);
     string condition_binary = COND_codes.at("A"); // set to ALWAYS by default.
     
     // insert instruction OPCODE
     assembled_string = instr_opcodes.at(instruction_vect[0]);
     
+    cout << addr_mode << endl;
+    cout << "size: " << size << endl;
+    assert(size > 0 && size < 6);
+    
     // direct addressing is unconditional
     if (addr_mode == "direct_addressing") {
         assembled_string.append(hex_to_binary(instruction_vect[1]));
+    }
+    else if (addr_mode == "control_ops" && size == 1){
+        assembled_string.append(condition_binary);
         assembled_vect.push_back(assembled_string);
         return assembled_vect;
     }
-    if (is_cond(instruction_vect[1])) condition_binary = COND_codes.at(instruction_vect[1]);
 
-    if (addr_mode == "single_reg"){
-        assembled_string.append(register_binary(instruction_vect[size-1]));
+    // see if COND is specified
+    if (is_cond(instruction_vect[1])){
+        condition_binary = COND_codes.at(instruction_vect[1]);
     }
-    else if (addr_mode == "single_reg_immediate" || addr_mode == "single_reg_bit_access") {
+    assembled_string.append(condition_binary);
+
+    // include rest of instruction
+    if (addr_mode == "single_reg"){
+        assert_reg_specified({instruction_vect[size-1]});
+        assembled_string.append(register_binary(instruction_vect[size-1])); 
+    }
+    else if (addr_mode == "single_reg_immediate") {
+        assembled_string.append(register_binary(instruction_vect[size-2]));
+        assembled_vect.push_back(assembled_string);
+        assembled_vect.push_back(hex_to_binary(instruction_vect[size-1]));
+        return assembled_vect;
+    }
+    else if(addr_mode == "single_reg_bit_access") {
         assembled_string.append(register_binary(instruction_vect[size-2]));
         assembled_string.append(hex_to_binary(instruction_vect[size-1])); 
     }
@@ -82,6 +96,7 @@ vector<string> CPU::assemble_instruction(vector<string> instruction_vect){
         assembled_string.append(hex_to_binary(instruction_vect[size-1]));
     }
     
+    assembled_vect.push_back(assembled_string);
     return assembled_vect;
 }
 
@@ -99,13 +114,28 @@ string CPU::hex_to_binary (string hex_string){
 
 
 string CPU::register_binary (string reg){
-    if (reg[0] != 'R' && reg[0] != 'r') return "Invalid syntax."; // create system to evaluate errors?
-    reg.erase(reg.begin());
-    bitset<3> bin (reg);
+    string reg_num = reg;
+    reg_num.erase(reg_num.begin());
+    bitset<3> bin (stoi(reg_num));
     return bin.to_string();
 }
 
 bool CPU::is_cond(string value){
     if (COND_codes.count(value) == 0) return false;
     else return true;
+}
+
+void CPU::assert_reg_specified (vector<string> values){
+    bool assertion = true;
+    for (int i = 0; i < values.size(); i++) {
+        if (values[i][0] != 'R' && values[i][0] != 'r') assertion = false;
+    }
+
+    if (!assertion){
+        cerr << "Invalid syntax. Specify register";
+        if (values.size()>1) cerr << "s.";
+        else cerr << ".";
+        cerr << endl;
+        exit(1);
+    }
 }
