@@ -26,14 +26,11 @@ vector<string> CPU::assemble_instruction(vector<string> instruction_vect){
     // insert instruction OPCODE
     assembled_string = instr_opcodes.at(instruction_vect[0]);
 
-
-    // cout << addr_mode << endl;
-    // cout << "size: " << size << endl;
     assert(size > 0 && size < 6);
     
     // direct addressing is unconditional
     if (addr_mode == "direct_addressing") {
-        assembled_string.append(hex_to_binary(instruction_vect[1]));
+        assembled_string.append(hex_to_binary(instruction_vect[1], 3));
         assembled_vect.push_back(assembled_string);
         return assembled_vect;
     }
@@ -49,69 +46,77 @@ vector<string> CPU::assemble_instruction(vector<string> instruction_vect){
     }
     assembled_string.append(condition_binary);
 
+    vector<string> instr_registers;
     // include rest of instruction
     if (addr_mode == "single_reg"){
-        assert_reg_specified({instruction_vect[size-1]});
-        assembled_string.append(register_binary(instruction_vect[size-1])); 
+        instr_registers = register_binary({instruction_vect[size-1]});
+        assembled_string.append(instr_registers[0]); 
     }
     else if (addr_mode == "single_reg_immediate") {
-        assembled_string.append(register_binary(instruction_vect[size-2]));
+        instr_registers = register_binary( {instruction_vect[size-2]} );
+        assembled_string.append(instr_registers[0]);
         assembled_vect.push_back(assembled_string);
-        assembled_vect.push_back(hex_to_binary(instruction_vect[size-1], "16b"));
+        assembled_vect.push_back(hex_to_binary(instruction_vect[size-1], 4));
         return assembled_vect;
     }
     else if(addr_mode == "single_reg_bit_access") {
-        assembled_string.append(register_binary(instruction_vect[size-2]));
-        assembled_string.append(hex_to_binary(instruction_vect[size-1])); 
+        instr_registers = register_binary({instruction_vect[size-2]});
+        assembled_string.append(instr_registers[0]);
+        assembled_string.append(hex_to_binary(instruction_vect[size-1], 1)); 
     }
     else if (addr_mode == "double_reg") {
-        assembled_string.append(register_binary(instruction_vect[size-2]));
-        assembled_string.append(register_binary(instruction_vect[size-1]));
+        instr_registers = register_binary({instruction_vect[size-1], instruction_vect[size-2]});
+        for (int i = 0; i<instr_registers.size(); i++) assembled_string.append(instr_registers[i]);
     }
     else if (addr_mode == "triple_reg"){
-        assembled_string.append(register_binary(instruction_vect[size-3]));
-        assembled_string.append(register_binary(instruction_vect[size-2]));
-        assembled_string.append(register_binary(instruction_vect[size-1]));
+        instr_registers = register_binary({instruction_vect[size-1], instruction_vect[size-2], instruction_vect[size-3]});
+        for (int i = 0; i<instr_registers.size(); i++) assembled_string.append(instr_registers[i]);
     }
     else if (addr_mode == "control_ops_offset"){
-        assembled_string.append(hex_to_binary(instruction_vect[size-1], "3b"));
+        assembled_string.append(hex_to_binary(instruction_vect[size-1], 0));
     }
-    
     assembled_vect.push_back(assembled_string);
     return assembled_vect;
 }
 
-string CPU::hex_to_binary (string hex_string, string spec){
-    string input, output;
-    input = hex_string;
-    if (input[0] == '0' && input[1] == 'x') for (int i = 0; i < 2; i++) input.erase(input.begin());
+// lim is the number of hex digits the equivalent output binary has = output.size()/4
+string CPU::hex_to_binary (string hex_string, int lim){
+    string output;
+    hex_string = hex_string;
+    if (hex_string[0] == '0' && (hex_string[1] == 'x' || hex_string[1] == 'X')) for (int i = 0; i < 2; i++) hex_string.erase(hex_string.begin());
 
-    if (input.size() > 4) {
-        cerr << "HEX data out of range." << endl;
-        exit(1);
+    // obtain equivalent binary for each hex digit
+    for (int i = 0; i < hex_string.size(); i++){
+        output.append(hex_table.at(hex_string[i]));
     }
-
-    for (int i = 0; i < input.size(); i++){
-        output.append(hex_table.at(input[i]));
-    }
-
-    if (spec=="3b") {
+    
+    if (lim == 0) {
         output.erase(output.begin());
-    } else if (spec=="16b"){
-        // if less than 4 hex digits specified, add 0's to the left to complete 16 binary bits
-        for (int i = 0; i < (4-input.size()); i++) {
-            output.insert (0, "0000");
-        }
+        return output;
+    } // this case is used for when a 3-bit binary is needed
+
+    if (hex_string.size() > lim) call_error_msg ("HEX data out of range");
+
+    for (int i = 0; i < (lim-hex_string.size()); i++) {
+        output.insert (0, "0000");
     }
+    
+    if (lim == 0) output.erase(output.begin());
+
     return output;
 }
 
 
-string CPU::register_binary (string reg){
-    string reg_num = reg;
-    reg_num.erase(reg_num.begin());
-    bitset<3> bin (stoi(reg_num));
-    return bin.to_string();
+vector<string> CPU::register_binary (vector<string> registers){
+    assert_reg_specified(registers);
+    vector<string> binary_registers;
+    for (int i = 0; i < registers.size(); i++){
+        string reg_num = registers[i];
+        reg_num.erase(reg_num.begin());
+        bitset<3> bin (stoi(reg_num));
+        binary_registers.push_back(bin.to_string());
+    }
+    return binary_registers;
 }
 
 bool CPU::is_cond(string value){
@@ -119,6 +124,7 @@ bool CPU::is_cond(string value){
     else return true;
 }
 
+// assert register has correct syntax and is in range
 void CPU::assert_reg_specified (vector<string> values){
     bool assertion = true;
     string message;
@@ -127,7 +133,6 @@ void CPU::assert_reg_specified (vector<string> values){
         if (values[i][0] != 'R' && values[i][0] != 'r') {
             assertion = false;
             message = "Invalid syntax. Specify register.";
-            break;
         }
 
         string num = values[i];
@@ -139,7 +144,11 @@ void CPU::assert_reg_specified (vector<string> values){
     }
 
     if (!assertion){
-        cerr << message << endl;
-        exit(1);
+        call_error_msg(message);
     }
+}
+
+void CPU::call_error_msg (string message){
+    cerr << "HEX data out of range." << endl;
+    exit(1);
 }

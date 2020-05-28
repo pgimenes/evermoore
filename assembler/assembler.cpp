@@ -26,6 +26,7 @@ void Assembler::parse_instructions(){
         }
     }
     instr_indices.push_back(assembly_code.size());
+    // ERROR HANDLING : WRONG MNEMONICS?
 
     // combine instructions and parameters into a single vector
     vector<string> instruction;

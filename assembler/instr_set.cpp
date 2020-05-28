@@ -46,10 +46,8 @@ void Instr_Set::create_map (ifstream & stream, map<string, string> & container){
             container.insert(pair<string, string>(key, value));
 
             // include lower case variation of key
-            string lower_case;
-            for (int k = 0; k < key.size(); k++){
-                lower_case = to_string(tolower(key[k]));
-            }
+            string lower_case = key;
+            transform(lower_case.begin(), lower_case.end(), lower_case.begin(), ::tolower);
             container.insert(pair<string, string> (lower_case, value));
         }
     }
