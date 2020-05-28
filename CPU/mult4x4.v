@@ -21,12 +21,12 @@ module mult4x4 (
 	assign net5[3] = 0;
 	wire [5:0] net6;
 	
-	carrysave4bit U5 (.A(net2),.B(net3),.C(net5),.SUM(net6));
+	assign net6 = net3 + net2 + net5;
 	
 	assign P[3:2] = net6[1:0];
 	
 	wire [3:0] net7 = {net6[5:2]};
 	
-	ripple4bit U6(.A(net7),.B(net4),.SUM(P[7:4]));
+	assign P[7:4]= net7+net4;
 	
 endmodule	

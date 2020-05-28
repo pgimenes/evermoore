@@ -1,0 +1,703 @@
+|mult8x8
+A[0] => A[0].IN2
+A[1] => A[1].IN2
+A[2] => A[2].IN2
+A[3] => A[3].IN2
+A[4] => A[4].IN2
+A[5] => A[5].IN2
+A[6] => A[6].IN2
+A[7] => A[7].IN2
+B[0] => B[0].IN2
+B[1] => B[1].IN2
+B[2] => B[2].IN2
+B[3] => B[3].IN2
+B[4] => B[4].IN2
+B[5] => B[5].IN2
+B[6] => B[6].IN2
+B[7] => B[7].IN2
+P[0] << mult4x4:U1.P
+P[1] << mult4x4:U1.P
+P[2] << mult4x4:U1.P
+P[3] << mult4x4:U1.P
+P[4] << Add1.DB_MAX_OUTPUT_PORT_TYPE
+P[5] << Add1.DB_MAX_OUTPUT_PORT_TYPE
+P[6] << Add1.DB_MAX_OUTPUT_PORT_TYPE
+P[7] << Add1.DB_MAX_OUTPUT_PORT_TYPE
+P[8] << Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[9] << Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[10] << Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[11] << Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[12] << Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[13] << Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[14] << Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[15] << Add2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U1
+A[0] => A[0].IN2
+A[1] => A[1].IN2
+A[2] => A[2].IN2
+A[3] => A[3].IN2
+B[0] => B[0].IN2
+B[1] => B[1].IN2
+B[2] => B[2].IN2
+B[3] => B[3].IN2
+P[0] <= mult2x2:U1.P
+P[1] <= mult2x2:U1.P
+P[2] <= Add1.DB_MAX_OUTPUT_PORT_TYPE
+P[3] <= Add1.DB_MAX_OUTPUT_PORT_TYPE
+P[4] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[5] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[6] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[7] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U1|mult2x2:U1
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U1|mult2x2:U1|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U1|mult2x2:U1|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U1|mult2x2:U2
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U1|mult2x2:U2|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U1|mult2x2:U2|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U1|mult2x2:U3
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U1|mult2x2:U3|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U1|mult2x2:U3|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U1|mult2x2:U4
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U1|mult2x2:U4|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U1|mult2x2:U4|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U2
+A[0] => A[0].IN2
+A[1] => A[1].IN2
+A[2] => A[2].IN2
+A[3] => A[3].IN2
+B[0] => B[0].IN2
+B[1] => B[1].IN2
+B[2] => B[2].IN2
+B[3] => B[3].IN2
+P[0] <= mult2x2:U1.P
+P[1] <= mult2x2:U1.P
+P[2] <= Add1.DB_MAX_OUTPUT_PORT_TYPE
+P[3] <= Add1.DB_MAX_OUTPUT_PORT_TYPE
+P[4] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[5] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[6] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[7] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U2|mult2x2:U1
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U2|mult2x2:U1|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U2|mult2x2:U1|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U2|mult2x2:U2
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U2|mult2x2:U2|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U2|mult2x2:U2|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U2|mult2x2:U3
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U2|mult2x2:U3|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U2|mult2x2:U3|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U2|mult2x2:U4
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U2|mult2x2:U4|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U2|mult2x2:U4|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U3
+A[0] => A[0].IN2
+A[1] => A[1].IN2
+A[2] => A[2].IN2
+A[3] => A[3].IN2
+B[0] => B[0].IN2
+B[1] => B[1].IN2
+B[2] => B[2].IN2
+B[3] => B[3].IN2
+P[0] <= mult2x2:U1.P
+P[1] <= mult2x2:U1.P
+P[2] <= Add1.DB_MAX_OUTPUT_PORT_TYPE
+P[3] <= Add1.DB_MAX_OUTPUT_PORT_TYPE
+P[4] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[5] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[6] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[7] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U3|mult2x2:U1
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U3|mult2x2:U1|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U3|mult2x2:U1|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U3|mult2x2:U2
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U3|mult2x2:U2|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U3|mult2x2:U2|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U3|mult2x2:U3
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U3|mult2x2:U3|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U3|mult2x2:U3|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U3|mult2x2:U4
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U3|mult2x2:U4|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U3|mult2x2:U4|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U4
+A[0] => A[0].IN2
+A[1] => A[1].IN2
+A[2] => A[2].IN2
+A[3] => A[3].IN2
+B[0] => B[0].IN2
+B[1] => B[1].IN2
+B[2] => B[2].IN2
+B[3] => B[3].IN2
+P[0] <= mult2x2:U1.P
+P[1] <= mult2x2:U1.P
+P[2] <= Add1.DB_MAX_OUTPUT_PORT_TYPE
+P[3] <= Add1.DB_MAX_OUTPUT_PORT_TYPE
+P[4] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[5] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[6] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+P[7] <= Add2.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U4|mult2x2:U1
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U4|mult2x2:U1|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U4|mult2x2:U1|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U4|mult2x2:U2
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U4|mult2x2:U2|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U4|mult2x2:U2|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U4|mult2x2:U3
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U4|mult2x2:U3|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U4|mult2x2:U3|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U4|mult2x2:U4
+A[0] => P.IN0
+A[0] => comb.IN0
+A[1] => comb.IN0
+A[1] => comb.IN0
+B[0] => P.IN1
+B[0] => comb.IN1
+B[1] => comb.IN1
+B[1] => comb.IN1
+P[0] <= P.DB_MAX_OUTPUT_PORT_TYPE
+P[1] <= halfadder:U1.SUM
+P[2] <= halfadder:U2.SUM
+P[3] <= halfadder:U2.COUT
+
+
+|mult8x8|mult4x4:U4|mult2x2:U4|halfadder:U1
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
+|mult8x8|mult4x4:U4|mult2x2:U4|halfadder:U2
+A => SUM.IN0
+A => COUT.IN0
+A => SUM.IN0
+B => SUM.IN1
+B => COUT.IN1
+B => SUM.IN1
+SUM <= Add0.DB_MAX_OUTPUT_PORT_TYPE
+COUT <= COUT.DB_MAX_OUTPUT_PORT_TYPE
+
+
