@@ -8,14 +8,14 @@ z2
 !i10f 100
 cModel Technology
 Z0 dC:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim
-vmult4x4
-Z1 !s110 1590673406
+vmult16x16
+Z1 !s110 1590674375
 !i10b 1
-!s100 VLD1LRQ`^oHbNoOgN[SdC1
-I8`mFTO1>lEJ@NQJ?j<KR?1
+!s100 fF1P9HkWjZ]PWT8oed7g>1
+IXY9mRde7gVDFY1n1<T7@g0
 Z2 VDg1SIo80bB@j0V0VzS_@n1
 R0
-w1590673405
+w1590674373
 Z3 8Evermoore.vo
 Z4 FEvermoore.vo
 Z5 L0 32
@@ -23,14 +23,56 @@ Z6 OV;L;10.5b;63
 r1
 !s85 0
 31
-Z7 !s108 1590673406.000000
+Z7 !s108 1590674375.000000
 Z8 !s107 Evermoore.vo|
 Z9 !s90 -work|work|Evermoore.vo|
 !i113 1
 Z10 o-work work
 Z11 tCvgOpt 0
-vmult4x4_vlg_vec_tst
+vmult16x16_vlg_vec_tst
 R1
+!i10b 1
+!s100 [=8^PI441VVdX<<24nM<70
+IR9]jcBoa<Tg09BlVCVnLi1
+R2
+R0
+w1590674371
+8Waveform2.vwf.vt
+FWaveform2.vwf.vt
+Z12 L0 30
+R6
+r1
+!s85 0
+31
+R7
+!s107 Waveform2.vwf.vt|
+!s90 -work|work|Waveform2.vwf.vt|
+!i113 1
+R10
+R11
+vmult4x4
+Z13 !s110 1590673406
+!i10b 1
+!s100 VLD1LRQ`^oHbNoOgN[SdC1
+I8`mFTO1>lEJ@NQJ?j<KR?1
+R2
+R0
+w1590673405
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z14 !s108 1590673406.000000
+R8
+R9
+!i113 1
+R10
+R11
+vmult4x4_vlg_vec_tst
+R13
 !i10b 1
 !s100 T404?2mKF_n`dS9bWFL?E1
 ITO`>Q5]79:N3KCoa?4Im?2
@@ -39,19 +81,19 @@ R0
 w1590673404
 8Waveform1.vwf.vt
 FWaveform1.vwf.vt
-Z12 L0 30
+R12
 R6
 r1
 !s85 0
 31
-R7
+R14
 !s107 Waveform1.vwf.vt|
 !s90 -work|work|Waveform1.vwf.vt|
 !i113 1
 R10
 R11
 vmult8x8
-Z13 !s110 1590673620
+Z15 !s110 1590673620
 !i10b 1
 !s100 Q4`H2i[@5jK<bSO:PI:YD3
 I1Gfh540:RFJ<1YYbVX`WT2
@@ -65,14 +107,14 @@ R6
 r1
 !s85 0
 31
-Z14 !s108 1590673620.000000
+Z16 !s108 1590673620.000000
 R8
 R9
 !i113 1
 R10
 R11
 vmult8x8_vlg_vec_tst
-R13
+R15
 !i10b 1
 !s100 Z1Bce5d:DzRCAd75R<lG=2
 Ia@H_1@=F=JIlL`cAUnW[_0
@@ -86,7 +128,7 @@ R6
 r1
 !s85 0
 31
-R14
+R16
 !s107 Waveform.vwf.vt|
 !s90 -work|work|Waveform.vwf.vt|
 !i113 1

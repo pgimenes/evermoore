@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Evermoore
-Thu May 28 15:45:16 2020
+Thu May 28 15:57:54 2020
 Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 
 
@@ -43,14 +43,14 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                  ;
 +---------------------------------+---------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Thu May 28 15:45:16 2020       ;
+; Analysis & Synthesis Status     ; Successful - Thu May 28 15:57:54 2020       ;
 ; Quartus Prime Version           ; 19.1.0 Build 670 09/22/2019 SJ Lite Edition ;
 ; Revision Name                   ; Evermoore                                   ;
-; Top-level Entity Name           ; mult8x8                                     ;
+; Top-level Entity Name           ; mult16x16                                   ;
 ; Family                          ; Cyclone V                                   ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
 ; Total registers                 ; 0                                           ;
-; Total pins                      ; 32                                          ;
+; Total pins                      ; 64                                          ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
 ; Total DSP Blocks                ; 0                                           ;
@@ -69,7 +69,7 @@ https://fpgasoftware.intel.com/eula.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CGXFC7C7F23C8     ;                    ;
-; Top-level entity name                                                           ; mult8x8            ; Evermoore          ;
+; Top-level entity name                                                           ; mult16x16          ; Evermoore          ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
@@ -173,81 +173,190 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
 ; mult8x8.v                        ; yes             ; User Verilog HDL File        ; C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult8x8.v   ;         ;
 ; mult4x4.v                        ; yes             ; User Verilog HDL File        ; C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult4x4.v   ;         ;
+; mult16x16.v                      ; yes             ; User Verilog HDL File        ; C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult16x16.v ;         ;
 ; mult2x2.v                        ; yes             ; Auto-Found Verilog HDL File  ; C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult2x2.v   ;         ;
 ; halfadder.v                      ; yes             ; Auto-Found Verilog HDL File  ; C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/halfadder.v ;         ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------------------+---------+
 
 
-+----------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary              ;
-+---------------------------------------------+------------+
-; Resource                                    ; Usage      ;
-+---------------------------------------------+------------+
-; Estimate of Logic utilization (ALMs needed) ; 55         ;
-;                                             ;            ;
-; Combinational ALUT usage for logic          ; 110        ;
-;     -- 7 input functions                    ; 0          ;
-;     -- 6 input functions                    ; 0          ;
-;     -- 5 input functions                    ; 21         ;
-;     -- 4 input functions                    ; 43         ;
-;     -- <=3 input functions                  ; 46         ;
-;                                             ;            ;
-; Dedicated logic registers                   ; 0          ;
-;                                             ;            ;
-; I/O pins                                    ; 32         ;
-;                                             ;            ;
-; Total DSP Blocks                            ; 0          ;
-;                                             ;            ;
-; Maximum fan-out node                        ; A[0]~input ;
-; Maximum fan-out                             ; 18         ;
-; Total fan-out                               ; 462        ;
-; Average fan-out                             ; 2.66       ;
-+---------------------------------------------+------------+
++-----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary               ;
++---------------------------------------------+-------------+
+; Resource                                    ; Usage       ;
++---------------------------------------------+-------------+
+; Estimate of Logic utilization (ALMs needed) ; 241         ;
+;                                             ;             ;
+; Combinational ALUT usage for logic          ; 475         ;
+;     -- 7 input functions                    ; 0           ;
+;     -- 6 input functions                    ; 7           ;
+;     -- 5 input functions                    ; 81          ;
+;     -- 4 input functions                    ; 166         ;
+;     -- <=3 input functions                  ; 221         ;
+;                                             ;             ;
+; Dedicated logic registers                   ; 0           ;
+;                                             ;             ;
+; I/O pins                                    ; 64          ;
+;                                             ;             ;
+; Total DSP Blocks                            ; 0           ;
+;                                             ;             ;
+; Maximum fan-out node                        ; A[12]~input ;
+; Maximum fan-out                             ; 37          ;
+; Total fan-out                               ; 1863        ;
+; Average fan-out                             ; 3.09        ;
++---------------------------------------------+-------------+
 
 
-+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                            ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------+-------------+--------------+
-; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                         ; Entity Name ; Library Name ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------+-------------+--------------+
-; |mult8x8                   ; 110 (9)             ; 0 (0)                     ; 0                 ; 0          ; 32   ; 0            ; |mult8x8                                    ; mult8x8     ; work         ;
-;    |mult4x4:U1|            ; 20 (6)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U1                         ; mult4x4     ; work         ;
-;       |mult2x2:U1|         ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U1|mult2x2:U1              ; mult2x2     ; work         ;
-;          |halfadder:U1|    ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U1|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
-;          |halfadder:U2|    ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U1|mult2x2:U1|halfadder:U2 ; halfadder   ; work         ;
-;       |mult2x2:U2|         ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U1|mult2x2:U2              ; mult2x2     ; work         ;
-;          |halfadder:U1|    ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U1|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;          |halfadder:U2|    ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U1|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
-;       |mult2x2:U3|         ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U1|mult2x2:U3              ; mult2x2     ; work         ;
-;          |halfadder:U1|    ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U1|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;          |halfadder:U2|    ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U1|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;       |mult2x2:U4|         ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U1|mult2x2:U4              ; mult2x2     ; work         ;
-;          |halfadder:U1|    ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U1|mult2x2:U4|halfadder:U1 ; halfadder   ; work         ;
-;    |mult4x4:U2|            ; 27 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U2                         ; mult4x4     ; work         ;
-;       |mult2x2:U1|         ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U2|mult2x2:U1              ; mult2x2     ; work         ;
-;          |halfadder:U1|    ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U2|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
-;       |mult2x2:U2|         ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U2|mult2x2:U2              ; mult2x2     ; work         ;
-;          |halfadder:U2|    ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U2|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
-;       |mult2x2:U3|         ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U2|mult2x2:U3              ; mult2x2     ; work         ;
-;          |halfadder:U1|    ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U2|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;          |halfadder:U2|    ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U2|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;    |mult4x4:U3|            ; 28 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U3                         ; mult4x4     ; work         ;
-;       |mult2x2:U1|         ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U3|mult2x2:U1              ; mult2x2     ; work         ;
-;          |halfadder:U1|    ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U3|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
-;       |mult2x2:U2|         ; 3 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U3|mult2x2:U2              ; mult2x2     ; work         ;
-;          |halfadder:U2|    ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U3|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
-;       |mult2x2:U3|         ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U3|mult2x2:U3              ; mult2x2     ; work         ;
-;          |halfadder:U1|    ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U3|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;          |halfadder:U2|    ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U3|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;    |mult4x4:U4|            ; 26 (17)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U4                         ; mult4x4     ; work         ;
-;       |mult2x2:U1|         ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U4|mult2x2:U1              ; mult2x2     ; work         ;
-;          |halfadder:U2|    ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U4|mult2x2:U1|halfadder:U2 ; halfadder   ; work         ;
-;       |mult2x2:U2|         ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U4|mult2x2:U2              ; mult2x2     ; work         ;
-;          |halfadder:U1|    ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U4|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;       |mult2x2:U3|         ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U4|mult2x2:U3              ; mult2x2     ; work         ;
-;          |halfadder:U1|    ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U4|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;          |halfadder:U2|    ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult8x8|mult4x4:U4|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-+----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------------------------------+-------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------+-------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                      ; Entity Name ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------+-------------+--------------+
+; |mult16x16                 ; 475 (17)            ; 0 (0)                     ; 0                 ; 0          ; 64   ; 0            ; |mult16x16                                               ; mult16x16   ; work         ;
+;    |mult8x8:U1|            ; 111 (9)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1                                    ; mult8x8     ; work         ;
+;       |mult4x4:U1|         ; 20 (6)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U1                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U1|mult2x2:U1              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U1|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U1|mult2x2:U1|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U2|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U1|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U1|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U1|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U1|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U1|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U1|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U4|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U1|mult2x2:U4              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U1|mult2x2:U4|halfadder:U1 ; halfadder   ; work         ;
+;       |mult4x4:U2|         ; 27 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U2                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U2|mult2x2:U1              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U2|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
+;          |mult2x2:U2|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U2|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U2|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U2|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U2|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U2|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;       |mult4x4:U3|         ; 28 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U3                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U3|mult2x2:U1              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U3|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
+;          |mult2x2:U2|      ; 3 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U3|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U3|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U3|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U3|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U3|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;       |mult4x4:U4|         ; 27 (18)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U4                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U4|mult2x2:U1              ; mult2x2     ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U4|mult2x2:U1|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U2|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U4|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U4|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U4|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U4|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U1|mult4x4:U4|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;    |mult8x8:U2|            ; 109 (9)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2                                    ; mult8x8     ; work         ;
+;       |mult4x4:U1|         ; 19 (6)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U1                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U1|mult2x2:U1              ; mult2x2     ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U1|mult2x2:U1|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U2|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U1|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U1|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U1|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U1|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U1|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U1|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U4|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U1|mult2x2:U4              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U1|mult2x2:U4|halfadder:U1 ; halfadder   ; work         ;
+;       |mult4x4:U2|         ; 27 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U2                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U2|mult2x2:U1              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U2|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
+;          |mult2x2:U2|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U2|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U2|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U2|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U2|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U2|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;       |mult4x4:U3|         ; 28 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U3                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U3|mult2x2:U1              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U3|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
+;          |mult2x2:U2|      ; 3 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U3|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U3|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U3|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U3|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U3|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;       |mult4x4:U4|         ; 26 (18)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U4                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U4|mult2x2:U1              ; mult2x2     ; work         ;
+;          |mult2x2:U2|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U4|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U4|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U4|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U4|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U2|mult4x4:U4|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;    |mult8x8:U3|            ; 109 (9)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3                                    ; mult8x8     ; work         ;
+;       |mult4x4:U1|         ; 19 (6)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U1                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U1|mult2x2:U1              ; mult2x2     ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U1|mult2x2:U1|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U2|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U1|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U1|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U1|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U1|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U1|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U1|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U4|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U1|mult2x2:U4              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U1|mult2x2:U4|halfadder:U1 ; halfadder   ; work         ;
+;       |mult4x4:U2|         ; 27 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U2                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U2|mult2x2:U1              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U2|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
+;          |mult2x2:U2|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U2|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U2|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U2|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U2|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U2|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;       |mult4x4:U3|         ; 28 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U3                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U3|mult2x2:U1              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U3|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
+;          |mult2x2:U2|      ; 3 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U3|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U3|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U3|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U3|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U3|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;       |mult4x4:U4|         ; 26 (18)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U4                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U4|mult2x2:U1              ; mult2x2     ; work         ;
+;          |mult2x2:U2|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U4|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U4|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U4|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U4|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U3|mult4x4:U4|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;    |mult8x8:U4|            ; 129 (9)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4                                    ; mult8x8     ; work         ;
+;       |mult4x4:U1|         ; 19 (6)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U1                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U1|mult2x2:U1              ; mult2x2     ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U1|mult2x2:U1|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U2|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U1|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U1|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U1|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U1|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U1|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U1|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U4|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U1|mult2x2:U4              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U1|mult2x2:U4|halfadder:U1 ; halfadder   ; work         ;
+;       |mult4x4:U2|         ; 29 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U2                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U2|mult2x2:U1              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U2|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
+;          |mult2x2:U2|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U2|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U2|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U2|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 8 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U2|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U2|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U2|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;       |mult4x4:U3|         ; 30 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U3                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U3|mult2x2:U1              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U3|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
+;          |mult2x2:U2|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U3|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U3|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U3|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 8 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U3|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U3|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U3|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
+;       |mult4x4:U4|         ; 42 (34)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U4                         ; mult4x4     ; work         ;
+;          |mult2x2:U1|      ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U4|mult2x2:U1              ; mult2x2     ; work         ;
+;          |mult2x2:U2|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U4|mult2x2:U2              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U4|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
+;          |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U4|mult2x2:U3              ; mult2x2     ; work         ;
+;             |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U4|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
+;             |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |mult16x16|mult8x8:U4|mult4x4:U4|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+----------------------------------------------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -271,26 +380,29 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_lcell_comb     ; 110                         ;
-;     arith             ; 28                          ;
-;         0 data inputs ; 2                           ;
-;         1 data inputs ; 2                           ;
-;         4 data inputs ; 9                           ;
-;         5 data inputs ; 15                          ;
-;     normal            ; 59                          ;
-;         2 data inputs ; 24                          ;
-;         4 data inputs ; 29                          ;
-;         5 data inputs ; 6                           ;
-;     shared            ; 23                          ;
-;         0 data inputs ; 1                           ;
-;         1 data inputs ; 1                           ;
-;         2 data inputs ; 5                           ;
-;         3 data inputs ; 11                          ;
-;         4 data inputs ; 5                           ;
-; boundary_port         ; 32                          ;
+; arriav_lcell_comb     ; 475                         ;
+;     arith             ; 128                         ;
+;         0 data inputs ; 8                           ;
+;         1 data inputs ; 15                          ;
+;         2 data inputs ; 9                           ;
+;         4 data inputs ; 36                          ;
+;         5 data inputs ; 60                          ;
+;     normal            ; 238                         ;
+;         2 data inputs ; 96                          ;
+;         3 data inputs ; 4                           ;
+;         4 data inputs ; 110                         ;
+;         5 data inputs ; 21                          ;
+;         6 data inputs ; 7                           ;
+;     shared            ; 109                         ;
+;         0 data inputs ; 5                           ;
+;         1 data inputs ; 4                           ;
+;         2 data inputs ; 28                          ;
+;         3 data inputs ; 52                          ;
+;         4 data inputs ; 20                          ;
+; boundary_port         ; 64                          ;
 ;                       ;                             ;
-; Max LUT depth         ; 5.80                        ;
-; Average LUT depth     ; 4.99                        ;
+; Max LUT depth         ; 9.40                        ;
+; Average LUT depth     ; 7.72                        ;
 +-----------------------+-----------------------------+
 
 
@@ -299,7 +411,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:00     ;
+; Top            ; 00:00:01     ;
 +----------------+--------------+
 
 
@@ -309,7 +421,7 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
-    Info: Processing started: Thu May 28 15:45:04 2020
+    Info: Processing started: Thu May 28 15:57:41 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Evermoore -c Evermoore
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
@@ -317,25 +429,28 @@ Info (12021): Found 1 design units, including 1 entities, in source file mult8x8
     Info (12023): Found entity 1: mult8x8 File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult8x8.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mult4x4.v
     Info (12023): Found entity 1: mult4x4 File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult4x4.v Line: 1
-Info (12127): Elaborating entity "mult8x8" for the top level hierarchy
-Info (12128): Elaborating entity "mult4x4" for hierarchy "mult4x4:U1" File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult8x8.v Line: 12
+Info (12021): Found 1 design units, including 1 entities, in source file mult16x16.v
+    Info (12023): Found entity 1: mult16x16 File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult16x16.v Line: 1
+Info (12127): Elaborating entity "mult16x16" for the top level hierarchy
+Info (12128): Elaborating entity "mult8x8" for hierarchy "mult8x8:U1" File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult16x16.v Line: 12
+Info (12128): Elaborating entity "mult4x4" for hierarchy "mult8x8:U1|mult4x4:U1" File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult8x8.v Line: 12
 Warning (12125): Using design file mult2x2.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
     Info (12023): Found entity 1: mult2x2 File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult2x2.v Line: 1
-Info (12128): Elaborating entity "mult2x2" for hierarchy "mult4x4:U1|mult2x2:U1" File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult4x4.v Line: 11
+Info (12128): Elaborating entity "mult2x2" for hierarchy "mult8x8:U1|mult4x4:U1|mult2x2:U1" File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult4x4.v Line: 11
 Warning (12125): Using design file halfadder.v, which is not specified as a design file for the current project, but contains definitions for 1 design units and 1 entities in project
     Info (12023): Found entity 1: halfadder File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/halfadder.v Line: 1
-Info (12128): Elaborating entity "halfadder" for hierarchy "mult4x4:U1|mult2x2:U1|halfadder:U1" File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult2x2.v Line: 9
+Info (12128): Elaborating entity "halfadder" for hierarchy "mult8x8:U1|mult4x4:U1|mult2x2:U1|halfadder:U1" File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult2x2.v Line: 9
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 142 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 16 input pins
-    Info (21059): Implemented 16 output pins
-    Info (21061): Implemented 110 logic cells
+Info (21057): Implemented 539 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 32 input pins
+    Info (21059): Implemented 32 output pins
+    Info (21061): Implemented 475 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 3 warnings
     Info: Peak virtual memory: 4818 megabytes
-    Info: Processing ended: Thu May 28 15:45:17 2020
+    Info: Processing ended: Thu May 28 15:57:54 2020
     Info: Elapsed time: 00:00:13
-    Info: Total CPU time (on all processors): 00:00:29
+    Info: Total CPU time (on all processors): 00:00:30
 
 

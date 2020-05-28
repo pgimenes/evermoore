@@ -1,5 +1,5 @@
 Flow report for Evermoore
-Thu May 28 15:46:59 2020
+Thu May 28 15:59:33 2020
 Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 
 
@@ -41,16 +41,16 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------------------------------------------------+
 ; Flow Summary                                                                  ;
 +---------------------------------+---------------------------------------------+
-; Flow Status                     ; Successful - Thu May 28 15:46:59 2020       ;
+; Flow Status                     ; Successful - Thu May 28 15:59:33 2020       ;
 ; Quartus Prime Version           ; 19.1.0 Build 670 09/22/2019 SJ Lite Edition ;
 ; Revision Name                   ; Evermoore                                   ;
-; Top-level Entity Name           ; mult8x8                                     ;
+; Top-level Entity Name           ; mult16x16                                   ;
 ; Family                          ; Cyclone V                                   ;
 ; Device                          ; 5CGXFC7C7F23C8                              ;
 ; Timing Models                   ; Final                                       ;
 ; Logic utilization (in ALMs)     ; N/A                                         ;
 ; Total registers                 ; 0                                           ;
-; Total pins                      ; 32                                          ;
+; Total pins                      ; 64                                          ;
 ; Total virtual pins              ; 0                                           ;
 ; Total block memory bits         ; 0                                           ;
 ; Total DSP Blocks                ; 0                                           ;
@@ -68,7 +68,7 @@ https://fpgasoftware.intel.com/eula.
 +-------------------+---------------------+
 ; Option            ; Setting             ;
 +-------------------+---------------------+
-; Start date & time ; 05/28/2020 15:45:05 ;
+; Start date & time ; 05/28/2020 15:57:41 ;
 ; Main task         ; Compilation         ;
 ; Revision Name     ; Evermoore           ;
 +-------------------+---------------------+
@@ -79,14 +79,14 @@ https://fpgasoftware.intel.com/eula.
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
 ; Assignment Name                     ; Value                                  ; Default Value ; Entity Name ; Section Id ;
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
-; COMPILER_SIGNATURE_ID               ; 1098884260418.159067350510552          ; --            ; --          ; --         ;
+; COMPILER_SIGNATURE_ID               ; 1098884260418.159067426115552          ; --            ; --          ; --         ;
 ; MAX_CORE_JUNCTION_TEMP              ; 85                                     ; --            ; --          ; --         ;
 ; MIN_CORE_JUNCTION_TEMP              ; 0                                      ; --            ; --          ; --         ;
-; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --            ; mult8x8     ; Top        ;
-; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --            ; mult8x8     ; Top        ;
-; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --            ; mult8x8     ; Top        ;
+; PARTITION_COLOR                     ; -- (Not supported for targeted family) ; --            ; mult16x16   ; Top        ;
+; PARTITION_FITTER_PRESERVATION_LEVEL ; -- (Not supported for targeted family) ; --            ; mult16x16   ; Top        ;
+; PARTITION_NETLIST_TYPE              ; -- (Not supported for targeted family) ; --            ; mult16x16   ; Top        ;
 ; PROJECT_OUTPUT_DIRECTORY            ; output_files                           ; --            ; --          ; --         ;
-; TOP_LEVEL_ENTITY                    ; mult8x8                                ; Evermoore     ; --          ; --         ;
+; TOP_LEVEL_ENTITY                    ; mult16x16                              ; Evermoore     ; --          ; --         ;
 +-------------------------------------+----------------------------------------+---------------+-------------+------------+
 
 
@@ -96,9 +96,9 @@ https://fpgasoftware.intel.com/eula.
 ; Module Name          ; Elapsed Time ; Average Processors Used ; Peak Virtual Memory ; Total CPU Time (on all processors) ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 ; Analysis & Synthesis ; 00:00:12     ; 1.0                     ; 4818 MB             ; 00:00:29                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4728 MB             ; 00:00:01                           ;
-; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4733 MB             ; 00:00:01                           ;
-; Total                ; 00:00:14     ; --                      ; --                  ; 00:00:31                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4729 MB             ; 00:00:01                           ;
+; EDA Netlist Writer   ; 00:00:01     ; 1.0                     ; 4734 MB             ; 00:00:02                           ;
+; Total                ; 00:00:14     ; --                      ; --                  ; 00:00:32                           ;
 +----------------------+--------------+-------------------------+---------------------+------------------------------------+
 
 
@@ -117,7 +117,7 @@ https://fpgasoftware.intel.com/eula.
 ; Flow Log ;
 ------------
 quartus_map --read_settings_files=on --write_settings_files=off Evermoore -c Evermoore
-quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off Evermoore -c Evermoore --vector_source="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/Waveform.vwf" --testbench_file="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim/Waveform.vwf.vt"
+quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off Evermoore -c Evermoore --vector_source="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/Waveform2.vwf" --testbench_file="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim/Waveform2.vwf.vt"
 quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim/" Evermoore -c Evermoore
 
 
