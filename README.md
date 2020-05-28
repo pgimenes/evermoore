@@ -1,6 +1,6 @@
 # curly-lamp
 
-To use the assembler, run the build.sh script. This runs with an example test program program.txt and upon execution a new file, program_assembled.mif will show up in the directory.
+To use the assembler, run the build.sh script. This runs with two test programs program1.txt, and program2.txt and upon execution the output mif file for each will appear in the directory.
 
 To run the program include the programs you want to assemble as command-line parameters:
 ./assembler <program_file_1.txt> <program_file_2.txt> <...> <program_file_n.txt>
