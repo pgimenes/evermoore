@@ -39,14 +39,22 @@
 
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CGXFC7C7F23C8
-set_global_assignment -name TOP_LEVEL_ENTITY mult16x16
+set_global_assignment -name TOP_LEVEL_ENTITY Evermoore
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 19.1.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "11:06:50  MAY 28, 2020"
-set_global_assignment -name LAST_QUARTUS_VERSION "19.1.0 Lite Edition"
+set_global_assignment -name LAST_QUARTUS_VERSION "18.1.0 Standard Edition"
 set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
 set_global_assignment -name ERROR_CHECK_FREQUENCY_DIVISOR 256
 set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
 set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name BDF_FILE Evermoore.bdf
+set_global_assignment -name VERILOG_FILE ripple4bit.v
+set_global_assignment -name VERILOG_FILE mult2x2.v
+set_global_assignment -name VERILOG_FILE halfadder.v
+set_global_assignment -name VERILOG_FILE fulladder.v
+set_global_assignment -name VERILOG_FILE carrysave4bit.v
 set_global_assignment -name VERILOG_FILE mult8x8.v
 set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform.vwf
 set_global_assignment -name VERILOG_FILE mult4x4.v

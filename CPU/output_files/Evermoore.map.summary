@@ -1,7 +1,7 @@
-Analysis & Synthesis Status : Successful - Thu May 28 15:57:54 2020
-Quartus Prime Version : 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+Analysis & Synthesis Status : Successful - Fri May 29 17:21:09 2020
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 Revision Name : Evermoore
-Top-level Entity Name : mult16x16
+Top-level Entity Name : Evermoore
 Family : Cyclone V
 Logic utilization (in ALMs) : N/A
 Total registers : 0
