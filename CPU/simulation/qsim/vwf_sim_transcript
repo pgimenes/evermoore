@@ -7,7 +7,7 @@ Note: if both ModelSim-Altera and ModelSim executables are available, ModelSim-A
 
 **** Generating the ModelSim Testbench ****
 
-quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off Evermoore -c Evermoore --vector_source="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/Waveform2.vwf" --testbench_file="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim/Waveform2.vwf.vt"
+quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off Evermoore -c Evermoore --vector_source="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/Waveform3.vwf" --testbench_file="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim/Waveform3.vwf.vt"
 
 Info: *******************************************************************
 Info: Running Quartus Prime EDA Netlist Writer
@@ -26,12 +26,10 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Thu May 28 15:59:30 2020
-Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off Evermoore -c Evermoore --vector_source="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/Waveform2.vwf" --testbench_file="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim/Waveform2.vwf.vt"
+    Info: Processing started: Tue Jun 02 10:17:53 2020
+Info: Command: quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off Evermoore -c Evermoore --vector_source="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/Waveform3.vwf" --testbench_file="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim/Waveform3.vwf.vt"
 Info (119006): Selected device 5CGXFC7C7F23C8 for design "Evermoore"
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-
-(201005): Ignoring output pin "P[9]" in vector source file when writing test bench files
 
 Completed successfully. 
 
@@ -58,16 +56,16 @@ Info: Running Quartus Prime EDA Netlist Writer
     Info: Intel and sold by Intel or its authorized distributors.  Please
     Info: refer to the applicable agreement for further details, at
     Info: https://fpgasoftware.intel.com/eula.
-    Info: Processing started: Thu May 28 15:59:32 2020
+    Info: Processing started: Tue Jun 02 10:17:54 2020
 Info: Command: quartus_eda --write_settings_files=off --simulation=on --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim/" Evermoore -c Evermoore
 Info (119006): Selected device 5CGXFC7C7F23C8 for design "Evermoore"
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (204019): Generated file Evermoore.vo in folder "C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim//" for EDA simulation tool
 Info: Quartus Prime EDA Netlist Writer was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4734 megabytes
-    Info: Processing ended: Thu May 28 15:59:34 2020
-    Info: Elapsed time: 00:00:02
-    Info: Total CPU time (on all processors): 00:00:02
+    Info: Peak virtual memory: 4732 megabytes
+    Info: Processing ended: Tue Jun 02 10:17:55 2020
+    Info: Elapsed time: 00:00:01
+    Info: Total CPU time (on all processors): 00:00:01
 
 Completed successfully. 
 
@@ -85,62 +83,54 @@ Reading C:/intelFPGA_lite/19.1/modelsim_ase/tcl/vsim/pref.tcl
 
 # 10.5b
 
-
 # do Evermoore.do
+
 # ** Warning: (vlib-34) Library already exists at "work".
-
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:59:35 on May 28,2020
+# Start time: 10:17:56 on Jun 02,2020
 # vlog -work work Evermoore.vo 
-
-# -- Compiling module mult16x16
-
+# -- Compiling module Statemachine_logic
 # 
 # Top level modules:
-# 	mult16x16
+# 	Statemachine_logic
 
-# End time: 15:59:35 on May 28,2020, Elapsed time: 0:00:00
+# End time: 10:17:56 on Jun 02,2020, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:59:35 on May 28,2020
-# vlog -work work Waveform2.vwf.vt 
-# -- Compiling module mult16x16_vlg_vec_tst
+# Start time: 10:17:57 on Jun 02,2020
+# vlog -work work Waveform3.vwf.vt 
+
+# -- Compiling module Statemachine_logic_vlg_vec_tst
 # 
 # Top level modules:
-# 	mult16x16_vlg_vec_tst
-
-# End time: 15:59:35 on May 28,2020, Elapsed time: 0:00:00
+# 	Statemachine_logic_vlg_vec_tst
+# End time: 10:17:57 on Jun 02,2020, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 
-# vsim -novopt -c -t 1ps -L cyclonev_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.mult16x16_vlg_vec_tst 
-# Start time: 15:59:35 on May 28,2020
-# Loading work.mult16x16_vlg_vec_tst
-# Loading work.mult16x16
+# vsim -novopt -c -t 1ps -L cyclonev_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.Statemachine_logic_vlg_vec_tst 
+# Start time: 10:17:57 on Jun 02,2020
+# Loading work.Statemachine_logic_vlg_vec_tst
+# Loading work.Statemachine_logic
 # Loading cyclonev_ver.cyclonev_io_obuf
 # Loading cyclonev_ver.cyclonev_io_ibuf
 # Loading cyclonev_ver.cyclonev_lcell_comb
 # after#25
-
-# ** Note: $stop    : Waveform2.vwf.vt(47)
-#    Time: 1 us  Iteration: 0  Instance: /mult16x16_vlg_vec_tst
-# Break in Module mult16x16_vlg_vec_tst at Waveform2.vwf.vt line 47
-# Stopped at Waveform2.vwf.vt line 47
-
-# End time: 15:59:36 on May 28,2020, Elapsed time: 0:00:01
+# ** Note: $finish    : Waveform3.vwf.vt(47)
+#    Time: 1 us  Iteration: 0  Instance: /Statemachine_logic_vlg_vec_tst
+# End time: 10:17:57 on Jun 02,2020, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 
 Completed successfully. 
 
 **** Converting ModelSim VCD to vector waveform ****
 
-Reading C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/Waveform2.vwf...
+Reading C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/Waveform3.vwf...
 
 Reading C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim/Evermoore.msim.vcd...
 
 Processing channel transitions... 
 
-Writing the resulting VWF to C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim/Evermoore_20200528155937.sim.vwf
+Writing the resulting VWF to C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim/Evermoore_20200602101757.sim.vwf
 
 Finished VCD to VWF conversion.
 

@@ -1,0 +1,20 @@
+Direct addressing:
+    LDA
+    CALL
+    JMD
+    RTN
+    STP
+Single register addressing:
+    INC
+    JMR
+    DEC 
+    SIM
+Double register addressing:
+    MOV
+    ADD
+    SUB
+    PUSH
+    POP
+    STORE
+Tripple register addressing:
+    MUL

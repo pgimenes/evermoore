@@ -1,6 +1,6 @@
 Analysis & Synthesis report for Evermoore
-Fri May 29 17:21:10 2020
-Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+Tue Jun 02 10:11:22 2020
+Quartus Prime Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
 
 
 ---------------------
@@ -23,9 +23,9 @@ Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 ----------------
 ; Legal Notice ;
 ----------------
-Copyright (C) 2018  Intel Corporation. All rights reserved.
+Copyright (C) 2019  Intel Corporation. All rights reserved.
 Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and its AMPP partner logic 
+and other software and tools, and any partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
@@ -35,31 +35,32 @@ the Intel FPGA IP License Agreement, or other applicable license
 agreement, including, without limitation, that your use is for
 the sole purpose of programming logic devices manufactured by
 Intel and sold by Intel or its authorized distributors.  Please
-refer to the applicable agreement for further details.
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
 
 
 
-+-----------------------------------------------------------------------------------+
-; Analysis & Synthesis Summary                                                      ;
-+---------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Fri May 29 17:21:09 2020           ;
-; Quartus Prime Version           ; 18.1.0 Build 625 09/12/2018 SJ Standard Edition ;
-; Revision Name                   ; Evermoore                                       ;
-; Top-level Entity Name           ; Evermoore                                       ;
-; Family                          ; Cyclone V                                       ;
-; Logic utilization (in ALMs)     ; N/A                                             ;
-; Total registers                 ; 0                                               ;
-; Total pins                      ; 64                                              ;
-; Total virtual pins              ; 0                                               ;
-; Total block memory bits         ; 0                                               ;
-; Total DSP Blocks                ; 0                                               ;
-; Total HSSI RX PCSs              ; 0                                               ;
-; Total HSSI PMA RX Deserializers ; 0                                               ;
-; Total HSSI TX PCSs              ; 0                                               ;
-; Total HSSI PMA TX Serializers   ; 0                                               ;
-; Total PLLs                      ; 0                                               ;
-; Total DLLs                      ; 0                                               ;
-+---------------------------------+-------------------------------------------------+
++-------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                  ;
++---------------------------------+---------------------------------------------+
+; Analysis & Synthesis Status     ; Successful - Tue Jun 02 10:11:22 2020       ;
+; Quartus Prime Version           ; 19.1.0 Build 670 09/22/2019 SJ Lite Edition ;
+; Revision Name                   ; Evermoore                                   ;
+; Top-level Entity Name           ; Statemachine_logic                          ;
+; Family                          ; Cyclone V                                   ;
+; Logic utilization (in ALMs)     ; N/A                                         ;
+; Total registers                 ; 0                                           ;
+; Total pins                      ; 5                                           ;
+; Total virtual pins              ; 0                                           ;
+; Total block memory bits         ; 0                                           ;
+; Total DSP Blocks                ; 0                                           ;
+; Total HSSI RX PCSs              ; 0                                           ;
+; Total HSSI PMA RX Deserializers ; 0                                           ;
+; Total HSSI TX PCSs              ; 0                                           ;
+; Total HSSI PMA TX Serializers   ; 0                                           ;
+; Total PLLs                      ; 0                                           ;
+; Total DLLs                      ; 0                                           ;
++---------------------------------+---------------------------------------------+
 
 
 +---------------------------------------------------------------------------------------------------------------------------+
@@ -68,7 +69,7 @@ refer to the applicable agreement for further details.
 ; Option                                                                          ; Setting            ; Default Value      ;
 +---------------------------------------------------------------------------------+--------------------+--------------------+
 ; Device                                                                          ; 5CGXFC7C7F23C8     ;                    ;
-; Top-level entity name                                                           ; Evermoore          ; Evermoore          ;
+; Top-level entity name                                                           ; Statemachine_logic ; Evermoore          ;
 ; Family name                                                                     ; Cyclone V          ; Cyclone V          ;
 ; Use smart compilation                                                           ; Off                ; Off                ;
 ; Enable parallel Assembler and Timing Analyzer during compilation                ; On                 ; On                 ;
@@ -155,7 +156,7 @@ refer to the applicable agreement for further details.
 ; Processors                 ; Number      ;
 +----------------------------+-------------+
 ; Number detected on machine ; 8           ;
-; Maximum allowed            ; 8           ;
+; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
 ; Maximum used               ; 1           ;
@@ -165,199 +166,49 @@ refer to the applicable agreement for further details.
 +----------------------------+-------------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                       ;
-+----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                             ; Library ;
-+----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------+---------+
-; Evermoore.bdf                    ; yes             ; User Block Diagram/Schematic File  ; //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/Evermoore.bdf ;         ;
-; mult2x2.v                        ; yes             ; User Verilog HDL File              ; //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/mult2x2.v     ;         ;
-; halfadder.v                      ; yes             ; User Verilog HDL File              ; //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/halfadder.v   ;         ;
-; mult8x8.v                        ; yes             ; User Verilog HDL File              ; //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/mult8x8.v     ;         ;
-; mult4x4.v                        ; yes             ; User Verilog HDL File              ; //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/mult4x4.v     ;         ;
-; mult16x16.v                      ; yes             ; User Verilog HDL File              ; //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/mult16x16.v   ;         ;
-+----------------------------------+-----------------+------------------------------------+--------------------------------------------------------------------------+---------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                      ;
++----------------------------------+-----------------+------------------------+-------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                        ; Library ;
++----------------------------------+-----------------+------------------------+-------------------------------------------------------------------------------------+---------+
+; Statemachine_logic.v             ; yes             ; User Verilog HDL File  ; C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/Statemachine_logic.v ;         ;
++----------------------------------+-----------------+------------------------+-------------------------------------------------------------------------------------+---------+
 
 
-+-----------------------------------------------------------+
-; Analysis & Synthesis Resource Usage Summary               ;
-+---------------------------------------------+-------------+
-; Resource                                    ; Usage       ;
-+---------------------------------------------+-------------+
-; Estimate of Logic utilization (ALMs needed) ; 241         ;
-;                                             ;             ;
-; Combinational ALUT usage for logic          ; 475         ;
-;     -- 7 input functions                    ; 0           ;
-;     -- 6 input functions                    ; 7           ;
-;     -- 5 input functions                    ; 81          ;
-;     -- 4 input functions                    ; 166         ;
-;     -- <=3 input functions                  ; 221         ;
-;                                             ;             ;
-; Dedicated logic registers                   ; 0           ;
-;                                             ;             ;
-; I/O pins                                    ; 64          ;
-;                                             ;             ;
-; Total DSP Blocks                            ; 0           ;
-;                                             ;             ;
-; Maximum fan-out node                        ; A[12]~input ;
-; Maximum fan-out                             ; 37          ;
-; Total fan-out                               ; 1863        ;
-; Average fan-out                             ; 3.09        ;
-+---------------------------------------------+-------------+
++----------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary              ;
++---------------------------------------------+------------+
+; Resource                                    ; Usage      ;
++---------------------------------------------+------------+
+; Estimate of Logic utilization (ALMs needed) ; 1          ;
+;                                             ;            ;
+; Combinational ALUT usage for logic          ; 2          ;
+;     -- 7 input functions                    ; 0          ;
+;     -- 6 input functions                    ; 0          ;
+;     -- 5 input functions                    ; 0          ;
+;     -- 4 input functions                    ; 0          ;
+;     -- <=3 input functions                  ; 2          ;
+;                                             ;            ;
+; Dedicated logic registers                   ; 0          ;
+;                                             ;            ;
+; I/O pins                                    ; 5          ;
+;                                             ;            ;
+; Total DSP Blocks                            ; 0          ;
+;                                             ;            ;
+; Maximum fan-out node                        ; Q[0]~input ;
+; Maximum fan-out                             ; 2          ;
+; Total fan-out                               ; 13         ;
+; Average fan-out                             ; 1.08       ;
++---------------------------------------------+------------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                           ;
-+-------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------+-------------+--------------+
-; Compilation Hierarchy Node    ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name                                                     ; Entity Name ; Library Name ;
-+-------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------+-------------+--------------+
-; |Evermoore                    ; 475 (0)             ; 0 (0)                     ; 0                 ; 0          ; 64   ; 0            ; |Evermoore                                                              ; Evermoore   ; work         ;
-;    |mult16x16:inst|           ; 475 (17)            ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst                                               ; mult16x16   ; work         ;
-;       |mult8x8:U1|            ; 111 (9)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1                                    ; mult8x8     ; work         ;
-;          |mult4x4:U1|         ; 20 (6)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U1                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U1|mult2x2:U1              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U1|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U1|mult2x2:U1|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U2|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U1|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U1|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U1|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U1|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U1|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U1|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U4|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U1|mult2x2:U4              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U1|mult2x2:U4|halfadder:U1 ; halfadder   ; work         ;
-;          |mult4x4:U2|         ; 27 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U2                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U2|mult2x2:U1              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U2|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U2|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U2|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U2|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U2|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U2|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U2|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;          |mult4x4:U3|         ; 28 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U3                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U3|mult2x2:U1              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U3|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U2|      ; 3 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U3|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U3|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U3|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U3|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U3|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;          |mult4x4:U4|         ; 27 (18)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U4                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U4|mult2x2:U1              ; mult2x2     ; work         ;
-;                |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U4|mult2x2:U1|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U2|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U4|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U4|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U4|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U4|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U1|mult4x4:U4|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;       |mult8x8:U2|            ; 109 (9)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2                                    ; mult8x8     ; work         ;
-;          |mult4x4:U1|         ; 19 (6)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U1                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U1|mult2x2:U1              ; mult2x2     ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U1|mult2x2:U1|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U2|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U1|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U1|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U1|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U1|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U1|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U1|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U4|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U1|mult2x2:U4              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U1|mult2x2:U4|halfadder:U1 ; halfadder   ; work         ;
-;          |mult4x4:U2|         ; 27 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U2                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U2|mult2x2:U1              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U2|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U2|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U2|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U2|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U2|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U2|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U2|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;          |mult4x4:U3|         ; 28 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U3                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U3|mult2x2:U1              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U3|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U2|      ; 3 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U3|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U3|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U3|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U3|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U3|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;          |mult4x4:U4|         ; 26 (18)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U4                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U4|mult2x2:U1              ; mult2x2     ; work         ;
-;             |mult2x2:U2|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U4|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U4|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U4|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U4|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U2|mult4x4:U4|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;       |mult8x8:U3|            ; 109 (9)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3                                    ; mult8x8     ; work         ;
-;          |mult4x4:U1|         ; 19 (6)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U1                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U1|mult2x2:U1              ; mult2x2     ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U1|mult2x2:U1|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U2|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U1|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U1|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U1|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U1|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U1|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U1|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U4|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U1|mult2x2:U4              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U1|mult2x2:U4|halfadder:U1 ; halfadder   ; work         ;
-;          |mult4x4:U2|         ; 27 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U2                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U2|mult2x2:U1              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U2|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U2|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U2|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U2|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U2|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U2|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U2|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;          |mult4x4:U3|         ; 28 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U3                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U3|mult2x2:U1              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U3|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U2|      ; 3 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U3|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U3|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 7 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U3|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U3|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U3|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;          |mult4x4:U4|         ; 26 (18)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U4                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U4|mult2x2:U1              ; mult2x2     ; work         ;
-;             |mult2x2:U2|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U4|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U4|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U4|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U4|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U3|mult4x4:U4|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;       |mult8x8:U4|            ; 129 (9)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4                                    ; mult8x8     ; work         ;
-;          |mult4x4:U1|         ; 19 (6)              ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U1                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U1|mult2x2:U1              ; mult2x2     ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U1|mult2x2:U1|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U2|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U1|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U1|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U1|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U1|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U1|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U1|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U4|      ; 2 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U1|mult2x2:U4              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U1|mult2x2:U4|halfadder:U1 ; halfadder   ; work         ;
-;          |mult4x4:U2|         ; 29 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U2                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U2|mult2x2:U1              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U2|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U2|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U2|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U2|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U2|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 8 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U2|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U2|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U2|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;          |mult4x4:U3|         ; 30 (14)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U3                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U3|mult2x2:U1              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U3|mult2x2:U1|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U2|      ; 4 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U3|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U3|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U3|mult2x2:U2|halfadder:U2 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 8 (4)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U3|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U3|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U3|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-;          |mult4x4:U4|         ; 42 (34)             ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U4                         ; mult4x4     ; work         ;
-;             |mult2x2:U1|      ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U4|mult2x2:U1              ; mult2x2     ; work         ;
-;             |mult2x2:U2|      ; 3 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U4|mult2x2:U2              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U4|mult2x2:U2|halfadder:U1 ; halfadder   ; work         ;
-;             |mult2x2:U3|      ; 4 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U4|mult2x2:U3              ; mult2x2     ; work         ;
-;                |halfadder:U1| ; 1 (1)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U4|mult2x2:U3|halfadder:U1 ; halfadder   ; work         ;
-;                |halfadder:U2| ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 0    ; 0            ; |Evermoore|mult16x16:inst|mult8x8:U4|mult4x4:U4|mult2x2:U3|halfadder:U2 ; halfadder   ; work         ;
-+-------------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+-------------------------------------------------------------------------+-------------+--------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                           ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+--------------------+--------------+
+; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name        ; Library Name ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+--------------------+--------------+
+; |Statemachine_logic        ; 2 (2)               ; 0 (0)                     ; 0                 ; 0          ; 5    ; 0            ; |Statemachine_logic ; Statemachine_logic ; work         ;
++----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+--------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
@@ -381,29 +232,13 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_lcell_comb     ; 475                         ;
-;     arith             ; 128                         ;
-;         0 data inputs ; 8                           ;
-;         1 data inputs ; 15                          ;
-;         2 data inputs ; 9                           ;
-;         4 data inputs ; 36                          ;
-;         5 data inputs ; 60                          ;
-;     normal            ; 238                         ;
-;         2 data inputs ; 96                          ;
-;         3 data inputs ; 4                           ;
-;         4 data inputs ; 110                         ;
-;         5 data inputs ; 21                          ;
-;         6 data inputs ; 7                           ;
-;     shared            ; 109                         ;
-;         0 data inputs ; 5                           ;
-;         1 data inputs ; 4                           ;
-;         2 data inputs ; 28                          ;
-;         3 data inputs ; 52                          ;
-;         4 data inputs ; 20                          ;
-; boundary_port         ; 64                          ;
+; arriav_lcell_comb     ; 2                           ;
+;     normal            ; 2                           ;
+;         3 data inputs ; 2                           ;
+; boundary_port         ; 5                           ;
 ;                       ;                             ;
-; Max LUT depth         ; 9.40                        ;
-; Average LUT depth     ; 7.72                        ;
+; Max LUT depth         ; 1.00                        ;
+; Average LUT depth     ; 1.00                        ;
 +-----------------------+-----------------------------+
 
 
@@ -421,46 +256,43 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-------------------------------+
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
-    Info: Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
-    Info: Processing started: Fri May 29 17:20:41 2020
+    Info: Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+    Info: Processing started: Tue Jun 02 10:11:10 2020
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Evermoore -c Evermoore
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
-Info (20030): Parallel compilation is enabled and will use 8 of the 8 processors detected
+Info (20030): Parallel compilation is enabled and will use 4 of the 4 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file evermoore.bdf
     Info (12023): Found entity 1: Evermoore
 Info (12021): Found 1 design units, including 1 entities, in source file ripple4bit.v
-    Info (12023): Found entity 1: ripple4bit File: //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/ripple4bit.v Line: 1
+    Info (12023): Found entity 1: ripple4bit File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/ripple4bit.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mult2x2.v
-    Info (12023): Found entity 1: mult2x2 File: //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/mult2x2.v Line: 1
+    Info (12023): Found entity 1: mult2x2 File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult2x2.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file halfadder.v
-    Info (12023): Found entity 1: halfadder File: //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/halfadder.v Line: 1
+    Info (12023): Found entity 1: halfadder File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/halfadder.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file fulladder.v
-    Info (12023): Found entity 1: fulladder File: //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/fulladder.v Line: 1
+    Info (12023): Found entity 1: fulladder File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/fulladder.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file carrysave4bit.v
-    Info (12023): Found entity 1: carrysave4bit File: //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/carrysave4bit.v Line: 1
+    Info (12023): Found entity 1: carrysave4bit File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/carrysave4bit.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mult8x8.v
-    Info (12023): Found entity 1: mult8x8 File: //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/mult8x8.v Line: 1
+    Info (12023): Found entity 1: mult8x8 File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult8x8.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mult4x4.v
-    Info (12023): Found entity 1: mult4x4 File: //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/mult4x4.v Line: 1
+    Info (12023): Found entity 1: mult4x4 File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult4x4.v Line: 1
 Info (12021): Found 1 design units, including 1 entities, in source file mult16x16.v
-    Info (12023): Found entity 1: mult16x16 File: //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/mult16x16.v Line: 1
-Info (12127): Elaborating entity "Evermoore" for the top level hierarchy
-Info (12128): Elaborating entity "mult16x16" for hierarchy "mult16x16:inst"
-Info (12128): Elaborating entity "mult8x8" for hierarchy "mult16x16:inst|mult8x8:U1" File: //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/mult16x16.v Line: 12
-Info (12128): Elaborating entity "mult4x4" for hierarchy "mult16x16:inst|mult8x8:U1|mult4x4:U1" File: //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/mult8x8.v Line: 12
-Info (12128): Elaborating entity "mult2x2" for hierarchy "mult16x16:inst|mult8x8:U1|mult4x4:U1|mult2x2:U1" File: //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/mult4x4.v Line: 11
-Info (12128): Elaborating entity "halfadder" for hierarchy "mult16x16:inst|mult8x8:U1|mult4x4:U1|mult2x2:U1|halfadder:U1" File: //icnas3.cc.ic.ac.uk/pg519/downloads/curly-lamp-master/CPU/mult2x2.v Line: 9
+    Info (12023): Found entity 1: mult16x16 File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/mult16x16.v Line: 1
+Info (12021): Found 1 design units, including 1 entities, in source file statemachine_logic.v
+    Info (12023): Found entity 1: Statemachine_logic File: C:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/Statemachine_logic.v Line: 1
+Info (12127): Elaborating entity "Statemachine_logic" for the top level hierarchy
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 539 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 32 input pins
-    Info (21059): Implemented 32 output pins
-    Info (21061): Implemented 475 logic cells
+Info (21057): Implemented 7 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 3 input pins
+    Info (21059): Implemented 2 output pins
+    Info (21061): Implemented 2 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4867 megabytes
-    Info: Processing ended: Fri May 29 17:21:10 2020
-    Info: Elapsed time: 00:00:29
-    Info: Total CPU time (on all processors): 00:00:19
+    Info: Peak virtual memory: 4816 megabytes
+    Info: Processing ended: Tue Jun 02 10:11:22 2020
+    Info: Elapsed time: 00:00:12
+    Info: Total CPU time (on all processors): 00:00:29
 
 

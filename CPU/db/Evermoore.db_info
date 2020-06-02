@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 Quartus_Version = Version 18.1.0 Build 625 09/12/2018 SJ Standard Edition
 Version_Index = 486699264
 Creation_Time = Mon Jun 01 20:19:48 2020
+=======
+Quartus_Version = Version 19.1.0 Build 670 09/22/2019 SJ Lite Edition
+Version_Index = 503488000
+Creation_Time = Tue Jun 02 09:50:09 2020
+>>>>>>> 8ef0aca31db572fd8f52840495cf4a0142709ef2

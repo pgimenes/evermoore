@@ -134,3 +134,47 @@ R16
 !i113 1
 R10
 R11
+vStatemachine_logic
+!s110 1591085876
+!i10b 1
+!s100 `Gh5lSjT40`Id4n72dFKH0
+I;Z??RMDhINIl@WYalYZ>;3
+R2
+R0
+w1591085875
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+!s108 1591085876.000000
+R8
+R9
+!i113 1
+R10
+R11
+n@statemachine_logic
+vStatemachine_logic_vlg_vec_tst
+!s110 1591085877
+!i10b 1
+!s100 1YFoP5aYT<>8]d2P<PDS33
+IF[Ie[hoH?@NjzHHf?iGiB2
+R2
+R0
+w1591085874
+8Waveform3.vwf.vt
+FWaveform3.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+!s108 1591085877.000000
+!s107 Waveform3.vwf.vt|
+!s90 -work|work|Waveform3.vwf.vt|
+!i113 1
+R10
+R11
+n@statemachine_logic_vlg_vec_tst
