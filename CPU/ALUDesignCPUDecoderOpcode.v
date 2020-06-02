@@ -1,5 +1,5 @@
 module ALUDesignCPUDecoderOpcode( instruction, rddata, rs1data, rs2data, carrystatus, skipstatus, exec1, statusregin,
-aluout, alucout, carryout, skipout, carryen, skipen, wenout,statusregout,decoder_encoded_opcode, aim, sim ) ;
+aluout, aluout2, alucout, carryout, skipout, carryen, skipen, wenout,statusregout,decoder_encoded_opcode, aim, sim ) ;
 // v1.01
 
 
@@ -15,7 +15,8 @@ input aim;
 input sim;
 input [5:0] decoder_encoded_opcode ;
 
-output [15:0] aluout; 				// the ALU block output, written into Rd
+output [15:0] aluout; 
+output [15:0] aluout2;				// the ALU block output, written into Rd
 output [7:0] statusregout; 		// output of status reg
 output alucout;                  // alu carry output
 output carryout; 						// the CARRY out, D for CARRY flip flop

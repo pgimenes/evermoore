@@ -1,0 +1,169 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 312 256)
+	(text "ALUDesignCPUDecoderOpcode" (rect 5 0 138 12)(font "Arial" ))
+	(text "inst" (rect 8 224 20 236)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "instruction[15..0]" (rect 0 0 62 12)(font "Arial" ))
+		(text "instruction[15..0]" (rect 21 27 83 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "rddata[15..0]" (rect 0 0 48 12)(font "Arial" ))
+		(text "rddata[15..0]" (rect 21 43 69 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "rs1data[15..0]" (rect 0 0 51 12)(font "Arial" ))
+		(text "rs1data[15..0]" (rect 21 59 72 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "rs2data[15..0]" (rect 0 0 53 12)(font "Arial" ))
+		(text "rs2data[15..0]" (rect 21 75 74 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "carrystatus" (rect 0 0 46 12)(font "Arial" ))
+		(text "carrystatus" (rect 21 91 67 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 1))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "skipstatus" (rect 0 0 38 12)(font "Arial" ))
+		(text "skipstatus" (rect 21 107 59 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 1))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "exec1" (rect 0 0 22 12)(font "Arial" ))
+		(text "exec1" (rect 21 123 43 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 1))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "statusregin[7..0]" (rect 0 0 62 12)(font "Arial" ))
+		(text "statusregin[7..0]" (rect 21 139 83 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "decoder_encoded_opcode[5..0]" (rect 0 0 125 12)(font "Arial" ))
+		(text "decoder_encoded_opcode[5..0]" (rect 21 155 146 167)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160)(line_width 3))
+	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "aim" (rect 0 0 14 12)(font "Arial" ))
+		(text "aim" (rect 21 171 35 183)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176)(line_width 1))
+	)
+	(port
+		(pt 0 192)
+		(input)
+		(text "sim" (rect 0 0 14 12)(font "Arial" ))
+		(text "sim" (rect 21 187 35 199)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192)(line_width 1))
+	)
+	(port
+		(pt 296 32)
+		(output)
+		(text "aluout[15..0]" (rect 0 0 46 12)(font "Arial" ))
+		(text "aluout[15..0]" (rect 229 27 275 39)(font "Arial" ))
+		(line (pt 296 32)(pt 280 32)(line_width 3))
+	)
+	(port
+		(pt 296 48)
+		(output)
+		(text "aluout2[15..0]" (rect 0 0 50 12)(font "Arial" ))
+		(text "aluout2[15..0]" (rect 225 43 275 55)(font "Arial" ))
+		(line (pt 296 48)(pt 280 48)(line_width 3))
+	)
+	(port
+		(pt 296 64)
+		(output)
+		(text "alucout" (rect 0 0 27 12)(font "Arial" ))
+		(text "alucout" (rect 248 59 275 71)(font "Arial" ))
+		(line (pt 296 64)(pt 280 64)(line_width 1))
+	)
+	(port
+		(pt 296 80)
+		(output)
+		(text "carryout" (rect 0 0 34 12)(font "Arial" ))
+		(text "carryout" (rect 241 75 275 87)(font "Arial" ))
+		(line (pt 296 80)(pt 280 80)(line_width 1))
+	)
+	(port
+		(pt 296 96)
+		(output)
+		(text "skipout" (rect 0 0 27 12)(font "Arial" ))
+		(text "skipout" (rect 248 91 275 103)(font "Arial" ))
+		(line (pt 296 96)(pt 280 96)(line_width 1))
+	)
+	(port
+		(pt 296 112)
+		(output)
+		(text "carryen" (rect 0 0 31 12)(font "Arial" ))
+		(text "carryen" (rect 244 107 275 119)(font "Arial" ))
+		(line (pt 296 112)(pt 280 112)(line_width 1))
+	)
+	(port
+		(pt 296 128)
+		(output)
+		(text "skipen" (rect 0 0 24 12)(font "Arial" ))
+		(text "skipen" (rect 251 123 275 135)(font "Arial" ))
+		(line (pt 296 128)(pt 280 128)(line_width 1))
+	)
+	(port
+		(pt 296 144)
+		(output)
+		(text "wenout" (rect 0 0 27 12)(font "Arial" ))
+		(text "wenout" (rect 248 139 275 151)(font "Arial" ))
+		(line (pt 296 144)(pt 280 144)(line_width 1))
+	)
+	(port
+		(pt 296 160)
+		(output)
+		(text "statusregout[7..0]" (rect 0 0 68 12)(font "Arial" ))
+		(text "statusregout[7..0]" (rect 207 155 275 167)(font "Arial" ))
+		(line (pt 296 160)(pt 280 160)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 280 224)(line_width 1))
+	)
+)
