@@ -2,8 +2,9 @@ CPU/db/*
 CPU/incremental_db/*
 CPU/output_files/*
 CPU/simulation/*
+CPU/*.bak
 
 # Mac system files
-.DS_Store
+*/.DS_Store
 
 assebler/a.out
