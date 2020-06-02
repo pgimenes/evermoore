@@ -1,34 +1,32 @@
 # do Evermoore.do
 # ** Warning: (vlib-34) Library already exists at "work".
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:59:35 on May 28,2020
+# Start time: 10:17:56 on Jun 02,2020
 # vlog -work work Evermoore.vo 
-# -- Compiling module mult16x16
+# -- Compiling module Statemachine_logic
 # 
 # Top level modules:
-# 	mult16x16
-# End time: 15:59:35 on May 28,2020, Elapsed time: 0:00:00
+# 	Statemachine_logic
+# End time: 10:17:56 on Jun 02,2020, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
-# Start time: 15:59:35 on May 28,2020
-# vlog -work work Waveform2.vwf.vt 
-# -- Compiling module mult16x16_vlg_vec_tst
+# Start time: 10:17:57 on Jun 02,2020
+# vlog -work work Waveform3.vwf.vt 
+# -- Compiling module Statemachine_logic_vlg_vec_tst
 # 
 # Top level modules:
-# 	mult16x16_vlg_vec_tst
-# End time: 15:59:35 on May 28,2020, Elapsed time: 0:00:00
+# 	Statemachine_logic_vlg_vec_tst
+# End time: 10:17:57 on Jun 02,2020, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
-# vsim -novopt -c -t 1ps -L cyclonev_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.mult16x16_vlg_vec_tst 
-# Start time: 15:59:35 on May 28,2020
-# Loading work.mult16x16_vlg_vec_tst
-# Loading work.mult16x16
+# vsim -novopt -c -t 1ps -L cyclonev_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.Statemachine_logic_vlg_vec_tst 
+# Start time: 10:17:57 on Jun 02,2020
+# Loading work.Statemachine_logic_vlg_vec_tst
+# Loading work.Statemachine_logic
 # Loading cyclonev_ver.cyclonev_io_obuf
 # Loading cyclonev_ver.cyclonev_io_ibuf
 # Loading cyclonev_ver.cyclonev_lcell_comb
 # after#25
-# ** Note: $stop    : Waveform2.vwf.vt(47)
-#    Time: 1 us  Iteration: 0  Instance: /mult16x16_vlg_vec_tst
-# Break in Module mult16x16_vlg_vec_tst at Waveform2.vwf.vt line 47
-# Stopped at Waveform2.vwf.vt line 47
-# End time: 15:59:36 on May 28,2020, Elapsed time: 0:00:01
+# ** Note: $finish    : Waveform3.vwf.vt(47)
+#    Time: 1 us  Iteration: 0  Instance: /Statemachine_logic_vlg_vec_tst
+# End time: 10:17:57 on Jun 02,2020, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
