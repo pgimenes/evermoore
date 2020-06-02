@@ -66,6 +66,13 @@ refer to the applicable agreement for further details.
 		(line (pt 0 112)(pt 16 112)(line_width 3))
 	)
 	(port
+		(pt 0 128)
+		(input)
+		(text "CLOCK" (rect 0 0 41 19)(font "Intel Clear" (font_size 8)))
+		(text "CLOCK" (rect 21 123 62 142)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 128)(pt 16 128))
+	)
+	(port
 		(pt 216 32)
 		(output)
 		(text "out1[15..0]" (rect 0 0 66 19)(font "Intel Clear" (font_size 8)))

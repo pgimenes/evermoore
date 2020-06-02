@@ -1,0 +1,155 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2018  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 256 320)
+	(text "decoder" (rect 5 0 36 12)(font "Arial" ))
+	(text "inst" (rect 8 288 20 300)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "instruction[15..0]" (rect 0 0 62 12)(font "Arial" ))
+		(text "instruction[15..0]" (rect 21 27 83 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 3))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "state[1..0]" (rect 0 0 37 12)(font "Arial" ))
+		(text "state[1..0]" (rect 21 43 58 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
+	)
+	(port
+		(pt 240 32)
+		(output)
+		(text "alu_input_sel" (rect 0 0 50 12)(font "Arial" ))
+		(text "alu_input_sel" (rect 169 27 219 39)(font "Arial" ))
+		(line (pt 240 32)(pt 224 32)(line_width 1))
+	)
+	(port
+		(pt 240 48)
+		(output)
+		(text "reg_data1_sel" (rect 0 0 55 12)(font "Arial" ))
+		(text "reg_data1_sel" (rect 164 43 219 55)(font "Arial" ))
+		(line (pt 240 48)(pt 224 48)(line_width 1))
+	)
+	(port
+		(pt 240 64)
+		(output)
+		(text "reg_data2_sel" (rect 0 0 56 12)(font "Arial" ))
+		(text "reg_data2_sel" (rect 163 59 219 71)(font "Arial" ))
+		(line (pt 240 64)(pt 224 64)(line_width 1))
+	)
+	(port
+		(pt 240 80)
+		(output)
+		(text "reg_shift_en" (rect 0 0 50 12)(font "Arial" ))
+		(text "reg_shift_en" (rect 169 75 219 87)(font "Arial" ))
+		(line (pt 240 80)(pt 224 80)(line_width 1))
+	)
+	(port
+		(pt 240 96)
+		(output)
+		(text "reg_shiftin" (rect 0 0 41 12)(font "Arial" ))
+		(text "reg_shiftin" (rect 178 91 219 103)(font "Arial" ))
+		(line (pt 240 96)(pt 224 96)(line_width 1))
+	)
+	(port
+		(pt 240 112)
+		(output)
+		(text "ram_instr_addr_sel" (rect 0 0 79 12)(font "Arial" ))
+		(text "ram_instr_addr_sel" (rect 140 107 219 119)(font "Arial" ))
+		(line (pt 240 112)(pt 224 112)(line_width 1))
+	)
+	(port
+		(pt 240 128)
+		(output)
+		(text "ram_data_addr_sel" (rect 0 0 79 12)(font "Arial" ))
+		(text "ram_data_addr_sel" (rect 140 123 219 135)(font "Arial" ))
+		(line (pt 240 128)(pt 224 128)(line_width 1))
+	)
+	(port
+		(pt 240 144)
+		(output)
+		(text "ir_mux" (rect 0 0 28 12)(font "Arial" ))
+		(text "ir_mux" (rect 191 139 219 151)(font "Arial" ))
+		(line (pt 240 144)(pt 224 144)(line_width 1))
+	)
+	(port
+		(pt 240 160)
+		(output)
+		(text "jump_sel" (rect 0 0 35 12)(font "Arial" ))
+		(text "jump_sel" (rect 184 155 219 167)(font "Arial" ))
+		(line (pt 240 160)(pt 224 160)(line_width 1))
+	)
+	(port
+		(pt 240 176)
+		(output)
+		(text "status_reg_sload" (rect 0 0 68 12)(font "Arial" ))
+		(text "status_reg_sload" (rect 151 171 219 183)(font "Arial" ))
+		(line (pt 240 176)(pt 224 176)(line_width 1))
+	)
+	(port
+		(pt 240 192)
+		(output)
+		(text "pc_sload" (rect 0 0 35 12)(font "Arial" ))
+		(text "pc_sload" (rect 184 187 219 199)(font "Arial" ))
+		(line (pt 240 192)(pt 224 192)(line_width 1))
+	)
+	(port
+		(pt 240 208)
+		(output)
+		(text "pc_cnt_en" (rect 0 0 42 12)(font "Arial" ))
+		(text "pc_cnt_en" (rect 177 203 219 215)(font "Arial" ))
+		(line (pt 240 208)(pt 224 208)(line_width 1))
+	)
+	(port
+		(pt 240 224)
+		(output)
+		(text "ir_en" (rect 0 0 20 12)(font "Arial" ))
+		(text "ir_en" (rect 199 219 219 231)(font "Arial" ))
+		(line (pt 240 224)(pt 224 224)(line_width 1))
+	)
+	(port
+		(pt 240 240)
+		(output)
+		(text "ram_wren_instr" (rect 0 0 63 12)(font "Arial" ))
+		(text "ram_wren_instr" (rect 156 235 219 247)(font "Arial" ))
+		(line (pt 240 240)(pt 224 240)(line_width 1))
+	)
+	(port
+		(pt 240 256)
+		(output)
+		(text "ram_wren_data" (rect 0 0 63 12)(font "Arial" ))
+		(text "ram_wren_data" (rect 156 251 219 263)(font "Arial" ))
+		(line (pt 240 256)(pt 224 256)(line_width 1))
+	)
+	(port
+		(pt 240 272)
+		(output)
+		(text "sm_extra" (rect 0 0 38 12)(font "Arial" ))
+		(text "sm_extra" (rect 181 267 219 279)(font "Arial" ))
+		(line (pt 240 272)(pt 224 272)(line_width 1))
+	)
+	(drawing
+		(rectangle (rect 16 16 224 288)(line_width 1))
+	)
+)

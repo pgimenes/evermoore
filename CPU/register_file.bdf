@@ -55,7 +55,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect -168 312 8 328)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
-	(text "write_add1[2..0]" (rect 5 0 82 17)(font "Intel Clear" ))
+	(text "write_add1[2..0]" (rect 5 0 81 17)(font "Intel Clear" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 92 12)(pt 117 12))
@@ -71,7 +71,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect -168 584 8 600)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
-	(text "write_add2[2..0]" (rect 5 0 82 17)(font "Intel Clear" ))
+	(text "write_add2[2..0]" (rect 5 0 81 17)(font "Intel Clear" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 92 12)(pt 117 12))
@@ -87,7 +87,7 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect 208 864 384 880)
 	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
-	(text "read_add1[2..0]" (rect 5 0 82 12)(font "Arial" ))
+	(text "read_add1[2..0]" (rect 5 0 81 12)(font "Arial" ))
 	(pt 176 8)
 	(drawing
 		(line (pt 92 12)(pt 117 12))
@@ -103,7 +103,23 @@ refer to the applicable agreement for further details.
 	(input)
 	(rect 216 912 384 928)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "read_add2[2..0]" (rect 5 0 80 17)(font "Intel Clear" ))
+	(text "read_add2[2..0]" (rect 5 0 79 17)(font "Intel Clear" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(input)
+	(rect -40 960 128 976)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "CLOCK" (rect 5 0 43 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -1342,7 +1358,7 @@ refer to the applicable agreement for further details.
 	(annotation_block (parameter)(rect 200 488 224 512))
 )
 (symbol
-	(rect 488 88 552 136)
+	(rect 448 88 512 136)
 	(text "XOR" (rect 1 0 21 10)(font "Arial" (font_size 6)))
 	(text "inst2" (rect 3 37 25 54)(font "Intel Clear" ))
 	(port
@@ -1376,7 +1392,7 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 488 296 552 344)
+	(rect 448 296 512 344)
 	(text "XOR" (rect 1 0 21 10)(font "Arial" (font_size 6)))
 	(text "inst10" (rect 3 37 31 54)(font "Intel Clear" ))
 	(port
@@ -1410,7 +1426,7 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 488 496 552 544)
+	(rect 448 496 512 544)
 	(text "XOR" (rect 1 0 21 10)(font "Arial" (font_size 6)))
 	(text "inst14" (rect 3 37 31 54)(font "Intel Clear" ))
 	(port
@@ -1444,7 +1460,7 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 488 704 552 752)
+	(rect 448 704 512 752)
 	(text "XOR" (rect 1 0 21 10)(font "Arial" (font_size 6)))
 	(text "inst15" (rect 3 37 31 54)(font "Intel Clear" ))
 	(port
@@ -1478,7 +1494,7 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 1032 88 1096 136)
+	(rect 992 88 1056 136)
 	(text "XOR" (rect 1 0 21 10)(font "Arial" (font_size 6)))
 	(text "inst16" (rect 3 37 31 54)(font "Intel Clear" ))
 	(port
@@ -1512,7 +1528,7 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 1032 296 1096 344)
+	(rect 992 296 1056 344)
 	(text "XOR" (rect 1 0 21 10)(font "Arial" (font_size 6)))
 	(text "inst17" (rect 3 37 31 54)(font "Intel Clear" ))
 	(port
@@ -1546,7 +1562,7 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 1032 496 1096 544)
+	(rect 992 496 1056 544)
 	(text "XOR" (rect 1 0 21 10)(font "Arial" (font_size 6)))
 	(text "inst18" (rect 3 37 31 54)(font "Intel Clear" ))
 	(port
@@ -1580,7 +1596,7 @@ refer to the applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 1032 704 1096 752)
+	(rect 992 704 1056 752)
 	(text "XOR" (rect 1 0 21 10)(font "Arial" (font_size 6)))
 	(text "inst19" (rect 3 37 31 54)(font "Intel Clear" ))
 	(port
@@ -2339,5 +2355,77 @@ refer to the applicable agreement for further details.
 	(text "sel[3]" (rect 392 671 409 698)(font "Intel Clear" )(vertical))
 	(pt 408 680)
 	(pt 408 704)
+)
+(connector
+	(pt 512 112)
+	(pt 552 112)
+)
+(connector
+	(text "clk" (rect 538 80 552 97)(font "Intel Clear" ))
+	(pt 552 96)
+	(pt 528 96)
+)
+(connector
+	(pt 512 320)
+	(pt 552 320)
+)
+(connector
+	(text "clk" (rect 538 288 552 305)(font "Intel Clear" ))
+	(pt 528 304)
+	(pt 552 304)
+)
+(connector
+	(text "clk" (rect 538 488 552 505)(font "Intel Clear" ))
+	(pt 528 504)
+	(pt 552 504)
+)
+(connector
+	(pt 512 520)
+	(pt 552 520)
+)
+(connector
+	(text "clk" (rect 538 696 552 713)(font "Intel Clear" ))
+	(pt 528 712)
+	(pt 552 712)
+)
+(connector
+	(pt 512 728)
+	(pt 552 728)
+)
+(connector
+	(text "clk" (rect 1082 80 1096 97)(font "Intel Clear" ))
+	(pt 1096 96)
+	(pt 1072 96)
+)
+(connector
+	(pt 1056 112)
+	(pt 1096 112)
+)
+(connector
+	(text "clk" (rect 1082 288 1096 305)(font "Intel Clear" ))
+	(pt 1096 304)
+	(pt 1072 304)
+)
+(connector
+	(pt 1056 320)
+	(pt 1096 320)
+)
+(connector
+	(pt 1056 520)
+	(pt 1096 520)
+)
+(connector
+	(text "clk" (rect 1082 488 1096 505)(font "Intel Clear" ))
+	(pt 1096 504)
+	(pt 1072 504)
+)
+(connector
+	(pt 1056 728)
+	(pt 1096 728)
+)
+(connector
+	(text "clk" (rect 138 952 152 969)(font "Intel Clear" ))
+	(pt 128 968)
+	(pt 152 968)
 )
 (junction (pt 56 592))

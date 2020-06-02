@@ -1,9 +1,9 @@
-db/*
-incremental_db/*
-output_files/*
-simulation/*
+CPU/db/*
+CPU/incremental_db/*
+CPU/output_files/*
+CPU/simulation/*
 
 # Mac system files
 .DS_Store
 
-a.out
+assebler/a.out
