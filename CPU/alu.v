@@ -86,12 +86,7 @@ assign fourbitthirteen = instruction[3]&&instruction[2]&&~instruction[1]&&instru
 assign fourbitfourteen = instruction[3]&&instruction[2]&&instruction[1]&&~instruction[0];
 assign fourbitfifteen = instruction[3]&&instruction[2]&&instruction[1]&&instruction[0];
 	
-wire thirtytwooutput[31:0] = {aluout[15:0],aluout2[15:0]}; 
-		
-										 
-		
-										 
-		
+wire thirtytwooutput[31:0] = {aluout1[15:0],aluout2[15:0]}; 
 	
 always @(*)
 begin 
@@ -138,7 +133,7 @@ begin
 					6'b100000: alusum = {1'b0,rs1data} ; //COMP COMPLETE
 					
 					
-					6'b100001: mult16x16 calc (.A(rsdata1[15:0]),.B(rsdata2[15:0],.P(thirtytwooutput[31:0])); //MUL COmPLETE
+					// 6'b100001: mult16x16 calc (.A(rsdata1[15:0]),.B(rsdata2[15:0],.P(thirtytwooutput[31:0])); //MUL COmPLETE
 					6'b100010: alusum = {1'b0,rs1data} ; //MLS COMPLETE
 					
 					

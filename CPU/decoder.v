@@ -48,6 +48,9 @@ assign fetch = ~state[0]&~state[1];
 assign exec1 = ~state[0]&state[1];
 assign exec2 = state[0]&~state[1];
 
+// CONDITION
+reg [3:0] cond_field = 
+
 // INSTRUCTION IDENTIFIERS
 // SIMPLER WAY TO DECODE?
 wire jmr, car, lsr, asr, inv, twc, inc, dec, ldi, seb, clb ,stb ,lob, add, adc, sub, sbc, gha, ghs, mov, mow, push, load, pop, store, AND, OR, XOR, comp,
@@ -83,7 +86,42 @@ assign encoded_opcode[4] = lob|add|adc|sub|sbc|gha|ghs|mov|mow|push|load|pop|sto
 assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|cln|sec|clc|set|clt|sev|clv|ses|cls|sei|cli|bru|brd ;
 
 // CONTROL SIGNALS
-assign sm_extra = (lda&exec1)||(aim&exec1)||(sim&exec1) ; // WRONG
-assign stop = stack_overflow; // OR with STP instruction
+	
+	assign alu_input_sel,
+	assign status_reg_sload,
+	assign stack_reg_increment,
+	assign stack_reg_load,
+	assign stack_reg_restart,
+	
+	assign reg_write_address = 
+	
+	assign reg_read_address = 
+	
+	assign regf_data1_sel [2] = 
+	assign regf_data1_sel [1] = 
+	assign regf_data1_sel [0] = 
+
+	assign regf_data2_sel,
+	assign reg_shift_en = exec1 & (asr | lsr);
+	assign reg_shiftin = exec1 & asr; // CHANGE THIS
+	assign reg_clear = exec1 & (clear | stop);
+	
+	assign ram_instr_addr_sel = exec1 & (jmr | jmd);
+	assign ram_data_addr_sel [0] = exec1 & call;
+	assign ram_data_addr_sel [1] = exec1 & rtn;
+	
+	assign ram_wren_data = exec1 & (store | push | call | car);
+	
+	assign jump_sel [0] = exec1 & (jmd | call);
+	assign jump_sel [1] = exec1 & (rtn);
+	
+	assign pc_sload = exec1 & (jmd | jmr | call | car | rtn);
+	assign pc_cnt_en = fetch | exec1 | (exec2 & (aim | sim | ldi));
+	assign ir_en = exec1 & sm_extra;
+	
+	assign sm_extra = exec1 & (ldi | aim | sim | load | pop);
+	
+	assign stop = (stp & exec1) | stack_overflow;
+	assign clock = mul & exec1;
 
 endmodule
