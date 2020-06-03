@@ -3,6 +3,7 @@ module alu (
 	input [15:0] instruction, 			// from IR'
 	input exec1, 							// timing signal: when things happen
 	input [5:0] encoded_opcode,
+	input [11:0] stack_reg,
 	
 	input aim,
 	input sim,
@@ -12,12 +13,15 @@ module alu (
 
 	input [7:0] statusregin,			//input of status reg
 
-	input [2:0] reg_addr,
+	input [2:0] reg_write_addr,
+	input [2:0] reg_read_addr,
 
 	output [15:0] aluout1, 
 	output [15:0] aluout2,				// used only for MULT
-	output [2:0] incremented_reg_addr,
-	output [7:0] statusregout 		// output of status reg
+	output [2:0] incremented_write_addr,
+	output [2:0] incremented_read_addr,
+	output [7:0] statusregout, 		// output of status reg
+	output [11:0] decremented_stack_reg
 );
 
 wire alucout;                  // alu carry output

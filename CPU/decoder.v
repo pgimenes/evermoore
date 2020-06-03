@@ -11,8 +11,11 @@ module decoder
 	output alu_input_sel,
 	output status_reg_sload,
 	output stack_reg_increment,
+	output stack_reg_load,
+	output stack_reg_restart,
 	
-	output [2:0] reg_addr,
+	output [2:0] reg_write_address,
+	output [2:0] reg_read_address,
 	output [1:0] regf_data1_sel,
 	output regf_data2_sel,
 	output reg_shift_en,
@@ -20,11 +23,11 @@ module decoder
 	output reg_clear,
 	
 	output ram_instr_addr_sel,
-	output ram_data_addr_sel,
+	output [1:0] ram_data_addr_sel,
 	output ram_wren_instr,
 	output ram_wren_data,
 	
-	output ir_mux,
+	output exec1,
 	output jump_sel,
 	output pc_sload,
 	output pc_cnt_en,
@@ -32,12 +35,14 @@ module decoder
 	
 	output sm_extra,
 	
+	output aim,
+	output sim,
 	output stop,
 	output clock
 );
 
 // STATE MACHINE WIRES
-wire fetch, exec1, exec2;
+wire fetch, exec2;
 
 assign fetch = ~state[0]&~state[1];
 assign exec1 = ~state[0]&state[1];
@@ -45,7 +50,8 @@ assign exec2 = state[0]&~state[1];
 
 // INSTRUCTION IDENTIFIERS
 // SIMPLER WAY TO DECODE?
-wire jmr, car, lsr, asr, inv, twc, inc, dec, ldi, aim, sim, seb, clb ,stb ,lob, add, adc, sub, sbc, gha, ghs, mov, mow, push, load, pop, store, AND, OR, XOR, comp, mul, mls, jmd, call, lda, rtn, stp, clear, sez, clz, sen, cln, sec, clc, set, clt, sev, clv, ses, cls, sei, cli, bru, brd ;
+wire jmr, car, lsr, asr, inv, twc, inc, dec, ldi, seb, clb ,stb ,lob, add, adc, sub, sbc, gha, ghs, mov, mow, push, load, pop, store, AND, OR, XOR, comp,
+mul, mls, jmd, call, lda, rtn, stp, clear, sez, clz, sen, cln, sec, clc, set, clt, sev, clv, ses, cls, sei, cli, bru, brd ;
 
 assign lda 	= instruction[15]&instruction[14]&instruction[13]&~instruction[12];
 assign call = instruction[15]&instruction[14]&~instruction[13]&instruction[12];
