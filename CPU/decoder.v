@@ -49,7 +49,17 @@ assign exec1 = ~state[0]&state[1];
 assign exec2 = state[0]&~state[1];
 
 // CONDITION
-reg [3:0] cond_field = 
+wire single_reg = ~instruction[15]&~instruction[14]&~instruction[13];
+wire single_reg_ba = ~instruction[15]&~instruction[14]&instruction[13];
+wire double_reg = ~instruction[15]&instruction[14];
+wire triple_reg = instruction[15]&~instruction[14];
+wire direct_add = instruction[15]&instruction[14];
+
+wire [3:0] cond_field;
+assign cond_field[0] =  (single_reg&instruction[3])|(single_reg_ba&instruction[7])|(double_reg&instruction[6])|(triple_reg&instruction[9])|(direct_add&instruction[3]);
+assign cond_field[1] = 	(single_reg&instruction[4])|(single_reg_ba&instruction[8])|(double_reg&instruction[7])|(triple_reg&instruction[10])|(direct_add&instruction[4]);
+assign cond_field[2] = 	(single_reg&instruction[5])|(single_reg_ba&instruction[9])|(double_reg&instruction[8])|(triple_reg&instruction[11])|(direct_add&instruction[5]);
+assign cond_field[3] =	(single_reg&instruction[6])|(single_reg_ba&instruction[10])|(double_reg&instruction[9])|(triple_reg&instruction[12])|(direct_add&instruction[6]);
 
 // INSTRUCTION IDENTIFIERS
 // SIMPLER WAY TO DECODE?
