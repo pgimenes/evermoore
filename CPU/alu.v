@@ -85,6 +85,8 @@ assign fourbittwelve = instruction[3]&&instruction[2]&&~instruction[1]&&~instruc
 assign fourbitthirteen = instruction[3]&&instruction[2]&&~instruction[1]&&instruction[0];
 assign fourbitfourteen = instruction[3]&&instruction[2]&&instruction[1]&&~instruction[0];
 assign fourbitfifteen = instruction[3]&&instruction[2]&&instruction[1]&&instruction[0];
+	
+wire thirtytwooutput[31:0] = {aluout[15:0],aluout2[15:0]}; 
 		
 										 
 		
@@ -95,7 +97,7 @@ always @(*)
 begin 
 		case (encoded_opcode)
 		
-					6'b000000: alusum = {1'b0,rs1data} ; //JMR 
+					//6'b000000: alusum = {1'b0,rs1data} ; //JMR 
 					//6'b000001: alusum = {1'b0,rs1data} ; //JMI 
 					//6'b000010: alusum = {1'b0,rs1data} ; //JEQ 
 					6'b000011: alusum = {1'b0,rs1data} ; //CAR COMPLETE
@@ -106,8 +108,8 @@ begin
 					6'b001000: alusum = {1'b0,rs1data}  + one; //INC 
 					6'b001001: alusum = {1'b0,rs1data}  - one; //DEC 
 					//6'b001010: alusum = {1'b0,rs1data} ; //LDI 
-					6'b001011: alusum = {1'b0,rs1data} ; //AIM COmPLETE 
-					6'b001100: alusum = {1'b0,rs1data} ; //SIM COMPLETE
+					6'b001011: alusum = {1'b0,rs1data} ; //AIM COmPLETE NO ALU? 
+					6'b001100: alusum = {1'b0,rs1data} ; //SIM COMPLETE NO ALU?
 					
 					
 					//6'b001101: (fourbitzero&&rs1data[0])||(fourbitone&&rs1data[1])||(fourbittwo&&rs1data[2])||(fourbitthree&&rs1data[3])||(fourbitfour&&rs1data[4])||(fourbitfive&&rs1data[5])||(fourbitsix&&rs1data[6])||(fourbitseven&&rs1data[7])||(fourbiteight&&rs1data[8])||(fourbitnine&&rs1data[9])||(fourbitten&&rs1data[10])||(fourbiteleven&&rs1data[11])||(fourbittwelve&&rs1data[12])||(fourbitthirteen&&rs1data[13])||(fourbitfourteen&&rs1data[14])||(fourbitfifteen&&rs1data[15])= one;//SEB find bit k of rs1data
@@ -126,9 +128,9 @@ begin
 					
 					6'b010111: alusum = {1'b0,rs1data} ; //MOV 
 					6'b011000: alusum = {1'b0,rs1data} ; //MOW COMPLETE
-					6'b011001: alusum = {1'b0,rs1data} ; //PUSH COMPLETE
+					6'b011001: alusum = {1'b0,rs2data}  + one; //PUSH COMPLETE
 					//6'b011010: alusum = {1'b0,rs1data} ; //LOAD 
-					6'b011011: alusum = {1'b0,rs1data} ; //POP COMPLETE
+					6'b011011: alusum = {1'b0,rs2data}  - one ; //POP COMPLETE
 					//6'b011100: alusum = {1'b0,rs1data} ; //STORE 
 					6'b011101: alusum = {1'b0,rs1data} && {1'b0,rs2data} ; //AND 
 					6'b011110: alusum = {1'b0,rs1data} || {1'b0,rs2data} ; //OR 
@@ -136,16 +138,16 @@ begin
 					6'b100000: alusum = {1'b0,rs1data} ; //COMP COMPLETE
 					
 					
-					6'b100001: alusum = {1'b0,rs1data} ; //MUL COmPLETE
+					6'b100001: mult16x16 calc (.A(rsdata1[15:0]),.B(rsdata2[15:0],.P(thirtytwooutput[31:0])); //MUL COmPLETE
 					6'b100010: alusum = {1'b0,rs1data} ; //MLS COMPLETE
 					
 					
 					//6'b100011: alusum = {1'b0,rs1data} ; //JMD 
-					6'b100100: alusum = {1'b0,rs1data} ; //CALL  COMPLETE
+					6'b100100: alusum = {1'b0,rs1data}  + one; //CALL
 					//6'b100101: alusum = {1'b0,rs1data} ; //LDA 
 					
 					
-					6'b100110: alusum = {1'b0,rs1data} ; //RTN COMPLETE
+					6'b100110: alusum = {1'b0,rs1data}  - one ; //RTN COMPLETE
 					//6'b100111: alusum = {1'b0,rs1data} ; //STP 
 					//6'b101000: alusum = {1'b0,rs1data} ; //CLEAR 
 					6'b101001: alusum = {1'b0,rs1data} ; //SEZ COMPLETE
