@@ -5,6 +5,8 @@ module extend_address (
 	
 );
 
-assign stack_addr = {0, 0, 0, 0, stack_reg};
+wire z = 0;
+
+assign stack_addr = {z, z, z, z, stack_reg};
 
 endmodule

@@ -20,9 +20,9 @@ refer to the applicable agreement for further details.
 */
 (header "symbol" (version "1.2"))
 (symbol
-	(rect 16 16 232 208)
+	(rect 16 16 232 240)
 	(text "register_file" (rect 5 0 75 19)(font "Intel Clear" (font_size 8)))
-	(text "inst" (rect 8 171 24 188)(font "Intel Clear" ))
+	(text "inst" (rect 8 203 24 220)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -87,6 +87,13 @@ refer to the applicable agreement for further details.
 		(line (pt 0 160)(pt 16 160))
 	)
 	(port
+		(pt 0 176)
+		(input)
+		(text "sclear" (rect 0 0 34 19)(font "Intel Clear" (font_size 8)))
+		(text "sclear" (rect 21 171 55 190)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 176)(pt 16 176))
+	)
+	(port
 		(pt 216 32)
 		(output)
 		(text "out1[15..0]" (rect 0 0 66 19)(font "Intel Clear" (font_size 8)))
@@ -101,6 +108,6 @@ refer to the applicable agreement for further details.
 		(line (pt 216 48)(pt 200 48)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 200 176))
+		(rectangle (rect 16 16 200 208))
 	)
 )
