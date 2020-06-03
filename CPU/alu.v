@@ -37,11 +37,28 @@ assign cin = statusregin[2];
 assign alucout = alusum [16]; // carry bit from sum, or shift if OP = 011
 assign aluout1 = alusum [15:0]; // 16 normal bits from sum
 
-assign statusregout[0] = ~alusum[16]&&~alusum[15]&&~alusum[14]&&~alusum[13]&&~alusum[12]&&~alusum[11]&&~alusum[10]&&~alusum[9]&&~alusum[8]&&~alusum[7]&&~alusum[6]&&~alusum[5]&&~alusum[4]&&~alusum[3]&&~alusum[2]&&~alusum[1]&&~alusum[0];
-assign statusregout[1] = alusum[15];
- //ghostaddsubwire orred with cin
-assign statusregout[2] = (~(instruction[13]==0&&instruction[12]==1&&instruction[11]==0&&instruction[10]==0)||~(instruction[13]==0&&instruction[12]==1&&instruction[11]==0&&instruction[10]==1)) ?   alucout : cin   ;
-								 
+wire eqzero;
+wire neg;
+wire carrycopy;
+
+assign eqzero = ~alusum[16]&&~alusum[15]&&~alusum[14]&&~alusum[13]&&~alusum[12]&&~alusum[11]&&~alusum[10]&&~alusum[9]&&~alusum[8]&&~alusum[7]&&~alusum[6]&&~alusum[5]&&~alusum[4]&&~alusum[3]&&~alusum[2]&&~alusum[1]&&~alusum[0];
+assign neg = alusum[15];
+assign carrycopy = alucout;
+
+//decide if to use control instr output to status reg or to use the normal procedures
+
+reg [7:0] statusregintermediate;
+
+assign statusregout = (encoded_opcode == 6'b101001||encoded_opcode == 6'b101010||encoded_opcode == 6'b101011||encoded_opcode == 6'b101100||encoded_opcode == 6'b101101||encoded_opcode == 6'b101110||encoded_opcode == 6'b101111||encoded_opcode == 6'b110000||encoded_opcode == 6'b110001||encoded_opcode == 6'b110010||encoded_opcode == 6'b110011||encoded_opcode == 6'b110100||encoded_opcode == 6'b110101||encoded_opcode == 6'b110110) ? statusregintermediate : 
+           ((encoded_opcode == 6'b010101)||(encoded_opcode == 6'b010110)) ? statusregin :
+            {eqzero,neg,carrycopy,5'b00010}; //COMPLETE ALL 8 BITS
+
+
+
+reg [11:0] stackregintermediate;
+assign decremented_stack_reg [11:0] = stackregintermediate [11:0];
+
+			 
 //for inc or dec
 wire one;
 assign one = 1;
@@ -49,8 +66,11 @@ assign one = 1;
 wire zero;
 assign zero = 0;
 
-//for clb seb stb lob
+
+wire [31:0] thirtytwooutput;	
 	
+assign thirtytwooutput = {aluout1,aluout2}; 
+
 wire fourbitzero;
 wire fourbitone;
 wire fourbittwo;
@@ -68,7 +88,6 @@ wire fourbitthirteen;
 wire fourbitfourteen;
 wire fourbitfifteen;
 
-
 assign fourbitzero = ~instruction[3]&&~instruction[2]&&~instruction[1]&&~instruction[0];
 assign fourbitone = ~instruction[3]&&~instruction[2]&&~instruction[1]&&instruction[0];
 assign fourbittwo = ~instruction[3]&&~instruction[2]&&instruction[1]&&~instruction[0];
@@ -85,8 +104,7 @@ assign fourbittwelve = instruction[3]&&instruction[2]&&~instruction[1]&&~instruc
 assign fourbitthirteen = instruction[3]&&instruction[2]&&~instruction[1]&&instruction[0];
 assign fourbitfourteen = instruction[3]&&instruction[2]&&instruction[1]&&~instruction[0];
 assign fourbitfifteen = instruction[3]&&instruction[2]&&instruction[1]&&instruction[0];
-	
-wire thirtytwooutput[31:0] = {aluout1[15:0],aluout2[15:0]}; 
+
 	
 always @(*)
 begin 
@@ -96,8 +114,8 @@ begin
 					//6'b000001: alusum = {1'b0,rs1data} ; //JMI 
 					//6'b000010: alusum = {1'b0,rs1data} ; //JEQ 
 					6'b000011: alusum = {1'b0,rs1data} ; //CAR COMPLETE
-					6'b000100: alusum = {1'b0,rs1data} ; //LSR COMPLETE
-					6'b000101: alusum = {1'b0,rs1data} ; //ASR COMPLETE
+					//6'b000100: alusum = {1'b0,rs1data} ; //LSR 
+					//6'b000101: alusum = {1'b0,rs1data} ; //ASR 
 					6'b000110: alusum = {1'b0,~rs1data} ; //INV 
 					6'b000111: alusum = {1'b0,~rs1data} + one; //TWC 
 					6'b001000: alusum = {1'b0,rs1data}  + one; //INC 
@@ -107,8 +125,8 @@ begin
 					6'b001100: alusum = {1'b0,rs1data} ; //SIM COMPLETE NO ALU?
 					
 					
-					//6'b001101: (fourbitzero&&rs1data[0])||(fourbitone&&rs1data[1])||(fourbittwo&&rs1data[2])||(fourbitthree&&rs1data[3])||(fourbitfour&&rs1data[4])||(fourbitfive&&rs1data[5])||(fourbitsix&&rs1data[6])||(fourbitseven&&rs1data[7])||(fourbiteight&&rs1data[8])||(fourbitnine&&rs1data[9])||(fourbitten&&rs1data[10])||(fourbiteleven&&rs1data[11])||(fourbittwelve&&rs1data[12])||(fourbitthirteen&&rs1data[13])||(fourbitfourteen&&rs1data[14])||(fourbitfifteen&&rs1data[15])= one;//SEB find bit k of rs1data
-					6'b001110: alusum = {1'b0,rs1data} ; //CLB COMPLETE SEB 
+					6'b001101: alusum = (fourbitzero&&({1'b0,rs1data[15:1],1'b1}))||(fourbitone&&({1'b0,rs1data[15:2],1'b1,rs1data[0]}))||(fourbittwo&&({1'b0,rs1data[15:3],1'b1,rs1data[1:0]}))||(fourbitthree&&({1'b0,rs1data[15:4],1'b1,rs1data[2:0]}))||(fourbitfour&&({1'b0,rs1data[15:5],1'b1,rs1data[3:0]}))||(fourbitfive&&({1'b0,rs1data[15:6],1'b1,rs1data[4:0]}))||(fourbitsix&&({1'b0,rs1data[15:7],1'b1,rs1data[5:0]}))||(fourbitseven&&({1'b0,rs1data[15:8],1'b1,rs1data[6:0]}))||(fourbiteight&&({1'b0,rs1data[15:9],1'b1,rs1data[7:0]}))||(fourbitnine&&({1'b0,rs1data[15:10],1'b1,rs1data[8:0]}))||(fourbitten&&({1'b0,rs1data[15:11],1'b1,rs1data[9:0]}))||(fourbiteleven&&({1'b0,rs1data[15:12],1'b1,rs1data[10:0]}))||(fourbittwelve&&({1'b0,rs1data[15:13],1'b1,rs1data[11:0]}))||(fourbitthirteen&&({1'b0,rs1data[15:14],1'b1,rs1data[12:0]}))||(fourbitfourteen&&({1'b0,rs1data[15],1'b1,rs1data[13:0]}))||(fourbitfifteen&&({1'b0,1'b1,rs1data[14:0]})) ;//SEB find bit k of rs1data COMPLETE
+					6'b001110: alusum = (fourbitzero&&({1'b0,rs1data[15:1],1'b0}))||(fourbitone&&({1'b0,rs1data[15:2],1'b0,rs1data[0]}))||(fourbittwo&&({1'b0,rs1data[15:3],1'b0,rs1data[1:0]}))||(fourbitthree&&({1'b0,rs1data[15:4],1'b0,rs1data[2:0]}))||(fourbitfour&&({1'b0,rs1data[15:5],1'b0,rs1data[3:0]}))||(fourbitfive&&({1'b0,rs1data[15:6],1'b0,rs1data[4:0]}))||(fourbitsix&&({1'b0,rs1data[15:7],1'b0,rs1data[5:0]}))||(fourbitseven&&({1'b0,rs1data[15:8],1'b0,rs1data[6:0]}))||(fourbiteight&&({1'b0,rs1data[15:9],1'b0,rs1data[7:0]}))||(fourbitnine&&({1'b0,rs1data[15:10],1'b0,rs1data[8:0]}))||(fourbitten&&({1'b0,rs1data[15:11],1'b0,rs1data[9:0]}))||(fourbiteleven&&({1'b0,rs1data[15:12],1'b0,rs1data[10:0]}))||(fourbittwelve&&({1'b0,rs1data[15:13],1'b0,rs1data[11:0]}))||(fourbitthirteen&&({1'b0,rs1data[15:14],1'b0,rs1data[12:0]}))||(fourbitfourteen&&({1'b0,rs1data[15],1'b0,rs1data[13:0]}))||(fourbitfifteen&&({1'b0,1'b0,rs1data[14:0]})) ;//SEB find bit k of rs1data COMPLETE
 					6'b001111: alusum = {1'b0,rs1data} ; //STB COMPLETE
 					6'b010000: alusum = {1'b0,rs1data} ; //LOB COMPLETE
 					
@@ -123,9 +141,9 @@ begin
 					
 					6'b010111: alusum = {1'b0,rs1data} ; //MOV 
 					6'b011000: alusum = {1'b0,rs1data} ; //MOW COMPLETE
-					6'b011001: alusum = {1'b0,rs2data}  + one; //PUSH COMPLETE
+					6'b011001: alusum = {1'b0,rs2data}  + one; //PUSH 
 					//6'b011010: alusum = {1'b0,rs1data} ; //LOAD 
-					6'b011011: alusum = {1'b0,rs2data}  - one ; //POP COMPLETE
+					6'b011011: alusum = {1'b0,rs2data}  - one ; //POP 
 					//6'b011100: alusum = {1'b0,rs1data} ; //STORE 
 					6'b011101: alusum = {1'b0,rs1data} && {1'b0,rs2data} ; //AND 
 					6'b011110: alusum = {1'b0,rs1data} || {1'b0,rs2data} ; //OR 
@@ -138,32 +156,34 @@ begin
 					
 					
 					//6'b100011: alusum = {1'b0,rs1data} ; //JMD 
-					6'b100100: alusum = {1'b0,rs1data}  + one; //CALL
+					6'b100100: stackregintermediate = {stack_reg}  - one; //CALL 
 					//6'b100101: alusum = {1'b0,rs1data} ; //LDA 
 					
 					
-					6'b100110: alusum = {1'b0,rs1data}  - one ; //RTN COMPLETE
+					6'b100110: stackregintermediate = {stack_reg}  - one ; //RTN 
 					//6'b100111: alusum = {1'b0,rs1data} ; //STP 
 					//6'b101000: alusum = {1'b0,rs1data} ; //CLEAR 
-					6'b101001: alusum = {1'b0,rs1data} ; //SEZ COMPLETE
-					6'b101010: alusum = {1'b0,rs1data} ; //CLZ COMPLETE
-					6'b101011: alusum = {1'b0,rs1data} ; //SEN COMPLETE
-					6'b101100: alusum = {1'b0,rs1data} ; //CLN COMPLETE
-					6'b101101: alusum = {1'b0,rs1data} ; //SEC COMPLETE
-					6'b101110: alusum = {1'b0,rs1data} ; //CLC COMPLETE
-					6'b101111: alusum = {1'b0,rs1data} ; //SET COMPLETE
-					6'b110000: alusum = {1'b0,rs1data} ; //CLT COMPLETE
-					6'b110001: alusum = {1'b0,rs1data} ; //SEV COMPLETE
-					6'b110010: alusum = {1'b0,rs1data} ; //CLV COMPLETE
-					6'b110011: alusum = {1'b0,rs1data} ; //SES COMPLETE
-					6'b110100: alusum = {1'b0,rs1data} ; //CLS COMPLETE
-					6'b110101: alusum = {1'b0,rs1data} ; //SEI COMPLETE
-					6'b110110: alusum = {1'b0,rs1data} ; //CLI COMPLETE
+					6'b101001: statusregintermediate[0] =  one; //SEZ 
+					6'b101010: statusregintermediate[0] =  zero; //CLZ 
+					6'b101011: statusregintermediate[1] =  one;  //SEN 
+					6'b101100: statusregintermediate[1] =  zero;  //CLN
+					6'b101101: statusregintermediate[2] =  one;  //SEC 
+					6'b101110: statusregintermediate[2] =  zero;  //CLC 
+					6'b101111: statusregintermediate[3] =  one;  //SET 
+					6'b110000: statusregintermediate[3] =  zero;  //CLT 
+					6'b110001: statusregintermediate[4] =  one;  //SEV
+					6'b110010: statusregintermediate[4] =  zero;  //CLV 
+					6'b110011: statusregintermediate[5] =  one;  //SES 
+					6'b110100: statusregintermediate[5] =  zero;  //CLS 
+					6'b110101: statusregintermediate[6] =  one;  //SEI 
+					6'b110110: statusregintermediate[6] =  zero;  //CLI 
 					6'b110111: alusum = {1'b0,rs1data} ; //BRU COMPLETE
 					6'b111000: alusum = {1'b0,rs1data} ; //BRD COMPLETE
 					
 					default : alusum = 0;// default output for unimplemented OP values, do not change
 		endcase;
 end
+
+
 
 endmodule
