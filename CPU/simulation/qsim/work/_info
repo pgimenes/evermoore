@@ -1,0 +1,52 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/Users/kovac/OneDrive/Dokumentumok/EEE Project/EVERMOORE/CPU/simulation/qsim
+vstatemachine
+!s110 1591195782
+!i10b 1
+!s100 g4U7g;m2CgSY:P>mC>O:H3
+I3<4R]V2R8C26oOi4Ugz>?3
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1591195779
+8Evermoore.vo
+FEvermoore.vo
+L0 32
+Z2 OV;L;10.5b;63
+r1
+!s85 0
+31
+!s108 1591195782.000000
+!s107 Evermoore.vo|
+!s90 -work|work|Evermoore.vo|
+!i113 1
+Z3 o-work work
+Z4 tCvgOpt 0
+vstatemachine_vlg_vec_tst
+!s110 1591195783
+!i10b 1
+!s100 FXNf>[lLA:]8FVS2AL8G:2
+Ic9Q8fmQn1AO2NQBhZUjeb0
+R1
+R0
+w1591195777
+8Waveform4.vwf.vt
+FWaveform4.vwf.vt
+L0 30
+R2
+r1
+!s85 0
+31
+!s108 1591195783.000000
+!s107 Waveform4.vwf.vt|
+!s90 -work|work|Waveform4.vwf.vt|
+!i113 1
+R3
+R4
