@@ -33,13 +33,11 @@ assign cin = statusregin[2];
 assign alucout = alusum [16]; // carry bit from sum, or shift if OP = 011
 assign aluout1 = alusum [15:0]; // 16 normal bits from sum
 
-wire eqzero;
-wire neg;
-wire carrycopy;
 
-assign eqzero = ~alusum[16]&&~alusum[15]&&~alusum[14]&&~alusum[13]&&~alusum[12]&&~alusum[11]&&~alusum[10]&&~alusum[9]&&~alusum[8]&&~alusum[7]&&~alusum[6]&&~alusum[5]&&~alusum[4]&&~alusum[3]&&~alusum[2]&&~alusum[1]&&~alusum[0];
-assign neg = alusum[15];
-assign carrycopy = alucout;
+wire eqzero = ~alusum[16]&&~alusum[15]&&~alusum[14]&&~alusum[13]&&~alusum[12]&&~alusum[11]&&~alusum[10]&&~alusum[9]&&~alusum[8]&&~alusum[7]&&~alusum[6]&&~alusum[5]&&~alusum[4]&&~alusum[3]&&~alusum[2]&&~alusum[1]&&~alusum[0];
+wire neg = alusum[15];
+wire twc_overflow;
+wire sign_flag = neg & ~twc_overflow | ~neg & twc_overflow;
 
 //decide if to use control instr output to status reg or to use the normal procedures
 
@@ -47,7 +45,7 @@ reg [7:0] statusregintermediate = statusregin;
 
 assign statusregout = (encoded_opcode == 6'b101001||encoded_opcode == 6'b101010||encoded_opcode == 6'b101011||encoded_opcode == 6'b101100||encoded_opcode == 6'b101101||encoded_opcode == 6'b101110||encoded_opcode == 6'b101111||encoded_opcode == 6'b110000||encoded_opcode == 6'b110001||encoded_opcode == 6'b110010||encoded_opcode == 6'b110011||encoded_opcode == 6'b110100||encoded_opcode == 6'b110101||encoded_opcode == 6'b110110) ? statusregintermediate : // control ops with offset
            ((encoded_opcode == 6'b010101)||(encoded_opcode == 6'b010110)) ? statusregin : // ghost arithmetic operations
-            {eqzero,neg,carrycopy,5'b00010}; //COMPLETE ALL 8 BITS
+            {eqzero, neg, alucout, 1'b0, twc_overflow, sign_flag, 1'b1, statusregin[7]}; //COMPLETE ALL 8 BITS
 
 
 
@@ -67,41 +65,47 @@ wire [31:0] thirtytwooutput;
 	
 assign thirtytwooutput = {aluout1,aluout2}; 
 
-wire fourbitzero;
-wire fourbitone;
-wire fourbittwo;
-wire fourbitthree;
-wire fourbitfour;
-wire fourbitfive;
-wire fourbitsix;
-wire fourbitseven;
-wire fourbiteight;
-wire fourbitnine;
-wire fourbitten;
-wire fourbiteleven;
-wire fourbittwelve;
-wire fourbitthirteen;
-wire fourbitfourteen;
-wire fourbitfifteen;
+//wire fourbitzero;
+//wire fourbitone;
+//wire fourbittwo;
+//wire fourbitthree;
+//wire fourbitfour;
+//wire fourbitfive;
+//wire fourbitsix;
+//wire fourbitseven;
+//wire fourbiteight;
+//wire fourbitnine;
+//wire fourbitten;
+//wire fourbiteleven;
+//wire fourbittwelve;
+//wire fourbitthirteen;
+//wire fourbitfourteen;
+//wire fourbitfifteen;
+//
+//assign fourbitzero = ~instruction[3]&&~instruction[2]&&~instruction[1]&&~instruction[0];
+//assign fourbitone = ~instruction[3]&&~instruction[2]&&~instruction[1]&&instruction[0];
+//assign fourbittwo = ~instruction[3]&&~instruction[2]&&instruction[1]&&~instruction[0];
+//assign fourbitthree = ~instruction[3]&&~instruction[2]&&instruction[1]&&instruction[0];
+//assign fourbitfour = ~instruction[3]&&instruction[2]&&~instruction[1]&&~instruction[0];
+//assign fourbitfive = ~instruction[3]&&instruction[2]&&~instruction[1]&&instruction[0];
+//assign fourbitsix = ~instruction[3]&&instruction[2]&&instruction[1]&&~instruction[0];
+//assign fourbitseven = ~instruction[3]&&instruction[2]&&instruction[1]&&instruction[0];
+//assign fourbiteight = instruction[3]&&~instruction[2]&&~instruction[1]&&~instruction[0];
+//assign fourbitnine = instruction[3]&&~instruction[2]&&~instruction[1]&&instruction[0];
+//assign fourbitten = instruction[3]&&~instruction[2]&&instruction[1]&&~instruction[0];
+//assign fourbiteleven = instruction[3]&&~instruction[2]&&instruction[1]&&instruction[0];
+//assign fourbittwelve = instruction[3]&&instruction[2]&&~instruction[1]&&~instruction[0];
+//assign fourbitthirteen = instruction[3]&&instruction[2]&&~instruction[1]&&instruction[0];
+//assign fourbitfourteen = instruction[3]&&instruction[2]&&instruction[1]&&~instruction[0];
+//assign fourbitfifteen = instruction[3]&&instruction[2]&&instruction[1]&&instruction[0];
 
-assign fourbitzero = ~instruction[3]&&~instruction[2]&&~instruction[1]&&~instruction[0];
-assign fourbitone = ~instruction[3]&&~instruction[2]&&~instruction[1]&&instruction[0];
-assign fourbittwo = ~instruction[3]&&~instruction[2]&&instruction[1]&&~instruction[0];
-assign fourbitthree = ~instruction[3]&&~instruction[2]&&instruction[1]&&instruction[0];
-assign fourbitfour = ~instruction[3]&&instruction[2]&&~instruction[1]&&~instruction[0];
-assign fourbitfive = ~instruction[3]&&instruction[2]&&~instruction[1]&&instruction[0];
-assign fourbitsix = ~instruction[3]&&instruction[2]&&instruction[1]&&~instruction[0];
-assign fourbitseven = ~instruction[3]&&instruction[2]&&instruction[1]&&instruction[0];
-assign fourbiteight = instruction[3]&&~instruction[2]&&~instruction[1]&&~instruction[0];
-assign fourbitnine = instruction[3]&&~instruction[2]&&~instruction[1]&&instruction[0];
-assign fourbitten = instruction[3]&&~instruction[2]&&instruction[1]&&~instruction[0];
-assign fourbiteleven = instruction[3]&&~instruction[2]&&instruction[1]&&instruction[0];
-assign fourbittwelve = instruction[3]&&instruction[2]&&~instruction[1]&&~instruction[0];
-assign fourbitthirteen = instruction[3]&&instruction[2]&&~instruction[1]&&instruction[0];
-assign fourbitfourteen = instruction[3]&&instruction[2]&&instruction[1]&&~instruction[0];
-assign fourbitfifteen = instruction[3]&&instruction[2]&&instruction[1]&&instruction[0];
 
-	
+assign incremented_write_addr = reg_write_addr + one;
+assign incremented_read_addr = reg_read_addr + one;
+
+reg [3:0] offset = instruction [3:0];
+reg [16:0] decoded_offset = 17'b00000000000000001 << offset;
+
 always @(*)
 begin 
 		case (encoded_opcode)
@@ -121,10 +125,13 @@ begin
 					6'b001100: alusum = {1'b0,rs1data} ; //SIM COMPLETE NO ALU?
 					
 					
-					6'b001101: alusum = (fourbitzero&&({1'b0,rs1data[15:1],1'b1}))||(fourbitone&&({1'b0,rs1data[15:2],1'b1,rs1data[0]}))||(fourbittwo&&({1'b0,rs1data[15:3],1'b1,rs1data[1:0]}))||(fourbitthree&&({1'b0,rs1data[15:4],1'b1,rs1data[2:0]}))||(fourbitfour&&({1'b0,rs1data[15:5],1'b1,rs1data[3:0]}))||(fourbitfive&&({1'b0,rs1data[15:6],1'b1,rs1data[4:0]}))||(fourbitsix&&({1'b0,rs1data[15:7],1'b1,rs1data[5:0]}))||(fourbitseven&&({1'b0,rs1data[15:8],1'b1,rs1data[6:0]}))||(fourbiteight&&({1'b0,rs1data[15:9],1'b1,rs1data[7:0]}))||(fourbitnine&&({1'b0,rs1data[15:10],1'b1,rs1data[8:0]}))||(fourbitten&&({1'b0,rs1data[15:11],1'b1,rs1data[9:0]}))||(fourbiteleven&&({1'b0,rs1data[15:12],1'b1,rs1data[10:0]}))||(fourbittwelve&&({1'b0,rs1data[15:13],1'b1,rs1data[11:0]}))||(fourbitthirteen&&({1'b0,rs1data[15:14],1'b1,rs1data[12:0]}))||(fourbitfourteen&&({1'b0,rs1data[15],1'b1,rs1data[13:0]}))||(fourbitfifteen&&({1'b0,1'b1,rs1data[14:0]})) ;//SEB find bit k of rs1data COMPLETE
-					6'b001110: alusum = (fourbitzero&&({1'b0,rs1data[15:1],1'b0}))||(fourbitone&&({1'b0,rs1data[15:2],1'b0,rs1data[0]}))||(fourbittwo&&({1'b0,rs1data[15:3],1'b0,rs1data[1:0]}))||(fourbitthree&&({1'b0,rs1data[15:4],1'b0,rs1data[2:0]}))||(fourbitfour&&({1'b0,rs1data[15:5],1'b0,rs1data[3:0]}))||(fourbitfive&&({1'b0,rs1data[15:6],1'b0,rs1data[4:0]}))||(fourbitsix&&({1'b0,rs1data[15:7],1'b0,rs1data[5:0]}))||(fourbitseven&&({1'b0,rs1data[15:8],1'b0,rs1data[6:0]}))||(fourbiteight&&({1'b0,rs1data[15:9],1'b0,rs1data[7:0]}))||(fourbitnine&&({1'b0,rs1data[15:10],1'b0,rs1data[8:0]}))||(fourbitten&&({1'b0,rs1data[15:11],1'b0,rs1data[9:0]}))||(fourbiteleven&&({1'b0,rs1data[15:12],1'b0,rs1data[10:0]}))||(fourbittwelve&&({1'b0,rs1data[15:13],1'b0,rs1data[11:0]}))||(fourbitthirteen&&({1'b0,rs1data[15:14],1'b0,rs1data[12:0]}))||(fourbitfourteen&&({1'b0,rs1data[15],1'b0,rs1data[13:0]}))||(fourbitfifteen&&({1'b0,1'b0,rs1data[14:0]})) ;//SEB find bit k of rs1data COMPLETE
-					6'b001111: alusum = {1'b0,rs1data} ; //STB COMPLETE
-					6'b010000: alusum = {1'b0,rs1data} ; //LOB COMPLETE
+//					6'b001101: alusum = (fourbitzero&&({1'b0,rs1data[15:1],1'b1}))||(fourbitone&&({1'b0,rs1data[15:2],1'b1,rs1data[0]}))||(fourbittwo&&({1'b0,rs1data[15:3],1'b1,rs1data[1:0]}))||(fourbitthree&&({1'b0,rs1data[15:4],1'b1,rs1data[2:0]}))||(fourbitfour&&({1'b0,rs1data[15:5],1'b1,rs1data[3:0]}))||(fourbitfive&&({1'b0,rs1data[15:6],1'b1,rs1data[4:0]}))||(fourbitsix&&({1'b0,rs1data[15:7],1'b1,rs1data[5:0]}))||(fourbitseven&&({1'b0,rs1data[15:8],1'b1,rs1data[6:0]}))||(fourbiteight&&({1'b0,rs1data[15:9],1'b1,rs1data[7:0]}))||(fourbitnine&&({1'b0,rs1data[15:10],1'b1,rs1data[8:0]}))||(fourbitten&&({1'b0,rs1data[15:11],1'b1,rs1data[9:0]}))||(fourbiteleven&&({1'b0,rs1data[15:12],1'b1,rs1data[10:0]}))||(fourbittwelve&&({1'b0,rs1data[15:13],1'b1,rs1data[11:0]}))||(fourbitthirteen&&({1'b0,rs1data[15:14],1'b1,rs1data[12:0]}))||(fourbitfourteen&&({1'b0,rs1data[15],1'b1,rs1data[13:0]}))||(fourbitfifteen&&({1'b0,1'b1,rs1data[14:0]})) ;//SEB find bit k of rs1data COMPLETE
+//					6'b001110: alusum = (fourbitzero&&({1'b0,rs1data[15:1],1'b0}))||(fourbitone&&({1'b0,rs1data[15:2],1'b0,rs1data[0]}))||(fourbittwo&&({1'b0,rs1data[15:3],1'b0,rs1data[1:0]}))||(fourbitthree&&({1'b0,rs1data[15:4],1'b0,rs1data[2:0]}))||(fourbitfour&&({1'b0,rs1data[15:5],1'b0,rs1data[3:0]}))||(fourbitfive&&({1'b0,rs1data[15:6],1'b0,rs1data[4:0]}))||(fourbitsix&&({1'b0,rs1data[15:7],1'b0,rs1data[5:0]}))||(fourbitseven&&({1'b0,rs1data[15:8],1'b0,rs1data[6:0]}))||(fourbiteight&&({1'b0,rs1data[15:9],1'b0,rs1data[7:0]}))||(fourbitnine&&({1'b0,rs1data[15:10],1'b0,rs1data[8:0]}))||(fourbitten&&({1'b0,rs1data[15:11],1'b0,rs1data[9:0]}))||(fourbiteleven&&({1'b0,rs1data[15:12],1'b0,rs1data[10:0]}))||(fourbittwelve&&({1'b0,rs1data[15:13],1'b0,rs1data[11:0]}))||(fourbitthirteen&&({1'b0,rs1data[15:14],1'b0,rs1data[12:0]}))||(fourbitfourteen&&({1'b0,rs1data[15],1'b0,rs1data[13:0]}))||(fourbitfifteen&&({1'b0,1'b0,rs1data[14:0]})) ;//SEB find bit k of rs1data COMPLETE
+					6'b001101: alusum = {1'b0, rs1data} | decoded_offset;
+					6'b001110: alusum = {1'b0, rs1data} & ~decoded_offset;
+					6'b001111: alusum = {1'b0,rs1data}; //STB COMPLETE
+									
+//					6'b010000: rs1data[k] = statusregisterin[3]; // LOB
 					
 					
 					6'b010001: alusum = {1'b0,rs1data} + {1'b0,rs2data} ; //ADD 
@@ -139,7 +146,7 @@ begin
 					6'b011000: alusum = {1'b0,rs1data} ; //MOW COMPLETE
 					6'b011001: alusum = {1'b0,rs2data}  + one; //PUSH 
 					//6'b011010: alusum = {1'b0,rs1data} ; //LOAD 
-					6'b011011: alusum = {1'b0,rs2data}  - one ; //POP 
+					6'b011011: alusum = {1'b0,rs1data}  - one ; //POP 
 					//6'b011100: alusum = {1'b0,rs1data} ; //STORE 
 					6'b011101: alusum = {1'b0,rs1data} & {1'b0,rs2data} ; //AND 
 					6'b011110: alusum = {1'b0,rs1data} | {1'b0,rs2data} ; //OR 
@@ -172,8 +179,8 @@ begin
 					6'b110010: statusregintermediate[4] =  zero;  //CLV 
 					6'b110011: statusregintermediate[5] =  one;  //SES 
 					6'b110100: statusregintermediate[5] =  zero;  //CLS 
-					6'b110101: statusregintermediate[6] =  one;  //SEI 
-					6'b110110: statusregintermediate[6] =  zero;  //CLI
+					6'b110101: statusregintermediate[7] =  one;  //SEI 
+					6'b110110: statusregintermediate[7] =  zero;  //CLI
 					
 					6'b110111: alusum = {1'b0,rs1data} ; //BRU COMPLETE
 					6'b111000: alusum = {1'b0,rs1data} ; //BRD COMPLETE

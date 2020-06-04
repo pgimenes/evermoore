@@ -17,10 +17,8 @@ module decoder
 	
 	// REG FILE INPUT
 	output [2:0] reg_write_addr1,
-	output [2:0] reg_write_addr2,
 	output [2:0] reg_read_addr1,
 	output [2:0] reg_read_addr2,
-	output write_addr_sel,
 	output read_addr_sel,
 	
 	output [1:0] regf_data1_sel,
@@ -34,7 +32,6 @@ module decoder
 	
 	output ram_instr_addr_sel,
 	output [1:0] ram_data_addr_sel,
-	output ram_wren_instr,
 	output ram_wren_data,
 	
 	// CONTROL PATH
@@ -137,13 +134,19 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 	assign stack_reg_load = exec1 & rtn;
 	assign stack_reg_restart = fetch | stop;
 	
-	assign reg_write_addr1 = single_reg ? instruction [2:0] : 0;
-	assign reg_write_addr2 = single_reg ? instruction [2:0] : 0;
+	assign reg_write_addr1 = single_reg ? instruction [2:0]
+									: single_reg_ba ? instruction [6:4]
+									: double_reg & pop & exec1 ? instruction [2:0] // Rs for decrementing the stack address
+									: double_reg & ~(pop & exec1) ? instruction[5:3]
+									: triple_reg ? instruction [8:6] : 3'b000; // default is 000 for LDA (R0)
 	
-//	assign reg_read_addr1 = 
-//	assign reg_read_addr2 = 
+	assign reg_read_addr1 = single_reg ? instruction [2:0]
+									: single_reg_ba ? instruction [6:4]
+									: double_reg ? instruction [2:0] // Rs
+									: triple_reg ? instruction [2:0] : 3'b000; // default is 000 for LDA (R0)
 	
-	assign write_addr_sel = exec2 & pop;
+	assign reg_read_addr2 = double_reg ? instruction [5:3] : instruction [5:3]; // default is triple_reg
+	
 	assign read_addr_sel = mow;
  
 	assign regf_data1_sel [0] = ~(lsr | asr | mov | mow | lda);
