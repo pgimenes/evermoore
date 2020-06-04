@@ -4,6 +4,7 @@ module decoder
 
 	input [15:0] instruction,
 	input [1:0] state,
+	input [7:0] status_reg,
 	input stack_overflow,
 	
 	output [5:0] encoded_opcode,
@@ -14,13 +15,22 @@ module decoder
 	output stack_reg_load,
 	output stack_reg_restart,
 	
-	output [2:0] reg_write_address,
-	output [2:0] reg_read_address,
+	// REG FILE INPUT
+	output [2:0] reg_write_addr1,
+	output [2:0] reg_write_addr2,
+	output [2:0] reg_read_addr1,
+	output [2:0] reg_read_addr2,
+	output write_addr_sel,
+	output read_addr_sel,
+	
 	output [1:0] regf_data1_sel,
 	output regf_data2_sel,
+	output write1_en,
+	output write2_en,
 	output reg_shift_en,
 	output reg_shiftin,
 	output reg_clear,
+	
 	
 	output ram_instr_addr_sel,
 	output [1:0] ram_data_addr_sel,
@@ -28,10 +38,9 @@ module decoder
 	output ram_wren_data,
 	
 	output exec1,
-	output jump_sel,
+	output [1:0] jump_sel,
 	output pc_sload,
 	output pc_cnt_en,
-	output ir_en,
 	
 	output sm_extra,
 	
@@ -48,18 +57,45 @@ assign fetch = ~state[0]&~state[1];
 assign exec1 = ~state[0]&state[1];
 assign exec2 = state[0]&~state[1];
 
-// CONDITION
+// ADDRESSING MODES
 wire single_reg = ~instruction[15]&~instruction[14]&~instruction[13];
 wire single_reg_ba = ~instruction[15]&~instruction[14]&instruction[13];
 wire double_reg = ~instruction[15]&instruction[14];
 wire triple_reg = instruction[15]&~instruction[14];
 wire direct_add = instruction[15]&instruction[14];
+wire control_ops = instruction[15] & instruction[14] & instruction[13] & instruction[12] & ~instruction[11];
+wire control_ops_offset = instruction[15] & instruction[14] & instruction[13] & instruction[12] & instruction[11];
 
+// COND FIELD
 wire [3:0] cond_field;
-assign cond_field[0] =  (single_reg&instruction[3])|(single_reg_ba&instruction[7])|(double_reg&instruction[6])|(triple_reg&instruction[9])|(direct_add&instruction[3]);
-assign cond_field[1] = 	(single_reg&instruction[4])|(single_reg_ba&instruction[8])|(double_reg&instruction[7])|(triple_reg&instruction[10])|(direct_add&instruction[4]);
-assign cond_field[2] = 	(single_reg&instruction[5])|(single_reg_ba&instruction[9])|(double_reg&instruction[8])|(triple_reg&instruction[11])|(direct_add&instruction[5]);
-assign cond_field[3] =	(single_reg&instruction[6])|(single_reg_ba&instruction[10])|(double_reg&instruction[9])|(triple_reg&instruction[12])|(direct_add&instruction[6]);
+assign cond_field[0] =  (single_reg&instruction[3])|(single_reg_ba&instruction[7])|(double_reg&instruction[6])|(triple_reg&instruction[9])|(direct_add& 0)|control_ops&instruction[0]|control_ops_offset&instruction[3];
+assign cond_field[1] = 	(single_reg&instruction[4])|(single_reg_ba&instruction[8])|(double_reg&instruction[7])|(triple_reg&instruction[10])|(direct_add& 1)|control_ops&instruction[1]|control_ops_offset&instruction[4];
+assign cond_field[2] = 	(single_reg&instruction[5])|(single_reg_ba&instruction[9])|(double_reg&instruction[8])|(triple_reg&instruction[11])|(direct_add& 1)|control_ops&instruction[2]|control_ops_offset&instruction[5];
+assign cond_field[3] =	(single_reg&instruction[6])|(single_reg_ba&instruction[10])|(double_reg&instruction[9])|(triple_reg&instruction[12])|(direct_add& 0)|control_ops&instruction[3]|control_ops_offset&instruction[6];
+
+reg cond_evaluated;
+
+always @(*) begin
+	case (cond_field)
+		4'b0000: cond_evaluated = status_reg[0];
+		4'b0001: cond_evaluated = status_reg[1];
+		4'b0010:	cond_evaluated = status_reg[2];
+		4'b0011: cond_evaluated = status_reg[3];
+		4'b0100: cond_evaluated = status_reg[4];
+		4'b0101: cond_evaluated = status_reg[5];
+		4'b0110: cond_evaluated = status_reg[6];
+		4'b0111: cond_evaluated = status_reg[7];
+		4'b1000: cond_evaluated = ~status_reg[0];
+		4'b1001: cond_evaluated = ~status_reg[1];
+		4'b1010: cond_evaluated = ~status_reg[2];
+		4'b1011: cond_evaluated = ~status_reg[3];
+		4'b1100: cond_evaluated = ~status_reg[4];
+		4'b1101: cond_evaluated = ~status_reg[5];
+		// 4'b1110: cond_evaluated = ~status_reg[6]; // INVALID
+		4'b1111: cond_evaluated = ~status_reg[7];
+		default : cond_evaluated = 1;
+	endcase
+end	
 
 // INSTRUCTION IDENTIFIERS
 // SIMPLER WAY TO DECODE?
@@ -97,41 +133,50 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 
 // CONTROL SIGNALS
 	
-	assign alu_input_sel,
-	assign status_reg_sload,
-	assign stack_reg_increment,
-	assign stack_reg_load,
-	assign stack_reg_restart,
+	assign alu_input_sel = exec1 & (aim | sim);
+	assign status_reg_sload = exec1 & ~(gha | ghs);
+	assign stack_reg_increment = exec1 & (call | car);
+	assign stack_reg_load = exec1 & rtn;
+	assign stack_reg_restart = fetch | stop;
 	
-	assign reg_write_address = 
+	assign reg_write_addr1 = single_reg ? instruction [2:0]
+	assign reg_write_addr2 = single_reg ? instruction [2:0]
 	
-	assign reg_read_address = 
+	assign reg_read_addr1 = 
+	assign reg_read_addr2 = 
 	
-	assign regf_data1_sel [2] = 
-	assign regf_data1_sel [1] = 
-	assign regf_data1_sel [0] = 
-
-	assign regf_data2_sel,
+	assign write_addr_sel = exec2 & pop;
+	assign read_addr_sel = mow;
+ 
+	assign regf_data1_sel [0] = ~(lsr | asr | mov | mow | lda)
+	assign regf_data1_sel [1] = mov | mow | exec2 & (pop | load | ldi);
+	
+	assign regf_data2_sel = mul;
+	
+	assign write1_en = cond_evaluated & ~(jmr | car | stb | lob | store | jmd | call | comp | rtn | control_ops | control_ops_offset | (exec1 & (load | aim | sim | ldi)) ); // enable might have to be low for clear instruction
+	assign write2_en = cond_evaluated & (mow | mul);
 	assign reg_shift_en = exec1 & (asr | lsr);
-	assign reg_shiftin = exec1 & asr; // CHANGE THIS
-	assign reg_clear = exec1 & (clear | stop);
+	assign reg_shiftin = exec1 & asr; // & MSB
+	assign reg_clear = exec1 & (clear | stop) & cond_evaluated;
 	
 	assign ram_instr_addr_sel = exec1 & (jmr | jmd);
 	assign ram_data_addr_sel [0] = exec1 & call;
 	assign ram_data_addr_sel [1] = exec1 & rtn;
 	
-	assign ram_wren_data = exec1 & (store | push | call | car);
+	assign ram_wren_data = exec1 & (store | push | call | car) & cond_evaluated;
 	
 	assign jump_sel [0] = exec1 & (jmd | call);
 	assign jump_sel [1] = exec1 & (rtn);
 	
-	assign pc_sload = exec1 & (jmd | jmr | call | car | rtn);
+	assign pc_sload = exec1 & (jmd | jmr | call | car | rtn) & cond_evaluated;
 	assign pc_cnt_en = fetch | exec1 | (exec2 & (aim | sim | ldi));
-	assign ir_en = exec1 & sm_extra;
 	
 	assign sm_extra = exec1 & (ldi | aim | sim | load | pop);
 	
-	assign stop = (stp & exec1) | stack_overflow;
+	assign stop = (stp & exec1) | stack_overflow & cond_evaluated;
 	assign clock = mul & exec1;
 
 endmodule
+
+
+

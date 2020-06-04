@@ -47,10 +47,10 @@ assign carrycopy = alucout;
 
 //decide if to use control instr output to status reg or to use the normal procedures
 
-reg [7:0] statusregintermediate;
+reg [7:0] statusregintermediate = statusregin;
 
-assign statusregout = (encoded_opcode == 6'b101001||encoded_opcode == 6'b101010||encoded_opcode == 6'b101011||encoded_opcode == 6'b101100||encoded_opcode == 6'b101101||encoded_opcode == 6'b101110||encoded_opcode == 6'b101111||encoded_opcode == 6'b110000||encoded_opcode == 6'b110001||encoded_opcode == 6'b110010||encoded_opcode == 6'b110011||encoded_opcode == 6'b110100||encoded_opcode == 6'b110101||encoded_opcode == 6'b110110) ? statusregintermediate : 
-           ((encoded_opcode == 6'b010101)||(encoded_opcode == 6'b010110)) ? statusregin :
+assign statusregout = (encoded_opcode == 6'b101001||encoded_opcode == 6'b101010||encoded_opcode == 6'b101011||encoded_opcode == 6'b101100||encoded_opcode == 6'b101101||encoded_opcode == 6'b101110||encoded_opcode == 6'b101111||encoded_opcode == 6'b110000||encoded_opcode == 6'b110001||encoded_opcode == 6'b110010||encoded_opcode == 6'b110011||encoded_opcode == 6'b110100||encoded_opcode == 6'b110101||encoded_opcode == 6'b110110) ? statusregintermediate : // control ops with offset
+           ((encoded_opcode == 6'b010101)||(encoded_opcode == 6'b010110)) ? statusregin : // ghost arithmetic operations
             {eqzero,neg,carrycopy,5'b00010}; //COMPLETE ALL 8 BITS
 
 
@@ -133,21 +133,21 @@ begin
 					
 					6'b010001: alusum = {1'b0,rs1data} + {1'b0,rs2data} ; //ADD 
 					6'b010010: alusum = {1'b0,rs1data} + {1'b0,rs2data} + cin ; //ADC 
-					6'b010011: alusum = {1'b0,rs1data} + {1'b0,~rs2data} ; //SUB 
-					6'b010100: alusum = {1'b0,rs1data} + {1'b0,~rs2data} - cin ; //SBC 
-					6'b010101: alusum = {1'b0,rs1data} + {1'b0,rs2data} ; //GHA 
-					6'b010110: alusum = {1'b0,rs1data} + {1'b0,~rs2data} ; //GHS 
+					6'b010011: alusum = {1'b0,rs1data} + {1'b0,~rs2data} + 1; //SUB 
+					6'b010100: alusum = {1'b0,rs1data} + {1'b0,~rs2data} + 1 - cin ; //SBC 
+					6'b010101: alusum = {1'b0,rs1data} + {1'b0,rs2data} ; // GHA 
+					6'b010110: alusum = {1'b0,rs1data} + {1'b0,~rs2data} + 1 ; // GHS 
 					
 					
-					6'b010111: alusum = {1'b0,rs1data} ; //MOV 
+					//6'b010111: alusum = {1'b0,rs1data} ; //MOV 
 					6'b011000: alusum = {1'b0,rs1data} ; //MOW COMPLETE
 					6'b011001: alusum = {1'b0,rs2data}  + one; //PUSH 
 					//6'b011010: alusum = {1'b0,rs1data} ; //LOAD 
 					6'b011011: alusum = {1'b0,rs2data}  - one ; //POP 
 					//6'b011100: alusum = {1'b0,rs1data} ; //STORE 
-					6'b011101: alusum = {1'b0,rs1data} && {1'b0,rs2data} ; //AND 
-					6'b011110: alusum = {1'b0,rs1data} || {1'b0,rs2data} ; //OR 
-					6'b011111: alusum = ({1'b0,rs1data} + {1'b0,rs2data}) && ({1'b0,~rs1data} + {1'b0,~rs2data}) ; //XOR 
+					6'b011101: alusum = {1'b0,rs1data} & {1'b0,rs2data} ; //AND 
+					6'b011110: alusum = {1'b0,rs1data} | {1'b0,rs2data} ; //OR 
+					6'b011111: alusum = ({1'b0,rs1data} + {1'b0,rs2data}) & ({1'b0,~rs1data} + {1'b0,~rs2data}) ; //XOR 
 					6'b100000: alusum = {1'b0,rs1data} ; //COMP COMPLETE
 					
 					
@@ -156,13 +156,14 @@ begin
 					
 					
 					//6'b100011: alusum = {1'b0,rs1data} ; //JMD 
-					6'b100100: stackregintermediate = {stack_reg}  - one; //CALL 
+					// 6'b100100: stackregintermediate = {stack_reg}  - one; //CALL 
 					//6'b100101: alusum = {1'b0,rs1data} ; //LDA 
 					
 					
 					6'b100110: stackregintermediate = {stack_reg}  - one ; //RTN 
 					//6'b100111: alusum = {1'b0,rs1data} ; //STP 
 					//6'b101000: alusum = {1'b0,rs1data} ; //CLEAR 
+					
 					6'b101001: statusregintermediate[0] =  one; //SEZ 
 					6'b101010: statusregintermediate[0] =  zero; //CLZ 
 					6'b101011: statusregintermediate[1] =  one;  //SEN 
@@ -176,7 +177,8 @@ begin
 					6'b110011: statusregintermediate[5] =  one;  //SES 
 					6'b110100: statusregintermediate[5] =  zero;  //CLS 
 					6'b110101: statusregintermediate[6] =  one;  //SEI 
-					6'b110110: statusregintermediate[6] =  zero;  //CLI 
+					6'b110110: statusregintermediate[6] =  zero;  //CLI
+					
 					6'b110111: alusum = {1'b0,rs1data} ; //BRU COMPLETE
 					6'b111000: alusum = {1'b0,rs1data} ; //BRD COMPLETE
 					
