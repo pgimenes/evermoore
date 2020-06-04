@@ -1,12 +1,8 @@
 module alu (
 
 	input [15:0] instruction, 			// from IR'
-	input exec1, 							// timing signal: when things happen
 	input [5:0] encoded_opcode,
 	input [11:0] stack_reg,
-	
-	input aim,
-	input sim,
 	
 	input [15:0] rs1data, 				// Rs register data outputs
 	input [15:0] rs2data, 				// 2nd Rs register data output

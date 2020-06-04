@@ -37,6 +37,7 @@ module decoder
 	output ram_wren_instr,
 	output ram_wren_data,
 	
+	// CONTROL PATH
 	output exec1,
 	output [1:0] jump_sel,
 	output pc_sload,
@@ -44,27 +45,24 @@ module decoder
 	
 	output sm_extra,
 	
-	output aim,
-	output sim,
 	output stop,
 	output clock
 );
 
 // STATE MACHINE WIRES
 wire fetch, exec2;
-
 assign fetch = ~state[0]&~state[1];
 assign exec1 = ~state[0]&state[1];
 assign exec2 = state[0]&~state[1];
 
 // ADDRESSING MODES
-wire single_reg = ~instruction[15]&~instruction[14]&~instruction[13];
-wire single_reg_ba = ~instruction[15]&~instruction[14]&instruction[13];
-wire double_reg = ~instruction[15]&instruction[14];
-wire triple_reg = instruction[15]&~instruction[14];
-wire direct_add = instruction[15]&instruction[14];
-wire control_ops = instruction[15] & instruction[14] & instruction[13] & instruction[12] & ~instruction[11];
-wire control_ops_offset = instruction[15] & instruction[14] & instruction[13] & instruction[12] & instruction[11];
+wire single_reg = instruction [15:13] == 3'b000;
+wire single_reg_ba = instruction [15:13] == 3'b001;
+wire double_reg = instruction [15:14] == 2'b01;
+wire triple_reg = instruction [15:14] == 2'b10;
+wire direct_add = instruction [15:14] == 2'b11;
+wire control_ops = instruction [15:11] == 5'b11110;
+wire control_ops_offset = instruction [15:11] == 5'b11111;
 
 // COND FIELD
 wire [3:0] cond_field;
@@ -83,7 +81,7 @@ always @(*) begin
 		4'b0011: cond_evaluated = status_reg[3];
 		4'b0100: cond_evaluated = status_reg[4];
 		4'b0101: cond_evaluated = status_reg[5];
-		4'b0110: cond_evaluated = status_reg[6];
+		4'b0110: cond_evaluated = 1; // ALWAYS
 		4'b0111: cond_evaluated = status_reg[7];
 		4'b1000: cond_evaluated = ~status_reg[0];
 		4'b1001: cond_evaluated = ~status_reg[1];
@@ -99,7 +97,7 @@ end
 
 // INSTRUCTION IDENTIFIERS
 // SIMPLER WAY TO DECODE?
-wire jmr, car, lsr, asr, inv, twc, inc, dec, ldi, seb, clb ,stb ,lob, add, adc, sub, sbc, gha, ghs, mov, mow, push, load, pop, store, AND, OR, XOR, comp,
+wire jmr, car, lsr, asr, inv, twc, inc, dec, ldi, aim, sim, seb, clb ,stb ,lob, add, adc, sub, sbc, gha, ghs, mov, mow, push, load, pop, store, AND, OR, XOR, comp,
 mul, mls, jmd, call, lda, rtn, stp, clear, sez, clz, sen, cln, sec, clc, set, clt, sev, clv, ses, cls, sei, cli, bru, brd ;
 
 assign lda 	= instruction[15]&instruction[14]&instruction[13]&~instruction[12];
@@ -139,16 +137,16 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 	assign stack_reg_load = exec1 & rtn;
 	assign stack_reg_restart = fetch | stop;
 	
-	assign reg_write_addr1 = single_reg ? instruction [2:0]
-	assign reg_write_addr2 = single_reg ? instruction [2:0]
+	assign reg_write_addr1 = single_reg ? instruction [2:0] : 0;
+	assign reg_write_addr2 = single_reg ? instruction [2:0] : 0;
 	
-	assign reg_read_addr1 = 
-	assign reg_read_addr2 = 
+//	assign reg_read_addr1 = 
+//	assign reg_read_addr2 = 
 	
 	assign write_addr_sel = exec2 & pop;
 	assign read_addr_sel = mow;
  
-	assign regf_data1_sel [0] = ~(lsr | asr | mov | mow | lda)
+	assign regf_data1_sel [0] = ~(lsr | asr | mov | mow | lda);
 	assign regf_data1_sel [1] = mov | mow | exec2 & (pop | load | ldi);
 	
 	assign regf_data2_sel = mul;
