@@ -30,7 +30,7 @@ module decoder
 	output reg_clear,
 	
 	
-	output ram_instr_addr_sel,
+	output [1:0] ram_instr_addr_sel,
 	output [1:0] ram_data_addr_sel,
 	output ram_wren_data,
 	
@@ -161,7 +161,12 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 	assign reg_shiftin = exec1 & asr; // & MSB
 	assign reg_clear = exec1 & (clear | stop) & cond_evaluated;
 	
-	assign ram_instr_addr_sel = exec1 & (jmr | jmd);
+//	assign ram_instr_addr_sel = exec1 & (jmr | jmd);
+	
+//	assign ram_instr_addr_sel [0] = 
+//	assign ram_instr_addr_sel [1] = 
+	
+	
 	assign ram_data_addr_sel [0] = exec1 & call;
 	assign ram_data_addr_sel [1] = exec1 & rtn;
 	

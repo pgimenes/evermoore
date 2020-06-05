@@ -173,9 +173,9 @@ refer to the applicable agreement for further details.
 	(port
 		(pt 264 304)
 		(output)
-		(text "ram_instr_addr_sel" (rect 0 0 79 12)(font "Arial" ))
-		(text "ram_instr_addr_sel" (rect 164 299 243 311)(font "Arial" ))
-		(line (pt 264 304)(pt 248 304)(line_width 1))
+		(text "ram_instr_addr_sel[1..0]" (rect 0 0 97 12)(font "Arial" ))
+		(text "ram_instr_addr_sel[1..0]" (rect 146 299 243 311)(font "Arial" ))
+		(line (pt 264 304)(pt 248 304)(line_width 3))
 	)
 	(port
 		(pt 264 320)

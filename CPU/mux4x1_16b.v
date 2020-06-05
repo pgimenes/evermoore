@@ -1,11 +1,11 @@
-module four_input_mux_12b (
+module mux4x1_16b (
 
-	input [11:0] a,
-	input [11:0] b,
-	input [11:0] c,
-	input [11:0] d,
+	input [15:0] a,
+	input [15:0] b,
+	input [15:0] c,
+	input [15:0] d,
 	input [1:0] sel,
-	output [11:0] out
+	output [15:0] out
 );
 
 assign out = (sel == 2'b00) ? a
