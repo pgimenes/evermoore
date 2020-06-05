@@ -25,13 +25,29 @@ wire carryout; 						// the CARRY out, D for CARRY flip flop
 
 //doing logic and assigning outputs
 
+wire [31:0] thirtytwooutput;	
+
+
+
+
+mult16x16 calc(
+					.A (rs1data[15:0]),
+					.B (rs2data[15:0]),
+					.P (thirtytwooutput[31:0])
+									);
+
+									
+									
 reg [16:0] alusum; // the 17 bit sum, 1 extra bit so ALU carry out can be extracted
 wire cin; // The ALU carry input, determined from instruction as in ISA spec
 wire shiftin; // value shifted into bit 15 on LSR, determined as in ISA spec
 assign cin = statusregin[2];
 
 assign alucout = alusum [16]; // carry bit from sum, or shift if OP = 011
-assign aluout1 = alusum [15:0]; // 16 normal bits from sum
+assign aluout1 = (encoded_opcode == 6'b101010) ? thirtytwooutput[15:0] :
+						alusum [15:0]; // 16 normal bits from sum
+						
+assign aluout2 = thirtytwooutput[31:16] ;   // 16 normal bits from sum
 
 
 wire eqzero = ~alusum[16]&&~alusum[15]&&~alusum[14]&&~alusum[13]&&~alusum[12]&&~alusum[11]&&~alusum[10]&&~alusum[9]&&~alusum[8]&&~alusum[7]&&~alusum[6]&&~alusum[5]&&~alusum[4]&&~alusum[3]&&~alusum[2]&&~alusum[1]&&~alusum[0];
@@ -60,9 +76,11 @@ wire zero;
 assign zero = 0;
 
 
-wire [31:0] thirtytwooutput;	
+
 	
-assign thirtytwooutput = {aluout1,aluout2}; 
+
+
+
 
 //wire fourbitzero;
 //wire fourbitone;
@@ -152,7 +170,7 @@ begin
 					6'b100000: alusum = {1'b0,rs1data} ; //COMP COMPLETE
 					
 					
-					// 6'b100001: mult16x16 calc (.A(rsdata1[15:0]),.B(rsdata2[15:0],.P(thirtytwooutput[31:0])); //MUL COmPLETE
+					//6'b100001: {aluout1,aluout2} = thirtytwooutput ; //MUL COmPLETE
 					6'b100010: alusum = {1'b0,rs1data} ; //MLS COMPLETE
 					
 					
@@ -190,3 +208,4 @@ end
 
 
 endmodule
+
