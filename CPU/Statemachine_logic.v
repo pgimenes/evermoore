@@ -5,6 +5,7 @@ module Statemachine_logic (
 );
 
 	assign N[1] = ~Q[1]&Q[0]&EXTRA;
-	assign N[0] = (~Q[1]&~Q[0])|(~Q[1]&Q[0]&~EXTRA)|(Q[1]&~Q[0]);
+//	assign N[0] = (~Q[1]&~Q[0])|(~Q[1]&Q[0]&~EXTRA)|(Q[1]&~Q[0]);
+assign N[0] = ~EXTRA | Q[1] | (~Q[1] & ~Q[0]);
 
 endmodule

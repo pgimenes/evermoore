@@ -1,0 +1,6 @@
+LDA 0x100
+MOV r0 r1
+LDA 0x101
+MOV r0 r2
+ADD r1 r2
+STP

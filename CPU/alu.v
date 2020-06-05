@@ -27,14 +27,12 @@ wire carryout; 						// the CARRY out, D for CARRY flip flop
 
 wire [31:0] thirtytwooutput;	
 
-
-
-
 mult16x16 calc(
-					.A (rs1data[15:0]),
-					.B (rs2data[15:0]),
-					.P (thirtytwooutput[31:0])
-									);
+	.enable (1),
+	.A (rs1data[15:0]),
+	.B (rs2data[15:0]),
+	.P (thirtytwooutput[31:0])
+);
 
 									
 									
@@ -56,17 +54,13 @@ wire twc_overflow;
 wire sign_flag = neg & ~twc_overflow | ~neg & twc_overflow;
 
 //decide if to use control instr output to status reg or to use the normal procedures
-
 reg [7:0] statusregintermediate;
 assign statusregout = (encoded_opcode == 6'b101001||encoded_opcode == 6'b101010||encoded_opcode == 6'b101011||encoded_opcode == 6'b101100||encoded_opcode == 6'b101101||encoded_opcode == 6'b101110||encoded_opcode == 6'b101111||encoded_opcode == 6'b110000||encoded_opcode == 6'b110001||encoded_opcode == 6'b110010||encoded_opcode == 6'b110011||encoded_opcode == 6'b110100||encoded_opcode == 6'b110101||encoded_opcode == 6'b110110) ? statusregintermediate : // control ops with offset
            ((encoded_opcode == 6'b010101)||(encoded_opcode == 6'b010110)) ? statusregin : // ghost arithmetic operations
             {eqzero, neg, alucout, 1'b0, twc_overflow, sign_flag, 1'b1, statusregin[7]}; //COMPLETE ALL 8 BITS
 
-
-
 reg [11:0] stackregintermediate;
 assign decremented_stack_reg [11:0] = stackregintermediate [11:0];
-
 			 
 //for inc or dec
 wire one;
@@ -74,48 +68,6 @@ assign one = 1;
 
 wire zero;
 assign zero = 0;
-
-
-
-	
-
-
-
-
-//wire fourbitzero;
-//wire fourbitone;
-//wire fourbittwo;
-//wire fourbitthree;
-//wire fourbitfour;
-//wire fourbitfive;
-//wire fourbitsix;
-//wire fourbitseven;
-//wire fourbiteight;
-//wire fourbitnine;
-//wire fourbitten;
-//wire fourbiteleven;
-//wire fourbittwelve;
-//wire fourbitthirteen;
-//wire fourbitfourteen;
-//wire fourbitfifteen;
-//
-//assign fourbitzero = ~instruction[3]&&~instruction[2]&&~instruction[1]&&~instruction[0];
-//assign fourbitone = ~instruction[3]&&~instruction[2]&&~instruction[1]&&instruction[0];
-//assign fourbittwo = ~instruction[3]&&~instruction[2]&&instruction[1]&&~instruction[0];
-//assign fourbitthree = ~instruction[3]&&~instruction[2]&&instruction[1]&&instruction[0];
-//assign fourbitfour = ~instruction[3]&&instruction[2]&&~instruction[1]&&~instruction[0];
-//assign fourbitfive = ~instruction[3]&&instruction[2]&&~instruction[1]&&instruction[0];
-//assign fourbitsix = ~instruction[3]&&instruction[2]&&instruction[1]&&~instruction[0];
-//assign fourbitseven = ~instruction[3]&&instruction[2]&&instruction[1]&&instruction[0];
-//assign fourbiteight = instruction[3]&&~instruction[2]&&~instruction[1]&&~instruction[0];
-//assign fourbitnine = instruction[3]&&~instruction[2]&&~instruction[1]&&instruction[0];
-//assign fourbitten = instruction[3]&&~instruction[2]&&instruction[1]&&~instruction[0];
-//assign fourbiteleven = instruction[3]&&~instruction[2]&&instruction[1]&&instruction[0];
-//assign fourbittwelve = instruction[3]&&instruction[2]&&~instruction[1]&&~instruction[0];
-//assign fourbitthirteen = instruction[3]&&instruction[2]&&~instruction[1]&&instruction[0];
-//assign fourbitfourteen = instruction[3]&&instruction[2]&&instruction[1]&&~instruction[0];
-//assign fourbitfifteen = instruction[3]&&instruction[2]&&instruction[1]&&instruction[0];
-
 
 assign incremented_write_addr = reg_write_addr + one;
 assign incremented_read_addr = reg_read_addr + one;
@@ -141,12 +93,9 @@ begin
 					6'b001100: alusum = {1'b0,rs1data} ; //SIM COMPLETE NO ALU?
 					
 					
-//					6'b001101: alusum = (fourbitzero&&({1'b0,rs1data[15:1],1'b1}))||(fourbitone&&({1'b0,rs1data[15:2],1'b1,rs1data[0]}))||(fourbittwo&&({1'b0,rs1data[15:3],1'b1,rs1data[1:0]}))||(fourbitthree&&({1'b0,rs1data[15:4],1'b1,rs1data[2:0]}))||(fourbitfour&&({1'b0,rs1data[15:5],1'b1,rs1data[3:0]}))||(fourbitfive&&({1'b0,rs1data[15:6],1'b1,rs1data[4:0]}))||(fourbitsix&&({1'b0,rs1data[15:7],1'b1,rs1data[5:0]}))||(fourbitseven&&({1'b0,rs1data[15:8],1'b1,rs1data[6:0]}))||(fourbiteight&&({1'b0,rs1data[15:9],1'b1,rs1data[7:0]}))||(fourbitnine&&({1'b0,rs1data[15:10],1'b1,rs1data[8:0]}))||(fourbitten&&({1'b0,rs1data[15:11],1'b1,rs1data[9:0]}))||(fourbiteleven&&({1'b0,rs1data[15:12],1'b1,rs1data[10:0]}))||(fourbittwelve&&({1'b0,rs1data[15:13],1'b1,rs1data[11:0]}))||(fourbitthirteen&&({1'b0,rs1data[15:14],1'b1,rs1data[12:0]}))||(fourbitfourteen&&({1'b0,rs1data[15],1'b1,rs1data[13:0]}))||(fourbitfifteen&&({1'b0,1'b1,rs1data[14:0]})) ;//SEB find bit k of rs1data COMPLETE
-//					6'b001110: alusum = (fourbitzero&&({1'b0,rs1data[15:1],1'b0}))||(fourbitone&&({1'b0,rs1data[15:2],1'b0,rs1data[0]}))||(fourbittwo&&({1'b0,rs1data[15:3],1'b0,rs1data[1:0]}))||(fourbitthree&&({1'b0,rs1data[15:4],1'b0,rs1data[2:0]}))||(fourbitfour&&({1'b0,rs1data[15:5],1'b0,rs1data[3:0]}))||(fourbitfive&&({1'b0,rs1data[15:6],1'b0,rs1data[4:0]}))||(fourbitsix&&({1'b0,rs1data[15:7],1'b0,rs1data[5:0]}))||(fourbitseven&&({1'b0,rs1data[15:8],1'b0,rs1data[6:0]}))||(fourbiteight&&({1'b0,rs1data[15:9],1'b0,rs1data[7:0]}))||(fourbitnine&&({1'b0,rs1data[15:10],1'b0,rs1data[8:0]}))||(fourbitten&&({1'b0,rs1data[15:11],1'b0,rs1data[9:0]}))||(fourbiteleven&&({1'b0,rs1data[15:12],1'b0,rs1data[10:0]}))||(fourbittwelve&&({1'b0,rs1data[15:13],1'b0,rs1data[11:0]}))||(fourbitthirteen&&({1'b0,rs1data[15:14],1'b0,rs1data[12:0]}))||(fourbitfourteen&&({1'b0,rs1data[15],1'b0,rs1data[13:0]}))||(fourbitfifteen&&({1'b0,1'b0,rs1data[14:0]})) ;//SEB find bit k of rs1data COMPLETE
 					6'b001101: alusum = {1'b0, rs1data} | decoded_offset;
 					6'b001110: alusum = {1'b0, rs1data} & ~decoded_offset;
-					6'b001111: alusum = {1'b0,rs1data}; //STB COMPLETE
-									
+					6'b001111: alusum = {1'b0,rs1data}; //STB COMPLETE									
 //					6'b010000: rs1data[k] = statusregisterin[3]; // LOB
 					
 					
@@ -204,8 +153,6 @@ begin
 					default : alusum = 0;// default output for unimplemented OP values, do not change
 		endcase;
 end
-
-
 
 endmodule
 

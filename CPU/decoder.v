@@ -49,8 +49,8 @@ module decoder
 // STATE MACHINE WIRES
 wire fetch, exec2;
 assign fetch = ~state[0]&~state[1];
-assign exec1 = ~state[0]&state[1];
-assign exec2 = state[0]&~state[1];
+assign exec1 = state[0]&~state[1];
+assign exec2 = ~state[0]&state[1];
 
 // ADDRESSING MODES
 wire single_reg = instruction [15:13] == 3'b000;
