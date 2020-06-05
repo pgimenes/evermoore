@@ -97,16 +97,16 @@ end
 wire jmr, car, lsr, asr, inv, twc, inc, dec, ldi, aim, sim, seb, clb ,stb ,lob, add, adc, sub, sbc, gha, ghs, mov, mow, push, load, pop, store, AND, OR, XOR, comp,
 mul, mls, jmd, call, lda, rtn, stp, clear, sez, clz, sen, cln, sec, clc, set, clt, sev, clv, ses, cls, sei, cli, bru, brd ;
 
-assign lda 	= instruction[15]&instruction[14]&instruction[13]&~instruction[12];
-assign call = instruction[15]&instruction[14]&~instruction[13]&instruction[12];
-assign jmd 	= instruction[15]&instruction[14]&~instruction[13]&~instruction[12];
+assign lda 	= instruction[15:12] == 4'b1110;
+assign call = instruction[15:12] == 4'b1101;
+assign jmd 	= instruction[15:12] == 4'b1100;
 
 assign rtn 	= instruction[15]&instruction[14]&instruction[13]&instruction[12]&~instruction[11]&&~instruction[10]&~instruction[9]&&~instruction[8]&~instruction[7]&&~instruction[6]&~instruction[5]&&~instruction[4];
 assign stp 	= instruction[15]&instruction[14]&instruction[13]&instruction[12]&~instruction[11]&&~instruction[10]&~instruction[9]&&~instruction[8]&~instruction[7]&&~instruction[6]&~instruction[5]&&instruction[4];
 
 
 assign inc 	= ~instruction[15]&~instruction[14]&~instruction[13]&~instruction[12]&~instruction[11]&instruction[10]&~instruction[9]&~instruction[8]&~instruction[7];
-assign jmr 	= ~instruction[15]&~instruction[14]&~instruction[13]&~instruction[12]&~instruction[11]&~instruction[10]&~instruction[9]&~instruction[8]&~instruction[7];
+assign jmr = instruction[15:7] == 8'b000000000;
 assign dec 	= ~instruction[15]&~instruction[14]&~instruction[13]&~instruction[12]&~instruction[11]&instruction[10]&~instruction[9]&~instruction[8]&instruction[7];
 assign sim 	= ~instruction[15]&~instruction[14]&~instruction[13]&~instruction[12]&~instruction[11]&instruction[10]&instruction[9]&~instruction[8]&~instruction[7];
 
@@ -156,11 +156,13 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 	
 	assign write1_en = cond_evaluated & ~(jmr | car | stb | lob | store | jmd | call | comp | rtn | control_ops | control_ops_offset | (exec1 & (load | aim | sim | ldi)) ); // enable might have to be low for clear instruction
 	assign write2_en = cond_evaluated & (mow | mul);
+	
 	assign reg_shift_en = exec1 & (asr | lsr);
 	assign reg_shiftin = exec1 & asr; // & MSB
 	assign reg_clear = exec1 & (clear | stop) & cond_evaluated;
 	
 	assign ram_instr_addr_sel = exec1 & (jmr | jmd);
+//	assign ram_instr_addr_sel = 0;
 	assign ram_data_addr_sel [0] = exec1 & call;
 	assign ram_data_addr_sel [1] = exec1 & rtn;
 	
@@ -170,7 +172,7 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 	assign jump_sel [1] = exec1 & (rtn);
 	
 	assign pc_sload = exec1 & (jmd | jmr | call | car | rtn) & cond_evaluated;
-	assign pc_cnt_en = fetch | exec1 | (exec2 & (aim | sim | ldi));
+	assign pc_cnt_en = fetch | exec1 & ~stp | (exec2 & (aim | sim | ldi));
 	
 	assign sm_extra = exec1 & (ldi | aim | sim | load | pop);
 	
