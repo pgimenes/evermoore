@@ -88,7 +88,7 @@ begin
 					6'b000111: alusum = {1'b0,~rs1data} + one; //TWC 
 					6'b001000: alusum = {1'b0,rs1data}  + one; //INC 
 					6'b001001: alusum = {1'b0,rs1data}  - one; //DEC 
-					//6'b001010: alusum = {1'b0,rs1data} ; //LDI 
+					6'b001010: alusum = {1'b0,rs2data} ; //LDI 
 					6'b001011: alusum = {1'b0,rs1data} ; //AIM COmPLETE NO ALU? 
 					6'b001100: alusum = {1'b0,rs1data} ; //SIM COMPLETE NO ALU?
 					

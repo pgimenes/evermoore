@@ -128,7 +128,7 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 
 // CONTROL SIGNALS
 	
-	assign alu_input_sel = exec1 & (aim | sim);
+	assign alu_input_sel = exec2 & (ldi | aim | sim);
 	assign status_reg_sload = exec1 & ~(gha | ghs);
 	assign stack_reg_increment = exec1 & (call | car);
 	assign stack_reg_load = exec1 & rtn;
@@ -162,7 +162,6 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 	assign reg_clear = exec1 & (clear | stop) & cond_evaluated;
 	
 	assign ram_instr_addr_sel = exec1 & (jmr | jmd);
-//	assign ram_instr_addr_sel = 0;
 	assign ram_data_addr_sel [0] = exec1 & call;
 	assign ram_data_addr_sel [1] = exec1 & rtn;
 	

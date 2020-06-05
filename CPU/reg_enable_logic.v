@@ -7,7 +7,6 @@ module reg_enable_logic (
 	output enable
 );
 
-wire either_port = port1 & ~port2 | ~port1 & port2;
-assign enable = either_port & (write1en | write2en);
+assign enable = port1&write1en | port2&write2en;
 
 endmodule
