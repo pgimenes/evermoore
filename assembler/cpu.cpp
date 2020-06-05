@@ -65,11 +65,11 @@ vector<string> CPU::assemble_instruction(vector<string> instruction_vect){
         assembled_string.append(hex_to_binary(instruction_vect[size-1], 1)); 
     }
     else if (addr_mode == "double_reg") {
-        instr_registers = register_binary({instruction_vect[size-1], instruction_vect[size-2]});
+        instr_registers = register_binary({instruction_vect[size-2], instruction_vect[size-1]});
         for (int i = 0; i<instr_registers.size(); i++) assembled_string.append(instr_registers[i]);
     }
     else if (addr_mode == "triple_reg"){
-        instr_registers = register_binary({instruction_vect[size-1], instruction_vect[size-2], instruction_vect[size-3]});
+        instr_registers = register_binary({instruction_vect[size-3], instruction_vect[size-2], instruction_vect[size-1]});
         for (int i = 0; i<instr_registers.size(); i++) assembled_string.append(instr_registers[i]);
     }
     else if (addr_mode == "control_ops_offset"){
