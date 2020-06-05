@@ -58,10 +58,10 @@ void Assembler::output_as_mif (ofstream & stream){
     stream << "DATA_RADIX=BIN;" << endl;
     stream << endl;
     stream << "CONTENT BEGIN" << endl;
-    
+    stream << "[0..4095]: 0000000000000000;" << endl;
     for (int i = 0; i < assembled_code.size(); i++){
         stream << dec_to_hex(to_string(i)) << " : ";
-        stream << assembled_code[i] << endl;
+        stream << assembled_code[i] << ";" << endl;
     }
 
     stream << "END;";
