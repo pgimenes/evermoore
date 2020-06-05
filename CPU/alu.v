@@ -41,8 +41,7 @@ wire sign_flag = neg & ~twc_overflow | ~neg & twc_overflow;
 
 //decide if to use control instr output to status reg or to use the normal procedures
 
-reg [7:0] statusregintermediate = statusregin;
-
+reg [7:0] statusregintermediate;
 assign statusregout = (encoded_opcode == 6'b101001||encoded_opcode == 6'b101010||encoded_opcode == 6'b101011||encoded_opcode == 6'b101100||encoded_opcode == 6'b101101||encoded_opcode == 6'b101110||encoded_opcode == 6'b101111||encoded_opcode == 6'b110000||encoded_opcode == 6'b110001||encoded_opcode == 6'b110010||encoded_opcode == 6'b110011||encoded_opcode == 6'b110100||encoded_opcode == 6'b110101||encoded_opcode == 6'b110110) ? statusregintermediate : // control ops with offset
            ((encoded_opcode == 6'b010101)||(encoded_opcode == 6'b010110)) ? statusregin : // ghost arithmetic operations
             {eqzero, neg, alucout, 1'b0, twc_overflow, sign_flag, 1'b1, statusregin[7]}; //COMPLETE ALL 8 BITS
@@ -103,8 +102,7 @@ assign thirtytwooutput = {aluout1,aluout2};
 assign incremented_write_addr = reg_write_addr + one;
 assign incremented_read_addr = reg_read_addr + one;
 
-reg [3:0] offset = instruction [3:0];
-reg [16:0] decoded_offset = 17'b00000000000000001 << offset;
+wire [16:0] decoded_offset = 17'b00000000000000001 << instruction[3:0];
 
 always @(*)
 begin 
@@ -167,7 +165,7 @@ begin
 					//6'b100111: alusum = {1'b0,rs1data} ; //STP 
 					//6'b101000: alusum = {1'b0,rs1data} ; //CLEAR 
 					
-					6'b101001: statusregintermediate[0] =  one; //SEZ 
+					6'b101001: statusregintermediate = {statusregin[7:1], one}; //SEZ 
 					6'b101010: statusregintermediate[0] =  zero; //CLZ 
 					6'b101011: statusregintermediate[1] =  one;  //SEN 
 					6'b101100: statusregintermediate[1] =  zero;  //CLN
