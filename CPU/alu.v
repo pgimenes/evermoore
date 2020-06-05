@@ -3,6 +3,7 @@ module alu (
 	input [15:0] instruction, 			// from IR'
 	input [5:0] encoded_opcode,
 	input [11:0] stack_reg,
+	input [15:0] data_ram,
 	
 	input [15:0] rs1data, 				// Rs register data outputs
 	input [15:0] rs2data, 				// 2nd Rs register data output
@@ -48,7 +49,7 @@ assign aluout1 = (encoded_opcode == 6'b101010) ? thirtytwooutput[15:0] :
 assign aluout2 = thirtytwooutput[31:16] ;   // 16 normal bits from sum
 
 
-wire eqzero = ~alusum[16]&&~alusum[15]&&~alusum[14]&&~alusum[13]&&~alusum[12]&&~alusum[11]&&~alusum[10]&&~alusum[9]&&~alusum[8]&&~alusum[7]&&~alusum[6]&&~alusum[5]&&~alusum[4]&&~alusum[3]&&~alusum[2]&&~alusum[1]&&~alusum[0];
+wire eqzero = ~alusum[15]&&~alusum[14]&&~alusum[13]&&~alusum[12]&&~alusum[11]&&~alusum[10]&&~alusum[9]&&~alusum[8]&&~alusum[7]&&~alusum[6]&&~alusum[5]&&~alusum[4]&&~alusum[3]&&~alusum[2]&&~alusum[1]&&~alusum[0];
 wire neg = alusum[15];
 wire twc_overflow;
 wire sign_flag = neg & ~twc_overflow | ~neg & twc_overflow;
@@ -57,7 +58,7 @@ wire sign_flag = neg & ~twc_overflow | ~neg & twc_overflow;
 reg [7:0] statusregintermediate;
 assign statusregout = (encoded_opcode == 6'b101001||encoded_opcode == 6'b101010||encoded_opcode == 6'b101011||encoded_opcode == 6'b101100||encoded_opcode == 6'b101101||encoded_opcode == 6'b101110||encoded_opcode == 6'b101111||encoded_opcode == 6'b110000||encoded_opcode == 6'b110001||encoded_opcode == 6'b110010||encoded_opcode == 6'b110011||encoded_opcode == 6'b110100||encoded_opcode == 6'b110101||encoded_opcode == 6'b110110) ? statusregintermediate : // control ops with offset
            ((encoded_opcode == 6'b010101)||(encoded_opcode == 6'b010110)) ? statusregin : // ghost arithmetic operations
-            {eqzero, neg, alucout, 1'b0, twc_overflow, sign_flag, 1'b1, statusregin[7]}; //COMPLETE ALL 8 BITS
+				{statusregin[7], 1'b1, sign_flag, twc_overflow, 1'b0, alucout, neg, eqzero}; 
 
 reg [11:0] stackregintermediate;
 assign decremented_stack_reg [11:0] = stackregintermediate [11:0];
@@ -78,10 +79,9 @@ always @(*)
 begin 
 		case (encoded_opcode)
 		
-					//6'b000000: alusum = {1'b0,rs1data} ; //JMR 
-					//6'b000001: alusum = {1'b0,rs1data} ; //JMI 
-					//6'b000010: alusum = {1'b0,rs1data} ; //JEQ 
-					6'b000011: alusum = {1'b0,rs1data} ; //CAR COMPLETE
+					6'b000000: alusum = {5'b00000, instruction[11:0]} + one ; //JMR
+					6'b000011: begin alusum = {4'b0000, rs1data[11:0]}  + one; // CAR
+									 stackregintermediate = {stack_reg} + one ; end
 					//6'b000100: alusum = {1'b0,rs1data} ; //LSR 
 					//6'b000101: alusum = {1'b0,rs1data} ; //ASR 
 					6'b000110: alusum = {1'b0,~rs1data} ; //INV 
@@ -123,12 +123,13 @@ begin
 					6'b100010: alusum = {1'b0,rs1data} ; //MLS COMPLETE
 					
 					
-					//6'b100011: alusum = {1'b0,rs1data} ; //JMD 
-					// 6'b100100: stackregintermediate = {stack_reg}  - one; //CALL 
+					6'b100011: alusum = {5'b00000, instruction[11:0]} + one ; //JMD 
+					6'b100100: begin stackregintermediate = {stack_reg}  + one; // CALL
+									 alusum = {5'b00000, instruction[11:0]} + one ; end
 					//6'b100101: alusum = {1'b0,rs1data} ; //LDA 
 					
-					
-					6'b100110: stackregintermediate = {stack_reg}  - one ; //RTN 
+					6'b100110: begin stackregintermediate = {stack_reg}  - one ; //RTN
+								alusum = {5'b00000, data_ram [11:0]} + one ; end
 					//6'b100111: alusum = {1'b0,rs1data} ; //STP 
 					//6'b101000: alusum = {1'b0,rs1data} ; //CLEAR 
 					

@@ -20,24 +20,24 @@ refer to the applicable agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 248 96)
+	(rect 16 16 280 96)
 	(text "extend_address" (rect 5 0 68 12)(font "Arial" ))
 	(text "inst" (rect 8 64 20 76)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "stack_reg[11..0]" (rect 0 0 62 12)(font "Arial" ))
-		(text "stack_reg[11..0]" (rect 21 27 83 39)(font "Arial" ))
+		(text "address_input[11..0]" (rect 0 0 77 12)(font "Arial" ))
+		(text "address_input[11..0]" (rect 21 27 98 39)(font "Arial" ))
 		(line (pt 0 32)(pt 16 32)(line_width 3))
 	)
 	(port
-		(pt 232 32)
+		(pt 264 32)
 		(output)
-		(text "stack_addr[15..0]" (rect 0 0 68 12)(font "Arial" ))
-		(text "stack_addr[15..0]" (rect 143 27 211 39)(font "Arial" ))
-		(line (pt 232 32)(pt 216 32)(line_width 3))
+		(text "extended_addr[15..0]" (rect 0 0 82 12)(font "Arial" ))
+		(text "extended_addr[15..0]" (rect 161 27 243 39)(font "Arial" ))
+		(line (pt 264 32)(pt 248 32)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 216 64)(line_width 1))
+		(rectangle (rect 16 16 248 64)(line_width 1))
 	)
 )

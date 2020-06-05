@@ -32,11 +32,11 @@ module decoder
 	
 	output [1:0] ram_instr_addr_sel,
 	output [1:0] ram_data_addr_sel,
+	output ram_data_input_sel,
 	output ram_wren_data,
 	
 	// CONTROL PATH
 	output exec1,
-	output [1:0] jump_sel,
 	output pc_sload,
 	output pc_cnt_en,
 	
@@ -199,23 +199,20 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 	assign reg_shiftin = exec1 & asr; // & MSB
 	assign reg_clear = exec1 & (clear | stop) & cond_evaluated;
 	
-	
-//	assign ram_instr_addr_sel [0] = exec1 & (jmd | rtn)
-//	assign ram_instr_addr_sel [1] = exec1 & (jmr | rtn)  
-	
+	assign ram_instr_addr_sel [0] = ( (rtn & ~fetch) | (exec1 & jmd) ) & cond_evaluated;
+	assign ram_instr_addr_sel [1] = ( (rtn & ~fetch) | ( exec1 & (jmr | car) ) ) & cond_evaluated;  
 	
 	assign ram_data_addr_sel [0] = exec1 & call;
 	assign ram_data_addr_sel [1] = exec1 & rtn;
 	
+	assign ram_data_input_sel = exec1 & (call | car);
+	
 	assign ram_wren_data = exec1 & (store | push | call | car) & cond_evaluated;
 	
-	assign jump_sel [0] = exec1 & (jmd | call);
-	assign jump_sel [1] = exec1 & (rtn);
-	
-	assign pc_sload = exec1 & (jmd | jmr | call | car | rtn) & cond_evaluated;
+	assign pc_sload = cond_evaluated & ( (exec1 & (jmd | jmr | call | car) ) | (exec2 & rtn) );
 	assign pc_cnt_en = fetch | exec1 & ~stp | (exec2 & (aim | sim | ldi));
 	
-	assign sm_extra = exec1 & (ldi | aim | sim | load | pop);
+	assign sm_extra = exec1 & (ldi | aim | sim | load | pop | rtn);
 	
 	assign stop = (stp & exec1) | stack_overflow & cond_evaluated;
 	assign clock = mul & exec1;
