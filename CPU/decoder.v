@@ -94,30 +94,68 @@ end
 
 // INSTRUCTION IDENTIFIERS
 // SIMPLER WAY TO DECODE?
-wire jmr, car, lsr, asr, inv, twc, inc, dec, ldi, aim, sim, seb, clb ,stb ,lob, add, adc, sub, sbc, gha, ghs, mov, mow, push, load, pop, store, AND, OR, XOR, comp,
-mul, mls, jmd, call, lda, rtn, stp, clear, sez, clz, sen, cln, sec, clc, set, clt, sev, clv, ses, cls, sei, cli, bru, brd ;
+wire jmr = instruction[15:7] == 9'b000000000;
+wire car = instruction[15:7] == 9'b000000011;
+wire lsr = instruction[15:7] == 9'b000000100;
+wire asr = instruction[15:7] == 9'b000000101;
+wire inv = instruction[15:7] == 9'b000000110;
+wire twc = instruction[15:7] == 9'b000000111;
+wire inc = instruction[15:7] == 9'b000001000;
+wire dec = instruction[15:7] == 9'b000001001;
+wire ldi = instruction[15:7] == 9'b000001010;
 
-assign lda 	= instruction[15:12] == 4'b1110;
-assign call = instruction[15:12] == 4'b1101;
-assign jmd 	= instruction[15:12] == 4'b1100;
+wire aim = instruction[15:7] == 9'b000001011;
+wire sim = instruction[15:7] == 9'b000001100;
 
-assign rtn 	= instruction[15]&instruction[14]&instruction[13]&instruction[12]&~instruction[11]&&~instruction[10]&~instruction[9]&&~instruction[8]&~instruction[7]&&~instruction[6]&~instruction[5]&&~instruction[4];
-assign stp 	= instruction[15]&instruction[14]&instruction[13]&instruction[12]&~instruction[11]&&~instruction[10]&~instruction[9]&&~instruction[8]&~instruction[7]&&~instruction[6]&~instruction[5]&&instruction[4];
+wire seb = instruction[15:11] == 5'b00100;
+wire clb = instruction[15:11] == 5'b00101;
+wire stb = instruction[15:11] == 5'b00110;
+wire lob = instruction[15:11] == 5'b00111;
 
+wire add = instruction[15:10] == 6'b010000;
+wire adc = instruction[15:10] == 6'b010001;
+wire sub = instruction[15:10] == 6'b010010;
+wire sbc = instruction[15:10] == 6'b010011;
+wire gha = instruction[15:10] == 6'b010100;
+wire ghs = instruction[15:10] == 6'b010101;
+wire mov = instruction[15:10] == 6'b010110;
+wire mow = instruction[15:10] == 6'b010111;
+wire push = instruction[15:10] == 6'b011000;
+wire load = instruction[15:10] == 6'b011001;
+wire pop = instruction[15:10] == 6'b011010;
+wire store = instruction[15:10] == 6'b011011;
+wire AND = instruction[15:10] == 6'b011100;
+wire OR = instruction[15:10] == 6'b011101;
+wire XOR = instruction[15:10] == 6'b011110;
+wire comp = instruction[15:10] == 6'b011111;
 
-assign inc 	= ~instruction[15]&~instruction[14]&~instruction[13]&~instruction[12]&~instruction[11]&instruction[10]&~instruction[9]&~instruction[8]&~instruction[7];
-assign jmr = instruction[15:7] == 8'b000000000;
-assign dec 	= ~instruction[15]&~instruction[14]&~instruction[13]&~instruction[12]&~instruction[11]&instruction[10]&~instruction[9]&~instruction[8]&instruction[7];
-assign sim 	= ~instruction[15]&~instruction[14]&~instruction[13]&~instruction[12]&~instruction[11]&instruction[10]&instruction[9]&~instruction[8]&~instruction[7];
+wire mul = instruction[15:13] == 3'b100;
+wire mls = instruction[15:13] == 3'b101;
 
-assign mov 	= ~instruction[15]&instruction[14]&~instruction[13]&instruction[12]&instruction[11]&~instruction[10];
-assign add 	= ~instruction[15]&instruction[14]&~instruction[13]&~instruction[12]&~instruction[11]&~instruction[10];
-assign sub 	= ~instruction[15]&instruction[14]&~instruction[13]&~instruction[12]&instruction[11]&~instruction[10];
-assign push = ~instruction[15]&instruction[14]&instruction[13]&~instruction[12]&~instruction[11]&~instruction[10];
-assign pop 	= ~instruction[15]&instruction[14]&instruction[13]&~instruction[12]&instruction[11]&~instruction[10];
-assign store= ~instruction[15]&instruction[14]&instruction[13]&~instruction[12]&instruction[11]&instruction[10];
+wire jmd = instruction[15:12] == 4'b1100;
+wire call = instruction[15:12] == 4'b1101;
+wire lda = instruction[15:12] == 4'b1110;
 
-assign mul 	= instruction[15]&~instruction[14]&~instruction[13];
+wire rtn = instruction[15:4] == 12'b111100000000;
+wire stp = instruction[15:4] == 12'b111100000001;
+wire clear = instruction[15:4] == 12'b111100000010;
+wire sez = instruction[15:4] == 12'b111100000011;
+wire clz = instruction[15:4] == 12'b111100000100;
+wire sen = instruction[15:4] == 12'b111100000101;
+wire cln = instruction[15:4] == 12'b111100000110;
+wire sec = instruction[15:4] == 12'b111100000111;
+wire clc = instruction[15:4] == 12'b111100001000;
+wire set = instruction[15:4] == 12'b111100001001;
+wire clt = instruction[15:4] == 12'b111100001010;
+wire sev = instruction[15:4] == 12'b111100001011;
+wire clv = instruction[15:4] == 12'b111100001100;
+wire ses = instruction[15:4] == 12'b111100001101;
+wire cls = instruction[15:4] == 12'b111100001110;
+wire sei = instruction[15:4] == 12'b111100001111;
+wire cli = instruction[15:4] == 12'b111100010000;
+
+wire bru = instruction[15:7] == 9'b111110000;
+wire brd = instruction[15:7] == 9'b111110001;
   
 assign encoded_opcode[0] = car|asr|twc|dec|aim|seb|stb|add|sub|gha|mov|push|pop|AND|XOR|mul|jmd|lda|stp|sez|sen|sec|set|sev|ses|sei|bru ;
 assign encoded_opcode[1] = car|inv|twc|ldi|aim|clb|stb|adc|sub|ghs|mov|load|pop|OR|XOR|mls|jmd|rtn|stp|clz|sen|clc|set|clv|ses|cli|bru ;
