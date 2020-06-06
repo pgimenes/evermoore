@@ -215,8 +215,9 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 	assign ram_wren_data = exec1 & (store | push | call | car) & cond_evaluated;
 	
 	assign pc_sload = cond_evaluated & ( (exec1 & (jmd | jmr | call | car) ) | (exec2 & rtn) );
-	wire three_cycle = (ldi | aim | sim | load | pop);
-	assign pc_cnt_en = fetch | exec1 & ~stp & ~(three_cycle & jump) | (exec2 & (aim | sim | ldi)) | exec2 & three_cycle & two_cycles_after_jump;
+	wire three_cycle = (ldi | aim | sim | load | pop |rtn);
+	//assign pc_cnt_en = fetch | exec1 & ~stp & ~(three_cycle & jump) | (exec2 & (aim | sim | ldi)) | exec2 & three_cycle & two_cycles_after_jump;
+	assign pc_cnt_en = fetch | (exec1 & ~(jump & (aim | sim | ldi)) & ~(load | pop | rtn)) | exec2 & three_cycle;
 	
 	assign sm_extra = exec1 & (ldi | aim | sim | load | pop | rtn);
 	
