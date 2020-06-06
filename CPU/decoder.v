@@ -7,7 +7,6 @@ module decoder
 	input [7:0] status_reg,
 	input stack_overflow,
 	input jump,
-	input two_cycles_after_jump,
 	
 	output [5:0] encoded_opcode,
 	
@@ -99,6 +98,7 @@ end
 // INSTRUCTION IDENTIFIERS
 // SIMPLER WAY TO DECODE?
 wire jmr = instruction[15:7] == 9'b000000000;
+wire asc = instruction[15:7] == 9'b000000001;
 wire car = instruction[15:7] == 9'b000000011;
 wire lsr = instruction[15:7] == 9'b000000100;
 wire asr = instruction[15:7] == 9'b000000101;
@@ -161,7 +161,7 @@ wire cli = instruction[15:4] == 12'b111100010000;
 wire bru = instruction[15:7] == 9'b111110000;
 wire brd = instruction[15:7] == 9'b111110001;
   
-assign encoded_opcode[0] = car|asr|twc|dec|aim|seb|stb|add|sub|gha|mov|push|pop|AND|XOR|mul|jmd|lda|stp|sez|sen|sec|set|sev|ses|sei|bru ;
+assign encoded_opcode[0] = asc|car|asr|twc|dec|aim|seb|stb|add|sub|gha|mov|push|pop|AND|XOR|mul|jmd|lda|stp|sez|sen|sec|set|sev|ses|sei|bru ;
 assign encoded_opcode[1] = car|inv|twc|ldi|aim|clb|stb|adc|sub|ghs|mov|load|pop|OR|XOR|mls|jmd|rtn|stp|clz|sen|clc|set|clv|ses|cli|bru ;
 assign encoded_opcode[2] = lsr|asr|inv|twc|sim|seb|clb|stb|sbc|gha|ghs|mov|store|AND|OR|XOR|call|lda|rtn|stp|cln|sec|clc|set|cls|sei|cli|bru ;
 assign encoded_opcode[3] = inc|dec|ldi|aim|sim|seb|clb|stb|mow|push|load|pop|store|AND|OR|XOR|clear|sez|clz|sen|cln|sec|clc|set|brd ;
@@ -169,7 +169,7 @@ assign encoded_opcode[4] = lob|add|adc|sub|sbc|gha|ghs|mov|mow|push|load|pop|sto
 assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|cln|sec|clc|set|clt|sev|clv|ses|cls|sei|cli|bru|brd ;
 
 // CONTROL SIGNALS
-	assign alu_input1_sel = exec2 & (load | pop);
+	assign alu_input1_sel = exec2 & (load | pop | rtn);
 	assign alu_input2_sel = exec2 & (ldi | aim | sim);
 	
 	assign status_reg_sload = exec1 & ~(gha | ghs);

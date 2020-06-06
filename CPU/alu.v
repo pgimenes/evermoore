@@ -3,7 +3,6 @@ module alu (
 	input [15:0] instruction, 			// from IR'
 	input [5:0] encoded_opcode,
 	input [11:0] stack_reg,
-	input [15:0] data_ram,
 	
 	input [15:0] rs1data, 				// Rs register data outputs
 	input [15:0] rs2data, 				// 2nd Rs register data output
@@ -24,7 +23,7 @@ module alu (
 wire [31:0] thirtytwooutput;	
 
 mult16x16 calc(
-	.enable (1),
+	.enable (encoded_opcode == 6'b100001),
 	.A (rs1data[15:0]),
 	.B (rs2data[15:0]),
 	.P (thirtytwooutput[31:0])
@@ -73,7 +72,8 @@ always @(*)
 begin 
 		case (encoded_opcode)
 		
-					6'b000000: alusum = {5'b00000, instruction[11:0]} + one ; //JMR
+					6'b000000: alusum = {5'b00000, rs1data[11:0]} + one ; //JMR
+					6'b000001: alusum = {1'b0, rs1data} + cin ; //ASC					
 					6'b000011: begin alusum = {4'b0000, rs1data[11:0]}  + one; // CAR
 									 stackregintermediate = {stack_reg} + one ; end
 					6'b000110: alusum = {1'b0,~rs1data} ; //INV 
@@ -113,7 +113,7 @@ begin
 					//6'b100101: alusum = {1'b0,rs1data} ; //LDA 
 					
 					6'b100110: begin stackregintermediate = {stack_reg}  - one ; //RTN
-								alusum = {5'b00000, data_ram [11:0]} + one ; end
+								alusum = {5'b00000, rs1data [11:0]} + one ; end
 					
 					6'b101001: statusregintermediate[0] = one; //SEZ 
 					6'b101010: statusregintermediate[0] =  zero; //CLZ 

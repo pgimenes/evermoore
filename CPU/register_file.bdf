@@ -2802,11 +2802,6 @@ refer to the applicable agreement for further details.
 	(pt 592 376)
 )
 (connector
-	(text "sel[0]" (rect 424 391 441 418)(font "Intel Clear" )(vertical))
-	(pt 440 392)
-	(pt 440 424)
-)
-(connector
 	(text "clk" (rect 138 1240 152 1257)(font "Intel Clear" ))
 	(pt 128 1256)
 	(pt 152 1256)
@@ -2943,16 +2938,6 @@ refer to the applicable agreement for further details.
 (connector
 	(pt 536 1024)
 	(pt 568 1024)
-)
-(connector
-	(text "sel[0]" (rect 424 671 441 698)(font "Intel Clear" )(vertical))
-	(pt 440 672)
-	(pt 440 704)
-)
-(connector
-	(text "sel[0]" (rect 424 951 441 978)(font "Intel Clear" )(vertical))
-	(pt 440 952)
-	(pt 440 984)
 )
 (connector
 	(text "write1_en" (rect 330 200 377 217)(font "Intel Clear" ))
@@ -3115,26 +3100,6 @@ refer to the applicable agreement for further details.
 (connector
 	(pt 1184 1024)
 	(pt 1216 1024)
-)
-(connector
-	(text "sel[0]" (rect 1072 111 1089 138)(font "Intel Clear" )(vertical))
-	(pt 1088 112)
-	(pt 1088 144)
-)
-(connector
-	(text "sel[0]" (rect 1072 391 1089 418)(font "Intel Clear" )(vertical))
-	(pt 1088 392)
-	(pt 1088 424)
-)
-(connector
-	(text "sel[0]" (rect 1072 671 1089 698)(font "Intel Clear" )(vertical))
-	(pt 1088 672)
-	(pt 1088 704)
-)
-(connector
-	(text "sel[0]" (rect 1072 951 1089 978)(font "Intel Clear" )(vertical))
-	(pt 1088 952)
-	(pt 1088 984)
 )
 (connector
 	(text "mux_in[7..0][15..0]" (rect 1504 520 1591 537)(font "Intel Clear" ))
@@ -3569,6 +3534,41 @@ refer to the applicable agreement for further details.
 	(pt 1424 120)
 	(pt 1448 120)
 	(bus)
+)
+(connector
+	(text "sel[1]" (rect 424 391 441 418)(font "Intel Clear" )(vertical))
+	(pt 440 392)
+	(pt 440 424)
+)
+(connector
+	(text "sel[2]" (rect 424 671 441 698)(font "Intel Clear" )(vertical))
+	(pt 440 672)
+	(pt 440 704)
+)
+(connector
+	(text "sel[3]" (rect 424 951 441 978)(font "Intel Clear" )(vertical))
+	(pt 440 952)
+	(pt 440 984)
+)
+(connector
+	(text "sel[4]" (rect 1072 111 1089 138)(font "Intel Clear" )(vertical))
+	(pt 1088 112)
+	(pt 1088 144)
+)
+(connector
+	(text "sel[5]" (rect 1072 391 1089 418)(font "Intel Clear" )(vertical))
+	(pt 1088 392)
+	(pt 1088 424)
+)
+(connector
+	(text "sel[6]" (rect 1072 671 1089 698)(font "Intel Clear" )(vertical))
+	(pt 1088 672)
+	(pt 1088 704)
+)
+(connector
+	(text "sel[7]" (rect 1072 951 1089 978)(font "Intel Clear" )(vertical))
+	(pt 1088 952)
+	(pt 1088 984)
 )
 (junction (pt 56 592))
 (junction (pt 760 120))
