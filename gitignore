@@ -1,7 +1,7 @@
-CPU/db/*
-CPU/incremental_db/*
-CPU/output_files/*
-CPU/simulation/*
+CPU/db/
+CPU/incremental_db/
+CPU/output_files/
+CPU/simulation/
 CPU/*.bak
 
 # Mac system files
