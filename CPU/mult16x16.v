@@ -14,7 +14,7 @@ module mult16x16 (
 	wire [15:0] net4;
 	
 	mult8x8 U1 (.A(temp_A[7:0]), .B( temp_B[7:0]), .P(net1));
-	mult8x8 U2 (.A(temp-A[7:0]), .B(temp_B[15:8]), .P(net2));
+	mult8x8 U2 (.A(temp_A[7:0]), .B(temp_B[15:8]), .P(net2));
 	mult8x8 U3 (.A(temp_A[15:8]), .B(temp_B[7:0]), .P(net3));
 	mult8x8 U4 (.A(temp_A[15:8]), .B(temp_B[15:8]), .P(net4));
 	
