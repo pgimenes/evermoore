@@ -93,10 +93,10 @@ begin
 					
 					6'b010001: alusum = {1'b0,rs1data} + {1'b0,rs2data} ; //ADD 
 					6'b010010: alusum = {1'b0,rs1data} + {1'b0,rs2data} + cin ; //ADC 
-					6'b010011: alusum = {1'b0,rs1data} + {1'b0,~rs2data} + 1; //SUB 
-					6'b010100: alusum = {1'b0,rs1data} + {1'b0,~rs2data} + 1 - cin ; //SBC 
+					6'b010011: alusum = {1'b0,rs2data} - {1'b0,rs1data}; //SUB 
+					6'b010100: alusum = {1'b0,rs2data} - {1'b0,rs1data} - cin ; //SBC 
 					6'b010101: alusum = {1'b0,rs1data} + {1'b0,rs2data} ; // GHA 
-					6'b010110: alusum = {1'b0,rs1data} + {1'b0,~rs2data} + 1 ; // GHS 
+					6'b010110: alusum = {1'b0,rs2data} - {1'b0,rs1data} ; // GHS 
 					
 					6'b011001: alusum = {1'b0,rs2data}  + one; //PUSH 
 					6'b011010: alusum = {1'b0,rs1data} ; //LOAD : cannot be changed so status register updates
