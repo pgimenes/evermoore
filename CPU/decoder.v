@@ -6,10 +6,13 @@ module decoder
 	input [1:0] state,
 	input [7:0] status_reg,
 	input stack_overflow,
+	input jump,
+	input two_cycles_after_jump,
 	
 	output [5:0] encoded_opcode,
 	
-	output alu_input_sel,
+	output alu_input1_sel,
+	output alu_input2_sel,
 	output status_reg_sload,
 	output stack_reg_increment,
 	output stack_reg_load,
@@ -43,7 +46,8 @@ module decoder
 	output sm_extra,
 	
 	output stop,
-	output clock
+	output clock,
+	output set_jump
 );
 
 // STATE MACHINE WIRES
@@ -165,8 +169,9 @@ assign encoded_opcode[4] = lob|add|adc|sub|sbc|gha|ghs|mov|mow|push|load|pop|sto
 assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|cln|sec|clc|set|clt|sev|clv|ses|cls|sei|cli|bru|brd ;
 
 // CONTROL SIGNALS
+	assign alu_input1_sel = exec2 & (load | pop);
+	assign alu_input2_sel = exec2 & (ldi | aim | sim);
 	
-	assign alu_input_sel = exec2 & (ldi | aim | sim);
 	assign status_reg_sload = exec1 & ~(gha | ghs);
 	assign stack_reg_increment = exec1 & (call | car);
 	assign stack_reg_load = exec1 & rtn;
@@ -187,20 +192,20 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 	
 	assign read_addr_sel = mow;
  
+ 	assign regf_data1_sel [1] = mov | mow | exec2 & (pop | load);
 	assign regf_data1_sel [0] = ~(lsr | asr | mov | mow | lda);
-	assign regf_data1_sel [1] = mov | mow | exec2 & (pop | load | ldi);
 	
 	assign regf_data2_sel = mul;
 	
-	assign write1_en = cond_evaluated & ~(jmr | car | stb | lob | store | jmd | call | comp | rtn | control_ops | control_ops_offset | (exec1 & (load | aim | sim | ldi)) ); // enable might have to be low for clear instruction
-	assign write2_en = cond_evaluated & (mow | mul);
+	assign write1_en = cond_evaluated & ~fetch & ~(lsr | asr | jmr | car | stb | lob | store | jmd | call | comp | rtn | control_ops | control_ops_offset | (exec1 & (load | aim | sim | ldi)) ); // enable might have to be low for clear instruction
+	assign write2_en = cond_evaluated & (mow | mul) & ~ (fetch | asr | lsr); // maybe high for exec2?
 	
 	assign reg_shift_en = exec1 & (asr | lsr);
 	assign reg_shiftin = exec1 & asr; // & MSB
 	assign reg_clear = exec1 & (clear | stop) & cond_evaluated;
 	
-	assign ram_instr_addr_sel [0] = ( (rtn & ~fetch) | (exec1 & jmd) ) & cond_evaluated;
 	assign ram_instr_addr_sel [1] = ( (rtn & ~fetch) | ( exec1 & (jmr | car) ) ) & cond_evaluated;  
+	assign ram_instr_addr_sel [0] = ( (rtn & ~fetch) | (exec1 & (jmd | call)) ) & cond_evaluated;
 	
 	assign ram_data_addr_sel [0] = exec1 & call;
 	assign ram_data_addr_sel [1] = exec1 & rtn;
@@ -210,12 +215,14 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 	assign ram_wren_data = exec1 & (store | push | call | car) & cond_evaluated;
 	
 	assign pc_sload = cond_evaluated & ( (exec1 & (jmd | jmr | call | car) ) | (exec2 & rtn) );
-	assign pc_cnt_en = fetch | exec1 & ~stp | (exec2 & (aim | sim | ldi));
+	wire three_cycle = (ldi | aim | sim | load | pop);
+	assign pc_cnt_en = fetch | exec1 & ~stp & ~(three_cycle & jump) | (exec2 & (aim | sim | ldi)) | exec2 & three_cycle & two_cycles_after_jump;
 	
 	assign sm_extra = exec1 & (ldi | aim | sim | load | pop | rtn);
 	
 	assign stop = (stp & exec1) | stack_overflow & cond_evaluated;
 	assign clock = mul & exec1;
+	assign set_jump = exec1 & (call | car | jmr | jmd ) | exec2 & rtn;
 
 endmodule
 
