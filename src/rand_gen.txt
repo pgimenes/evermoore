@@ -1,20 +1,15 @@
-_main:
-    LDI R1, a // = coefficient of Xn; how to load 25k?
-    LDI R2, 3 // = b, constant
-    LDI R3, 16 // = n, word length
-    LDI R4, s // = seed
-    LDI R5, 18 // end of subroutine
-
-    CALL _rand_gen
-    STP
-
-_rand_gen:
-    MUL R4, R4, R1
-    ADD R4, R2
-    ADD R6, R4 // R6 contains sum
-    DEC R3
-    JMPS Z R5 // jump to address in R5 (end of subroutine) if R3 = 0 (Z set in SREG)
-    JMP 12 // if instr above fails, jump to top of subroutine
-    RTN
-
-// assume constants are all 16-bits
+LDI R1 0x6329
+LDI R2 3
+LDI R3 0x8
+LDI R4 0xA
+LDI R0 0xC
+CAR R0
+STP
+MUL R4 R4 R1
+ADD R4 R2
+ASC R5
+ADC R7 R5
+ADD R6 R4
+DEC R3
+JMR ZC R0
+RTN
