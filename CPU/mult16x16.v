@@ -1,4 +1,5 @@
 module mult16x16 (
+	input CLOCK,
 	input enable,
 	input [15:0] A,
 	input [15:0] B,
@@ -13,10 +14,10 @@ module mult16x16 (
 	wire [15:0] net3;
 	wire [15:0] net4;
 	
-	mult8x8 U1 (.A(temp_A[7:0]), .B( temp_B[7:0]), .P(net1));
-	mult8x8 U2 (.A(temp_A[7:0]), .B(temp_B[15:8]), .P(net2));
-	mult8x8 U3 (.A(temp_A[15:8]), .B(temp_B[7:0]), .P(net3));
-	mult8x8 U4 (.A(temp_A[15:8]), .B(temp_B[15:8]), .P(net4));
+	mult8x8 U1 (.CLOCK(CLOCK), .A(temp_A[7:0]), .B( temp_B[7:0]), .P(net1));
+	mult8x8 U2 (.CLOCK(CLOCK), .A(temp_A[7:0]), .B(temp_B[15:8]), .P(net2));
+	mult8x8 U3 (.CLOCK(CLOCK), .A(temp_A[15:8]), .B(temp_B[7:0]), .P(net3));
+	mult8x8 U4 (.CLOCK(CLOCK), .A(temp_A[15:8]), .B(temp_B[15:8]), .P(net4));
 	
 	assign P[7:0] = net1[7:0];
 	

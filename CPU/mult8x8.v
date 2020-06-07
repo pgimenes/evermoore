@@ -1,4 +1,5 @@
 module mult8x8 (
+	input CLOCK,
 	input [7:0] A,
 	input [7:0] B,
 	output [15:0] P
@@ -9,10 +10,10 @@ module mult8x8 (
 	wire [7:0] net3;
 	wire [7:0] net4;
 	
-	mult4x4 U1 (.A(A[3:0]),.B(B[3:0]),.P(net1));
-	mult4x4 U2 (.A(A[3:0]),.B(B[7:4]),.P(net2));
-	mult4x4 U3 (.A(A[7:4]),.B(B[3:0]),.P(net3));
-	mult4x4 U4 (.A(A[7:4]),.B(B[7:4]),.P(net4));
+	clocked4x4 U1 (.CLOCK(CLOCK),.A(A[3:0]),.B(B[3:0]),.P(net1));
+	clocked4x4 U2 (.CLOCK(CLOCK),.A(A[3:0]),.B(B[7:4]),.P(net2));
+	clocked4x4 U3 (.CLOCK(CLOCK),.A(A[7:4]),.B(B[3:0]),.P(net3));
+	clocked4x4 U4 (.CLOCK(CLOCK),.A(A[7:4]),.B(B[7:4]),.P(net4));
 	
 	assign P[3:0] = net1[3:0];
 	

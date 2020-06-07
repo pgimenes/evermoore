@@ -11,6 +11,8 @@ module alu (
 
 	input [2:0] reg_write_addr,
 	input [2:0] reg_read_addr,
+	
+	input CLOCK,
 
 	output [15:0] aluout1, 
 	output [15:0] aluout2,				// used only for MULT
@@ -23,6 +25,7 @@ module alu (
 wire [31:0] thirtytwooutput;	
 
 mult16x16 calc(
+	.CLOCK(CLOCK),
 	.enable (encoded_opcode == 6'b100001),
 	.A (rs1data[15:0]),
 	.B (rs2data[15:0]),

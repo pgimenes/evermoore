@@ -4,9 +4,9 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 2018  Intel Corporation. All rights reserved.
+Copyright (C) 2019  Intel Corporation. All rights reserved.
 Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and its AMPP partner logic 
+and other software and tools, and any partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
@@ -16,94 +16,95 @@ the Intel FPGA IP License Agreement, or other applicable license
 agreement, including, without limitation, that your use is for
 the sole purpose of programming logic devices manufactured by
 Intel and sold by Intel or its authorized distributors.  Please
-refer to the applicable agreement for further details.
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
 */
 (header "symbol" (version "1.2"))
 (symbol
 	(rect 0 0 256 216)
-	(text "two_port_ram" (rect 89 0 181 16)(font "Arial" (font_size 10)))
+	(text "two_port_ram" (rect 79 0 171 16)(font "Arial" (font_size 10)))
 	(text "inst" (rect 8 200 25 212)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
 		(text "data_a[15..0]" (rect 0 0 74 14)(font "Arial" (font_size 8)))
-		(text "data_a[15..0]" (rect 4 18 65 31)(font "Arial" (font_size 8)))
+		(text "data_a[15..0]" (rect 4 16 78 31)(font "Arial" (font_size 8)))
 		(line (pt 0 32)(pt 112 32)(line_width 3))
 	)
 	(port
 		(pt 0 48)
 		(input)
 		(text "address_a[11..0]" (rect 0 0 95 14)(font "Arial" (font_size 8)))
-		(text "address_a[11..0]" (rect 4 34 83 47)(font "Arial" (font_size 8)))
+		(text "address_a[11..0]" (rect 4 32 98 47)(font "Arial" (font_size 8)))
 		(line (pt 0 48)(pt 112 48)(line_width 3))
 	)
 	(port
 		(pt 0 64)
 		(input)
 		(text "wren_a" (rect 0 0 44 14)(font "Arial" (font_size 8)))
-		(text "wren_a" (rect 4 50 40 63)(font "Arial" (font_size 8)))
+		(text "wren_a" (rect 4 48 43 63)(font "Arial" (font_size 8)))
 		(line (pt 0 64)(pt 112 64))
 	)
 	(port
 		(pt 0 96)
 		(input)
 		(text "data_b[15..0]" (rect 0 0 74 14)(font "Arial" (font_size 8)))
-		(text "data_b[15..0]" (rect 4 82 65 95)(font "Arial" (font_size 8)))
+		(text "data_b[15..0]" (rect 4 80 78 95)(font "Arial" (font_size 8)))
 		(line (pt 0 96)(pt 112 96)(line_width 3))
 	)
 	(port
 		(pt 0 112)
 		(input)
 		(text "address_b[11..0]" (rect 0 0 95 14)(font "Arial" (font_size 8)))
-		(text "address_b[11..0]" (rect 4 98 83 111)(font "Arial" (font_size 8)))
+		(text "address_b[11..0]" (rect 4 96 98 111)(font "Arial" (font_size 8)))
 		(line (pt 0 112)(pt 112 112)(line_width 3))
 	)
 	(port
 		(pt 0 128)
 		(input)
 		(text "wren_b" (rect 0 0 44 14)(font "Arial" (font_size 8)))
-		(text "wren_b" (rect 4 114 40 127)(font "Arial" (font_size 8)))
+		(text "wren_b" (rect 4 112 43 127)(font "Arial" (font_size 8)))
 		(line (pt 0 128)(pt 112 128))
 	)
 	(port
 		(pt 0 152)
 		(input)
 		(text "byteena_a[1..0]" (rect 0 0 88 14)(font "Arial" (font_size 8)))
-		(text "byteena_a[1..0]" (rect 4 138 77 151)(font "Arial" (font_size 8)))
+		(text "byteena_a[1..0]" (rect 4 136 92 151)(font "Arial" (font_size 8)))
 		(line (pt 0 152)(pt 112 152)(line_width 3))
 	)
 	(port
 		(pt 0 168)
 		(input)
 		(text "byteena_b[1..0]" (rect 0 0 88 14)(font "Arial" (font_size 8)))
-		(text "byteena_b[1..0]" (rect 4 154 77 167)(font "Arial" (font_size 8)))
+		(text "byteena_b[1..0]" (rect 4 152 92 167)(font "Arial" (font_size 8)))
 		(line (pt 0 168)(pt 112 168)(line_width 3))
 	)
 	(port
 		(pt 0 192)
 		(input)
 		(text "clock" (rect 0 0 29 14)(font "Arial" (font_size 8)))
-		(text "clock" (rect 4 178 27 191)(font "Arial" (font_size 8)))
+		(text "clock" (rect 4 176 33 191)(font "Arial" (font_size 8)))
 		(line (pt 0 192)(pt 104 192))
 	)
 	(port
 		(pt 256 32)
 		(output)
 		(text "q_a[15..0]" (rect 0 0 56 14)(font "Arial" (font_size 8)))
-		(text "q_a[15..0]" (rect 205 18 251 31)(font "Arial" (font_size 8)))
+		(text "q_a[15..0]" (rect 195 16 251 31)(font "Arial" (font_size 8)))
 		(line (pt 256 32)(pt 168 32)(line_width 3))
 	)
 	(port
 		(pt 256 96)
 		(output)
 		(text "q_b[15..0]" (rect 0 0 56 14)(font "Arial" (font_size 8)))
-		(text "q_b[15..0]" (rect 205 82 251 95)(font "Arial" (font_size 8)))
+		(text "q_b[15..0]" (rect 195 80 251 95)(font "Arial" (font_size 8)))
 		(line (pt 256 96)(pt 168 96)(line_width 3))
 	)
 	(drawing
-		(text "4096 Word(s)" (rect 137 75 276 267)(font "Arial" )(vertical))
-		(text "RAM" (rect 148 64 269 231)(font "Arial" )(vertical))
-		(text "Block Type: AUTO" (rect 40 205 156 421)(font "Arial" ))
+		(text "4096 Word(s)" (rect 134 81 285 288)(font "Arial" )(vertical))
+		(text "RAM" (rect 148 67 274 238)(font "Arial" )(vertical))
+		(text "Block Type: AUTO" (rect 40 202 174 418)(font "Arial" ))
 		(line (pt 128 24)(pt 168 24))
 		(line (pt 168 24)(pt 168 176))
 		(line (pt 168 176)(pt 128 176))
