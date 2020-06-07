@@ -82,7 +82,7 @@ begin
 					6'b001001: alusum = {1'b0,rs1data}  - one; //DEC 
 					6'b001010: alusum = {1'b0,rs2data} ; //LDI 
 					6'b001011: alusum = {1'b0,rs1data} + {1'b0, rs2data} ; //AIM COmPLETE NO ALU? 
-					6'b001100: alusum = {1'b0,rs1data} + {1'b0, ~rs2data} + one; //SIM COMPLETE NO ALU?
+					6'b001100: alusum = {1'b0,rs1data} - {1'b0, rs2data}; //SIM COMPLETE NO ALU?
 					
 					
 					6'b001101: alusum = {1'b0, rs1data} | decoded_offset; // SEB
@@ -100,7 +100,10 @@ begin
 					
 					6'b011001: alusum = {1'b0,rs2data}  + one; //PUSH 
 					6'b011010: alusum = {1'b0,rs1data} ; //LOAD : cannot be changed so status register updates
-					6'b011011: alusum = {1'b0,rs1data}  - one ; //POP 
+					
+					6'b011011: begin stackregintermediate = {stack_reg} - one; // POP
+									alusum = {1'b0, rs1data} - one; end
+					
 					6'b011100: alusum = {1'b0,rs1data} ; //STORE : cannot be changed so status register updates
 					6'b011101: alusum = {1'b0,rs1data} & {1'b0,rs2data} ; //AND 
 					6'b011110: alusum = {1'b0,rs1data} | {1'b0,rs2data} ; //OR 

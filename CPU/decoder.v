@@ -14,6 +14,7 @@ module decoder
 	output alu_input2_sel,
 	output status_reg_sload,
 	output stack_reg_increment,
+	output stack_dec_sel,
 	output stack_reg_load,
 	output stack_reg_restart,
 	
@@ -174,6 +175,7 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 	
 	assign status_reg_sload = exec1 & ~(gha | ghs);
 	assign stack_reg_increment = exec1 & (call | car);
+	assign stack_dec_sel = exec1 & pop;
 	assign stack_reg_load = exec1 & rtn;
 	assign stack_reg_restart = fetch | stop;
 	
@@ -207,8 +209,8 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 	assign ram_instr_addr_sel [1] = ( (rtn & ~fetch) | ( exec1 & (jmr | car) ) ) & cond_evaluated;  
 	assign ram_instr_addr_sel [0] = ( (rtn & ~fetch) | (exec1 & (jmd | call)) ) & cond_evaluated;
 	
-	assign ram_data_addr_sel [0] = exec1 & (call|car);
-	assign ram_data_addr_sel [1] = exec1 & rtn;
+	assign ram_data_addr_sel [1] = exec1 & (rtn | push | pop);
+	assign ram_data_addr_sel [0] = exec1 & (call|car|push);
 	
 	assign ram_data_input_sel = exec1 & (call | car);
 	
