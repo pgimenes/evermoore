@@ -1,0 +1,31 @@
+Introduction Page (500) Dom
+
+Project Planning (1000)
+ -Gantt Chart
+ -Call Log
+
+ISA Design (1000) Pedro
+
+Product Design Specification (500) Dom
+
+Design Decisions (1000)
+ -Stack
+ -Status Reg
+ -Number of Reg
+ - Dual Port RAM
+ - Pipelining
+
+Mult Methods (1000) Geri
+
+Each of the three Algorithms (1500) 500 Each
+
+Design and Implementation (1000) 
+ -Reg File   Pedro
+ -ALU        Dom
+ -Decoder
+
+Simulation/Results (1000) 300 Each
+
+Assemble (500) Pedro
+
+Future Developments (500)
