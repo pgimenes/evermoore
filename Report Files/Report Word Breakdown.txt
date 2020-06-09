@@ -1,6 +1,6 @@
 Introduction Page (500) Dom
 
-Project Planning (1000)
+Project Planning (800)
  -Gantt Chart Dom
  -Call Log    Dom
 
@@ -22,8 +22,8 @@ Each of the three Algorithms (1500)
 -Number Generator Pedro (500)
 -Fibonacci Geri (500)
 
-Design and Implementation (1500) 
- -Reg File   Pedro (500)
+Design and Implementation (1300) 
+ -Reg File   Pedro (300)
  -ALU        Dom   (500)
  -Decoder    Geri  (500)
 
@@ -33,6 +33,8 @@ Simulation/Results (1000)
 -Fibonacci Geri Result (333)
 
 Assembler (500) Pedro
+
+Power consumption and Latency (500)
 
 Future Developments (500) Geri
 
