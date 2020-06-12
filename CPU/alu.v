@@ -25,7 +25,7 @@ wire [31:0] thirtytwooutput;
 
 mult16x16 calc(
 	.CLOCK (CLOCK),
-	.enable (encoded_opcode == 6'b100001),
+	.enable (instruction[15:13] == 3'b100),
 	.A (rs1data[15:0]),
 	.B (rs2data[15:0]),
 	.P (thirtytwooutput[31:0])
@@ -39,7 +39,7 @@ wire shiftin; // value shifted into bit 15 on LSR, determined as in ISA spec
 assign cin = statusregin[2];
 
 assign alucout = alusum [16]; // carry bit from sum, or shift if OP = 011
-assign aluout1 = (instruction[15:13] == 3'b100 || instruction[15:13] == 3'b100) ? thirtytwooutput[15:0] :
+assign aluout1 = (instruction[15:13] == 3'b100) ? thirtytwooutput[15:0] :
 						alusum [15:0]; // 16 normal bits from sum
 assign aluout2 = thirtytwooutput[31:16] ;   // 16 normal bits from sum
 
