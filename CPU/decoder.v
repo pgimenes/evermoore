@@ -6,7 +6,6 @@ module decoder
 	input [1:0] state,
 	input [7:0] status_reg,
 	input stack_overflow,
-	input jump,
 	
 	output [5:0] encoded_opcode,
 	
@@ -46,8 +45,7 @@ module decoder
 	output sm_extra,
 	
 	output stop,
-	output clock,
-	output set_jump
+	output clock
 );
 
 // STATE MACHINE WIRES
@@ -224,7 +222,7 @@ assign encoded_opcode[5] = comp|mul|mls|jmd|call|lda|rtn|stp|clear|sez|clz|sen|c
 	
 	assign stop = (stp & exec1) | stack_overflow & cond_evaluated;
 	assign clock = mul & exec1;
-	assign set_jump = exec1 & (call | car | jmr | jmd ) | exec2 & rtn;
+	//assign set_jump = exec1 & (call | car | jmr | jmd ) | exec2 & rtn;
 
 endmodule
 

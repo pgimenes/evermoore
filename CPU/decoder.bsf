@@ -4,9 +4,9 @@ editor if you plan to continue editing the block that represents it in
 the Block Editor! File corruption is VERY likely to occur.
 */
 /*
-Copyright (C) 2018  Intel Corporation. All rights reserved.
+Copyright (C) 2019  Intel Corporation. All rights reserved.
 Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and its AMPP partner logic 
+and other software and tools, and any partner logic 
 functions, and any output files from any of the foregoing 
 (including device programming or simulation files), and any 
 associated documentation or information are expressly subject 
@@ -16,7 +16,8 @@ the Intel FPGA IP License Agreement, or other applicable license
 agreement, including, without limitation, that your use is for
 the sole purpose of programming logic devices manufactured by
 Intel and sold by Intel or its authorized distributors.  Please
-refer to the applicable agreement for further details.
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
 */
 (header "symbol" (version "1.1"))
 (symbol
@@ -50,13 +51,6 @@ refer to the applicable agreement for further details.
 		(text "stack_overflow" (rect 0 0 61 12)(font "Arial" ))
 		(text "stack_overflow" (rect 21 75 82 87)(font "Arial" ))
 		(line (pt 0 80)(pt 16 80)(line_width 1))
-	)
-	(port
-		(pt 0 96)
-		(input)
-		(text "jump" (rect 0 0 18 12)(font "Arial" ))
-		(text "jump" (rect 21 91 39 103)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96)(line_width 1))
 	)
 	(port
 		(pt 264 32)
@@ -260,13 +254,6 @@ refer to the applicable agreement for further details.
 		(text "clock" (rect 0 0 20 12)(font "Arial" ))
 		(text "clock" (rect 223 475 243 487)(font "Arial" ))
 		(line (pt 264 480)(pt 248 480)(line_width 1))
-	)
-	(port
-		(pt 264 496)
-		(output)
-		(text "set_jump" (rect 0 0 36 12)(font "Arial" ))
-		(text "set_jump" (rect 207 491 243 503)(font "Arial" ))
-		(line (pt 264 496)(pt 248 496)(line_width 1))
 	)
 	(drawing
 		(rectangle (rect 16 16 248 512)(line_width 1))
