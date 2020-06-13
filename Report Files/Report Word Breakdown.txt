@@ -8,12 +8,19 @@ ISA Design (1000) Pedro
 
 Product Design Specification (500) Dom
 
+Assembler (500) Pedro
+
 Design Decisions (1000) Split 500 Geri, 500 Pedro
  -Stack          Geri 
  -Status Reg     Pedro 
  -Number of Reg  Pedro
  - Dual Port RAM Pedro 
  - Pipelining 	 Geri 
+ 
+Design and Implementation (1300) 
+ -Reg File   Pedro (300)
+ -ALU        Dom   (500)
+ -Decoder    Geri  (500)
 
 Mult Methods (1000) Geri
 
@@ -22,17 +29,12 @@ Each of the three Algorithms (1500)
 -Number Generator Pedro (500)
 -Fibonacci Geri (500)
 
-Design and Implementation (1300) 
- -Reg File   Pedro (300)
- -ALU        Dom   (500)
- -Decoder    Geri  (500)
-
 Simulation/Results (1000)
 -List Traversal Result Dom (333)
 -Number Generator Result Pedro (333)
 -Fibonacci Geri Result (333)
 
-Assembler (500) Pedro
+
 
 Power consumption and Latency (500)
 
