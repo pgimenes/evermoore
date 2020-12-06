@@ -1,4 +1,17 @@
-# curly-lamp
+# Evermoore
+
+This was an end-of-year group project conducted in the Summer of 2020, aimed at implementing a 16-bit ARM-based CPU architecture optimised for three benchmark algorithms.
+
+The algorithms were:
+1. Evaluation of Fibonacci sequence using a recursive function. This was enabled by a stack register included in the design to keep track of recursions.
+
+2. Calculate pseudo-random integers with a linear congruential generator, making use of a custom multiplication block within the ALU.
+
+3. Traversing a linked list stored in pointer format, making effective use of indirect addressing.
+
+A reference of the instruction set is available in "InstructionSet.pdf", and the code for each algorithm is in the src directory.
+
+**Assembler**
 
 To use the assembler, run the build.sh script. This runs with two test programs program1.txt, and program2.txt and upon execution the output mif file for each will appear in the directory.
 
@@ -11,9 +24,3 @@ The following files cannot be changed or deleted for the program to run correctl
 - instructions.txt
 - instruction_opcodes.txt
 - COND_codes.txt
-
-Refer to the link below for a reference of the format of each instruction. Note that the COND field is optional in the assembly and has a default value of "A" (always execute).
-https://imperiallondon-my.sharepoint.com/:x:/r/personal/pg519_ic_ac_uk/Documents/instr_set.xlsx?d=w86cb3e3d5c1e4c2a8971e38564a9dc8a&csf=1&web=1&e=mSK1xX
-
-The document below contains an overview of the ISA:
-https://imperiallondon-my.sharepoint.com/:w:/r/personal/pg519_ic_ac_uk/Documents/InstructionSet.docx?d=w5f3db266fc9c44efbf8a047937d30a1a&csf=1&web=1&e=Yvnenm
